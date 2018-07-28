@@ -45,8 +45,10 @@ class AdminPostsController extends Controller
 
         $status = Status::pluck('name','id')->all();
 
+        $departments = Department::pluck('name', 'id')->all();
 
-        return view('admin.posts.create', compact('categories','status'));
+
+        return view('admin.posts.create', compact('categories','status','departments'));
     }
 
     /**
@@ -111,7 +113,9 @@ class AdminPostsController extends Controller
 
         $status = Status::pluck('name','id')->all();
 
-        return view('admin.posts.edit', compact('post','categories','status'));
+        $departments = Department::pluck('name','id')->all();
+
+        return view('admin.posts.edit', compact('post','categories','status','departments'));
 
 
     }

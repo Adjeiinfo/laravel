@@ -1,10 +1,7 @@
 @extends('layouts.admin')
 
-
 @section('content')
-
     @include('includes.tinyeditor')
-
 
     <h1>Create Post</h1>
 
@@ -21,6 +18,12 @@
                 {!! Form::select('category_id', [''=>'Choose Categories'] + $categories, null, ['class'=>'form-control'])!!}
             </div>
 
+
+            <div class="form-group">
+                {!! Form::label('department_id', 'Department:') !!}
+                {!! Form::select('department_id', [''=>'Choose Department'] + $departments, null, ['class'=>'form-control'])!!}
+            </div>
+            
             <div class="form-group">
                 {!! Form::label('status_id', 'Status:') !!}
                 {!! Form::select('status_id', [''=>'Choose Status'] + $status, null, ['class'=>'form-control'])!!}
@@ -37,10 +40,6 @@
                 {!! Form::label('body', 'Description:') !!}
                 {!! Form::textarea('body', null, ['class'=>'form-control'])!!}
             </div>
-
-
-
-
              <div class="form-group">
                 {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
              </div>
@@ -48,18 +47,7 @@
            {!! Form::close() !!}
 
     </div>
-
-
     <div class="row">
-
-
         @include('includes.form_error')
-
-
-
     </div>
-
-
-
-
 @stop

@@ -81,9 +81,9 @@ class AdminDepartmentsController extends Controller
     {
         //
 
-        $status = Department::findOrFail($id);
+        $departments = Department::findOrFail($id);
 
-        $status->update($request->all());
+        $departments->update($request->all());
 
         return redirect('/admin/departments');
     }

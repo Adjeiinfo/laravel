@@ -4,7 +4,6 @@
 
     @include('includes.tinyeditor')
 
-
 <h1>Edit Post</h1>
     
     <div class="row">
@@ -27,6 +26,11 @@
         <div class="form-group">
             {!! Form::label('category_id', 'Category:') !!}
             {!! Form::select('category_id',  $categories, null, ['class'=>'form-control'])!!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('department_id', 'Department:') !!}
+            {!! Form::select('department_id', $departments, null, ['class'=>'form-control'])!!}
         </div>
 
         <div class="form-group">
