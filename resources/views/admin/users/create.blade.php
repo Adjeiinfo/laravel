@@ -28,6 +28,11 @@
             {!! Form::select('role_id', [''=>'Choose Options'] + $roles , null, ['class'=>'form-control'])!!}
         </div>
 
+        <div class="form-group">
+            {!! Form::label('department_id', 'Department:') !!}
+            {!! Form::select('department_id', [''=>'Choose Options'] + $departments , null, ['class'=>'form-control'])!!}
+        </div>
+
 
         <div class="form-group">
             {!! Form::label('is_active', 'Status:') !!}

@@ -44,6 +44,11 @@
                 {!! Form::select('role_id',  $roles , null, ['class'=>'form-control'])!!}
             </div>
 
+            <div class="form-group">
+                {!! Form::label('department_id', 'Department:') !!}
+                {!! Form::select('department_id',$departments , null, ['class'=>'form-control'])!!}
+            </div>
+
 
             <div class="form-group">
                 {!! Form::label('is_active', 'Status:') !!}

@@ -1,13 +1,6 @@
 @extends('layouts.admin')
 
-
-
-
 @section('content')
-
-
-
-
 
     @if(count($replies) > 0)
 

@@ -6,6 +6,8 @@ use App\Category;
 use App\Http\Requests\PostsCreateRequest;
 use App\Photo;
 use App\Post;
+use App\Status;
+use App\Department;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,12 +24,9 @@ class AdminPostsController extends Controller
     {
         //
 
-
         $posts = Post::paginate(2);
 
-
-
-        return view('admin.posts.index', compact('posts','categories'));
+       return view('admin.posts.index', compact('posts','categories','status','departments'));
 
 
     }
@@ -44,8 +43,10 @@ class AdminPostsController extends Controller
 
         $categories = Category::pluck('name','id')->all();
 
+        $status = Status::pluck('name','id')->all();
 
-        return view('admin.posts.create', compact('categories'));
+
+        return view('admin.posts.create', compact('categories','status'));
     }
 
     /**
@@ -76,24 +77,10 @@ class AdminPostsController extends Controller
 
 
             $input['photo_id'] = $photo->id;
-
-
         }
-
-
-
-
         $user->posts()->create($input);
 
-
-
-
         return redirect('/admin/posts');
-
-
-
-
-
 
     }
 
@@ -122,7 +109,9 @@ class AdminPostsController extends Controller
 
         $categories = Category::pluck('name','id')->all();
 
-        return view('admin.posts.edit', compact('post','categories'));
+        $status = Status::pluck('name','id')->all();
+
+        return view('admin.posts.edit', compact('post','categories','status'));
 
 
     }
@@ -158,15 +147,8 @@ class AdminPostsController extends Controller
 
         }
 
-
       Auth::user()->posts()->whereId($id)->first()->update($input);
-
-
-        return redirect('/admin/posts');
-
-
-
-
+      return redirect('/admin/posts');
     }
 
     /**
@@ -186,24 +168,5 @@ class AdminPostsController extends Controller
         $post->delete();
 
         return redirect('/admin/posts');
-
-
     }
-
-
-    public function post($slug){
-
-
-        $post = Post::findBySlugOrFail($slug);
-
-        $comments = $post->comments()->whereIsActive(1)->get();
-
-
-        return view('post', compact('post','comments'));
-
-
-    }
-
-
-
 }

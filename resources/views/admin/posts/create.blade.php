@@ -21,6 +21,11 @@
                 {!! Form::select('category_id', [''=>'Choose Categories'] + $categories, null, ['class'=>'form-control'])!!}
             </div>
 
+            <div class="form-group">
+                {!! Form::label('status_id', 'Status:') !!}
+                {!! Form::select('status_id', [''=>'Choose Status'] + $status, null, ['class'=>'form-control'])!!}
+            </div>
+
 
             <div class="form-group">
                 {!! Form::label('photo_id', 'Photo:') !!}

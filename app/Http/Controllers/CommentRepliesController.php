@@ -91,7 +91,6 @@ class CommentRepliesController extends Controller
 
         $replies = $comment->replies;
 
-
         return view(' admin.comments.replies.show', compact('replies'));
 
     }

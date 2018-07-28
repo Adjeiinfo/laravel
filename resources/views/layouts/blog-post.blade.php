@@ -68,18 +68,7 @@
         <div class="col-lg-8">
 
             @yield('content')
-
-
-
-
         </div>
-
-
-
-
-
-
-
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
 
@@ -146,7 +135,7 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
+                <p>Copyright &copy; HaiGiSTiket {{\Carbon\Carbon::now()->year()}}</p>
             </div>
         </div>
         <!-- /.row -->
@@ -156,15 +145,9 @@
 <!-- /.container -->
 
 <!-- jQuery -->
-
 <script src="{{asset('js/libs.js')}}"></script>
 
-
 @yield('scripts')
-
-
-
-
 
 </body>
 
