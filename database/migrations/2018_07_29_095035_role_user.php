@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDepartmentToPost extends Migration
+class RoleUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddDepartmentToPost extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-             $table->integer('department_id');
+        Schema::create('role_user', function (Blueprint $table) {
+           $table->increments('id');
+            $table->integer('role_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->timestamps();
         });
     }
 
@@ -26,10 +28,6 @@ class AddDepartmentToPost extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-            $table->dropColumn('department_id');
-
-        });
+        Schema::dropIfExists('role_user');
     }
 }

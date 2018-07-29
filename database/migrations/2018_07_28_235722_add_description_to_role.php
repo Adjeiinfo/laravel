@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDepartmentToPost extends Migration
+class AddDescriptionToRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddDepartmentToPost extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             //
-             $table->integer('department_id');
+            $table->string('description');
         });
     }
 
@@ -26,10 +26,9 @@ class AddDepartmentToPost extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             //
-            $table->dropColumn('department_id');
-
+            $table->dropColumn('description');
         });
     }
 }

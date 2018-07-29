@@ -58,24 +58,10 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-
-
-
-
-
             </ul>
-
         </div>
-
     </div>
-
 </div>
-
-
-
-
-
-
 <!-- Page Content -->
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -92,20 +78,12 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-
 </div>
 <!-- /#wrapper -->
-
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
 
-
 @yield('scripts')
 
-
-
-
-
 </body>
-
 </html>
