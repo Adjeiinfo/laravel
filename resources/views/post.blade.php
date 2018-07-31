@@ -20,9 +20,8 @@
             <!-- Post Content -->
             <p>{!!$post->body!!}</p>
             <hr>
-          
-
-                        <!-- Blog Comments -->
+            
+            <!-- Blog Comments -->
             @if(Auth::check())
             <!-- Comments Form -->
                 <div class="well">
@@ -40,7 +39,7 @@
                 </div>
             @endif
             <hr>
-<!-- Posted Comments -->
+            <!-- Posted Comments -->
             @if(count($comments) > 0)
                 @foreach($comments as $comment)
                 <!-- Comment -->

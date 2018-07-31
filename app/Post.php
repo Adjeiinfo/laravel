@@ -18,6 +18,7 @@ class Post extends Model
         'title',
         'body',
         'status_id',
+        'status_id',
         'department_id'
 
     ];
@@ -65,13 +66,13 @@ class Post extends Model
         return $this->belongsTo('App\Status');
     }
 
+    public function statuts(){
+        return $this->belongsTo('App\Statut');
+    }
+
     public function photoPlaceholder(){
         return "http://placehold.it/700x200";
     }
-
-
-
-
 
 
 }

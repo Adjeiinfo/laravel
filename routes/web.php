@@ -67,11 +67,11 @@ Route::group(['middleware'=>'admin'], function(){
     ]]);
 
     Route::resource('admin/comments/replies', 'CommentRepliesController',['names'=>[
-        'index'=>'admin.replies.index',
-        'create'=>'admin.replies.create',
-        'store'=>'admin.replies.store',
-        'edit'=>'admin.replies.edit',
-        'show'=>'admin.replies.show'
+        'index'=>'admin.comments.replies.index',
+        'create'=>'admin.comments.replies.create',
+        'store'=>'admin.comments.replies.store',
+        'edit'=>'admin.comments.replies.edit',
+        'show'=>'admin.comments.replies.show'
 
     ]]);
 
@@ -81,6 +81,15 @@ Route::group(['middleware'=>'admin'], function(){
         'store'=>'admin.status.store',
         'edit'=>'admin.status.edit'
     ]]);
+
+
+    Route::resource('admin/statut', 'StatutController',['names'=>[
+        'index'=>'admin.statut.index',
+        'create'=>'admin.statut.create',
+        'store'=>'admin.statut.store',
+        'edit'=>'admin.statut.edit'
+    ]]);
+
 
     Route::resource('admin/departments', 'AdminDepartmentsController',['names'=>[
         'index'=>'admin.departments.index',

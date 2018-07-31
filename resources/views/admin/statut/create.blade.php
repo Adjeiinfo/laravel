@@ -1,31 +1,35 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Status</h1>
+    <h1>Statut</h1>
     <div class="col-sm-6">
 
-        {!! Form::model($status, ['method'=>'PATCH', 'action'=> ['AdminStatusController@update', $status->id]]) !!}
+        {!! Form::model($statut, ['method'=>'PATCH', 'action'=> ['StatutController@update', $statut->id]]) !!}
         <div class="form-group">
             {!! Form::label('name', 'Name:') !!}
             {!! Form::text('name', null, ['class'=>'form-control'])!!}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Update Status', ['class'=>'btn btn-primary col-sm-6 ']) !!}
+            {!! Form::submit('Update Statut', ['class'=>'btn btn-primary col-sm-6 ']) !!}
         </div>
         {!! Form::close() !!}
 
 
-        {!! Form::open(['method'=>'DELETE', 'action'=> ['AdminStatusController@destroy', $status->id]]) !!}
+        {!! Form::open(['method'=>'DELETE', 'action'=> ['StatutController@destroy', $statut->id]]) !!}
 
 
         <div class="form-group">
-            {!! Form::submit('Delete Status', ['class'=>'btn btn-danger col-sm-6']) !!}
+            {!! Form::submit('Delete Statut', ['class'=>'btn btn-danger col-sm-6']) !!}
         </div>
         {!! Form::close() !!}
     </div>
     <div class="col-sm-6">
 
     </div>
+
+
+
+
 
 @stop

@@ -3,25 +3,25 @@
 @section('content')
 
 
-    <h1>Status</h1>
+    <h1>Statut</h1>
 
 
     <div class="col-sm-6">
 
-        {!! Form::open(['method'=>'POST', 'action'=> 'AdminStatusController@store']) !!}
+        {!! Form::open(['method'=>'POST', 'action'=> 'StatutController@store']) !!}
              <div class="form-group">
                  {!! Form::label('name', 'Name:') !!}
                  {!! Form::text('name', null, ['class'=>'form-control'])!!}
              </div>
 
              <div class="form-group">
-                 {!! Form::submit('Create Status', ['class'=>'btn btn-primary']) !!}
+                 {!! Form::submit('Create Statut', ['class'=>'btn btn-primary']) !!}
              </div>
         {!! Form::close() !!}
     </div>
 
     <div class="col-sm-6">
-        @if($status)
+        @if($statut)
             <table class="table">
                 <thead>
                 <tr>
@@ -31,11 +31,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($status as $status)
+                @foreach($statut as $statut)
                     <tr>
-                        <td>{{$status->id}}</td>
-                        <td><a href="{{route('admin.status.edit', $status->id)}}">{{$status->name}}</a></td>
-                        <td>{{$status->created_at ? $status->created_at->diffForHumans() : 'no date'}}</td>
+                        <td>{{$statut->id}}</td>
+                        <td><a href="{{route('admin.statut.edit', $statut->id)}}">{{$statut->name}}</a></td>
+                        <td>{{$statut->created_at ? $statut->created_at->diffForHumans() : 'no date'}}</td>
                     </tr>
                 @endforeach
                 </tbody>
