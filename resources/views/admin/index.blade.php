@@ -1,11 +1,11 @@
-@extends('layouts.blog-home')
+@extends('layouts.admin')
 
 @section('content')
 
     <h1>Admin</h1>
 
 	<hr>
-	<canvas id="myChart" width="400" height="400"></canvas>
+	<canvas id="myChart" ></canvas>
 @stop
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.blog-home')
+@extends('layouts.ha_login')
 
 @section('content')
 <div class="container">
