@@ -52,7 +52,7 @@
         <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
        <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
         <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>-->
-     <td>{{$post->created_at->diffForhumans()}}</td>
+        <td>{{$post->created_at->diffForhumans()}}</td>
         <td>{{$post->updated_at->diffForhumans()}}</td>
         <td>
           <div class="col-xs-4 text-left">
@@ -79,3 +79,5 @@
 
 </div>
 @stop
+
+
