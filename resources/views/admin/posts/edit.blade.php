@@ -57,8 +57,7 @@
                  {!! Form::submit('Delete Post', ['class'=>'btn btn-danger col-sm-6']) !!}
              </div>
         {!! Form::close() !!}
-
-
+        
         </div>
 
 

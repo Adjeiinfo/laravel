@@ -27,35 +27,44 @@
      <thead>
        <tr>
          <th>Id</th>
-         <th>Photo</th>
          <th>Title</th>
          <th>Status</th>
          <th>Owner</th>
          <th>Category</th>
          <th>Department</th>
-         <th>Post link</th>
-         <th>Comments</th>
-         <th>Created at</th>
-         <th>Update</th>
-         <th>Action</th>
+        <!-- <th>Post link</th>
+         <th>Comments</th>-->
+         <th>Soumission</th>
+         <th>Modification</th>
+         <th style="width: 20%">Action</th>
+       </tr>
        </thead>
-     </tr>
+
      <tbody>
       @if($posts)
       @foreach($posts as $post)
       <tr>
         <td>{{$post->id}}</td>
-        <td><img height="50" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400' }} " alt=""></td>
         <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
         <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
         <td>{{$post->user->name}}</td>
         <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
         <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
-        <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
-        <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>
-        <td>{{$post->created_at->diffForhumans()}}</td>
+       <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
+        <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>-->
+     <td>{{$post->created_at->diffForhumans()}}</td>
         <td>{{$post->updated_at->diffForhumans()}}</td>
-        <td><a href="{{route('admin.posts.edit', $post->id)}}"><i class="fa fa-edit"></i>  <span class="text-muted"></span></td>
+        <td>
+          <div class="col-xs-4 text-left">
+          <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
+        </div>
+        <div class="col-xs-4 text-center">
+          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
+        </div>
+        <div class="col-xs-4 text-right">
+          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
+        </div>
+        </td>
       </tr>
       @endforeach
       @endif

@@ -54,3 +54,4 @@
     <script src="{{asset('/vendors/vendor_backend/jszip/dist/jszip.min.js')}}"></script>
     <script src="{{asset('/vendors/vendor_backend/pdfmake/build/pdfmake.min.js')}}"></script>
     <script src="{{asset('/vendors/vendor_backend/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
