@@ -24,7 +24,7 @@ class AdminPostsController extends Controller
     {
         //
 
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(6);
 
        return view('admin.posts.index', compact('posts','categories','status','departments'));
 
@@ -167,7 +167,7 @@ class AdminPostsController extends Controller
 
         $post = Post::findOrFail($id);
 
-        unlink(public_path() . $post->photo->file);
+       // unlink(public_path() . $post->photo->file);
 
         $post->delete();
 

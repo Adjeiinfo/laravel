@@ -1,5 +1,4 @@
 <div class="col-md-4">
-
             <!-- Blog Search Well -->
             <div class="well">
                 <h4>Blog Search</h4>
@@ -19,13 +18,9 @@
                 <h4>Blog Categories</h4>
                 <div class="row">
                     <div class="col-lg-6">
-                        
-
                         <ul class="list-unstyled">
                             @if($categories)
-                                @foreach($categories as $category)
-                               
-                               
+                                @foreach($categories as $category)                          
                                 <li><a href="admin/category">{{$category->name}}</a> </li>
                                 @endforeach
                             @endif

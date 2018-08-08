@@ -3,7 +3,9 @@
 <!-- Navigation -->
 
 @include('includes.front_nav')
+
 @include('includes.flash_session')
+
 @yield('content')
 
 

@@ -14,12 +14,15 @@ class AdminController extends Controller
     //
     public function index(){
     	//get some dynamic data for the dashboard 
+
+        
     	$postsCount      = Post::count();
     	$categoriesCount = Category::count();
     	$commentsCount   = Comment::count();
     	$usersCount      = User::count();
     	
         //return [$postsCount,$categoriesCount,$commentsCount,$usersCount ];
-        return view('admin/index',compact('postsCount','categoriesCount','commentsCount','usersCount'));
+       // return view('admin/fhome',compact('postsCount','categoriesCount','commentsCount','usersCount'));
+        return view('fhome',compact('postsCount','categoriesCount','commentsCount','usersCount'));
     }
 }

@@ -58,20 +58,15 @@
     </div>
     <!-- /.container -->
 </nav>
-
 <!-- Page Content -->
 <div class="container">
-
     <div class="row">
-
         <!-- Blog Post Content Column -->
         <div class="col-lg-8">
-
             @yield('content')
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
-
             <!-- Blog Search Well -->
             <div class="well">
                 <h4>Blog Search</h4>
@@ -85,7 +80,6 @@
                 </div>
                 <!-- /.input-group -->
             </div>
-
             <!-- Blog Categories Well -->
             <div class="well">
                 <h4>Blog Categories</h4>
@@ -117,7 +111,6 @@
                 </div>
                 <!-- /.row -->
             </div>
-
             <!-- Side Widget Well -->
             <div class="well">
                 <h4>Side Widget Well</h4>
@@ -145,7 +138,7 @@
 <!-- /.container -->
 
 <!-- jQuery -->
-<script src="{{asset('js/libs.js')}}"></script>
+<!--<script src="{{asset('js/libs.js')}}"></script>-->
 
 @yield('scripts')
 
