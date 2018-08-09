@@ -1,4 +1,4 @@
-@extends('layouts.blog-home')
+@extends('layouts.ha_admin')
 
 @section('content')
 <!-- Blog Post -->
