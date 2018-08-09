@@ -38,15 +38,20 @@ class HomeController extends Controller
         $categoriesCount = Category::count();
         $commentsCount   = Comment::count();
         $usersCount      = User::count();
-
         $posts = Post::paginate(2);
-
         $categories = Category::all();
 
+        $solvedTicket =Post::where('status_id', '3')->count();
+        $suspendedTicket = Post::where('status_id', '1')->count();
+        $inProgressTicket = Post::where('status_id', '4')->count();
+        $percentagesolved = 100* $solvedTicket / $postsCount;
+
+        //Collection for trend
+
+
+
        // return view('/front/home',compact('posts','categories'));
-        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount'));
-
-
+        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket'));
     }
 
     public function post($slug){
@@ -56,7 +61,5 @@ class HomeController extends Controller
         $categories = Category::all();
         $comments = $post->comments()->whereIsActive(1)->get();
         return view('post', compact('post','comments','categories'));
-
-
     }
 }

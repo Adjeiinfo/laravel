@@ -39,24 +39,30 @@
               <div class="count">{{$postsCount}}</div>
               <span class="count_bottom"><i class="green">4% </i> Mois Precedent</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+           <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> Moyenne Quotidienne</span>
-              <div class="count">123.50</div>
+              <div class="count">{{number_format($percentagesolved,2)}}%</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> Mois Precedent</span>
-            </div>
+            </div>-->
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="glyphicon glyphicon-check"></i> Total Resolu</span>
-              <div class="count green">2,500</div>
+              <div class="count green">{{$solvedTicket}}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="glyphicon glyphicon-hourglass"></i> Pourcentage Traite</span>
-              <div class="count">4,567</div>
+              <span class="count_top"><i class="glyphicon glyphicon-hourglass"></i> Pourcentage Resolu</span>
+              <div class="count">{{number_format($percentagesolved,1)}}%</div>
               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> Mois Precedent</span>
+            </div>
+
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="glyphicon glyphicon-transfer"></i> Traitement en coours</span>
+              <div class="count">{{$inProgressTicket}}</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="glyphicon glyphicon-trash"></i> Total Suspendu</span>
-              <div class="count">2,315</div>
+              <div class="count">{{$suspendedTicket}}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
