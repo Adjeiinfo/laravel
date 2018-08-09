@@ -9,6 +9,7 @@ use App\Post;
 use App\Status;
 use App\Department;
 use Illuminate\Http\Request;
+use App\CommentReply;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
