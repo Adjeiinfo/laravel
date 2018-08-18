@@ -45,8 +45,8 @@ class HomeController extends Controller
         $posts = Post::paginate(2);
         $categories = Category::all();
 
-        $solvedTicket =Post::where('status_id', '3')->count();
-        $suspendedTicket = Post::where('status_id', '1')->count();
+        $solvedTicket =Post::where('status_id', '5')->count();
+        $suspendedTicket = Post::where('status_id', '3')->count();
         $inProgressTicket = Post::where('status_id', '4')->count();
         $percentagesolved = 100* $solvedTicket / $postsCount;
 
@@ -58,18 +58,24 @@ class HomeController extends Controller
             $topclaimcollection[$cat->name] = $cat->posts()->count();
         }
 */
-
         $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
-        ->where('posts.status_id', '3')
+        ->where('posts.status_id', '5')
         ->get([
             'categories.id',
             'categories.name',
-            DB::raw('count(categories.id) as count'),
+            DB::raw('count(posts.category_id) as count'),
             DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
         ]);
+        $solvedByCategoryCollection = $solvedByCategoryCollection->sortBy('count')->values()->all();
 
-        //return ($solvedByCategoryCollection);
+       /* $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
+        ->selectRaw('*, count(*)')
+        ->whereRaw('posts.satus=5)')
+        ->groupBy('categories.id')
+        ->get();*/
+
+        return ($solvedByCategoryCollection);
         //Top claim
         $topclaimcollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
@@ -78,30 +84,49 @@ class HomeController extends Controller
         //return ($topclaimcollection);
 
         //top agences (changer departement par agence ici apres avoir defini comment les agences seront tratees)
-        $top5AgenceCollection = Post::join('departments', 'departments.id', '=', 'posts.department_id')
+        $top5AgenceCollection =Post::join('departments', 'departments.id', '=', 'posts.department_id')
         ->groupBy('departments.id')
-        ->where('posts.status_id', '3')
-        ->get(['departments.id', 'departments.name', DB::raw('count(departments.id) as count')]);
+        ->where('posts.status_id', '5')
+        ->get([
+            'departments.id',
+            'departments.name',
+            DB::raw('count(departments.id) as count'),
+            DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
+        ]);
         $top5AgenceCollection = $top5AgenceCollection->sortByDesc('count')->values()->all();
         
         //lagger agences
-        $lag5AgenceCollection =Post::join('departments', 'departments.id', '=', 'posts.department_id')
+       /* $lag5AgenceCollection =Post::join('departments', 'departments.id', '=', 'posts.department_id')
         ->groupBy('departments.id')
         ->where('posts.status_id', '3')
         ->get(['departments.id', 'departments.name', DB::raw('count(departments.id) as count')]);
         $lag5AgenceCollection = $lag5AgenceCollection->sortBy('count')->values()->all();
+        */
 
+        //lagger with ration 
+        $lag5AgenceCollection= Post::join('departments', 'departments.id', '=', 'posts.department_id')
+        ->groupBy('departments.id')
+        ->where('posts.status_id', '5')
+        ->get([
+            'departments.id',
+            'departments.name',
+            DB::raw('count(departments.id) as count'),
+            DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
+        ]);
+        $lag5AgenceCollection = $lag5AgenceCollection->sortBy('count')->values()->all();
+
+        ///end of lagger ///
         //donuts 
 
         //solved by category
-        $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
+        /* $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
-        ->where('posts.status_id', '3')
+        ->where('posts.status_id', '5')
         ->get(['categories.id', 'categories.name', DB::raw('count(categories.id) as count')]);
-
+        */
 
        // return view('/front/home',compact('posts','categories'));
-        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection'));
+        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost'));
     }
 
     public function post($slug){

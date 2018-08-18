@@ -49,7 +49,10 @@ class Post extends Model
     public function category(){
         return $this->belongsTo('App\Category');
     }
-
+    
+    public function status(){
+        return $this->belongsTo('App\Status');
+    }
 
     public function department(){
         return $this->belongsTo('App\Department');
@@ -57,10 +60,6 @@ class Post extends Model
 
     public function comments(){
         return $this->hasMany('App\Comment');
-    }
-
-    public function status(){
-        return $this->belongsTo('App\Status');
     }
 
     public function statuts(){

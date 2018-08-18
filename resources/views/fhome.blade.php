@@ -8,28 +8,20 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>HaiGiSTicket!</span></a>
           </div>
-
           <div class="clearfix"></div>
-
           <!-- include quick side profile -->
           @include('includes.ha_quick_prof')
-
           <br />
           <!-- include sidebar-->
           @include('includes.ha_side_bar')
-
           <!-- include footer buttons -->
           @include('includes.ha_footer_button')
-
         </div>
       </div>
-
       <!-- Include top navigation bar-->
       @include('includes.ha_top_nav_bar')
-
-
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- top tiles -->
@@ -78,7 +70,7 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
+                    <h3>Reclamations: TRAITE versu NON TRAITE  <small>Graph title sub-title</small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
@@ -92,54 +84,54 @@
                </div>
                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                 <div class="x_title">
-                  <h2>Top Campaign Performance</h2>
+                  <h2>Progression des Reclamations</h2>
                   <div class="clearfix"></div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-6">
-                  <div>
-                    <div>
-                      @foreach($topclaimcollection as $topclaim)
-                      <p>{!!$topclaim->name!!}</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{!! $topclaim->count!!}"></div>
-                        </div>
-                      </div>
-                    </div>
-                    @endforeach
-                    <!--For loop to get all elements in the graph -->
-                  <!--  <div class="col-md-12 col-sm-12 col-xs-6">
-                      <div>
-                        <div>
-                          <p>Twitter Campaign</p>
-                          <div class="">
-                            <div class="progress progress_sm" style="width: 76%;">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-12 col-sm-12 col-xs-6">
-                        <div>
-                          <p>Conventional Media</p>
-                          <div class="">
-                            <div class="progress progress_sm" style="width: 76%;">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <p>Bill boards</p>
-                          <div class="">
-                            <div class="progress progress_sm" style="width: 76%;">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>-->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel tile ">
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
                     <div class="clearfix"></div>
+
+                    <!-- for loop for the agences -->
+                    <div class="x_content">
+                      <h4>Agence de:</h4>
+                      <!-- for loop to get all element in the graph-->
+                      @foreach($solvedByCategoryCollection as $topCategorie)
+                      <div class="widget_summary">
+                        <div class="w_left w_25">
+                          <span>{{$topCategorie->name}}</span>
+                        </div>
+                        <div class="w_center w_55">
+                          <div class="progress">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+                              <span class="sr-only">{{$topCategorie->ratio}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="w_right w_20">
+                          <span>{{$topCategorie->count}}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      @endforeach
+                      <!-- end for loop -->
+                    </div>
                   </div>
+
                 </div>
               </div>
               <br />
@@ -178,7 +170,7 @@
                         <div class="w_center w_55">
                           <div class="progress">
                             <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                              <span class="sr-only">{{$topAgence->count}}</span>
+                              <span class="sr-only">{{$topAgence->ratio}}</span>
                             </div>
                           </div>
                         </div>
@@ -189,76 +181,9 @@
                       </div>
                       @endforeach
                       <!-- end for loop -->
-
-                    <!-- <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>RIVIERA 2</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>50%</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>ATTECOUBE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                              <span class="sr-only">100% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>20%</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>NIABLE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>15%</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>HIRE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>10%</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>-->
                     </div>
                   </div>
                 </div>
-
-
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <div class="x_panel tile fixed_height_320">
                     <div class="x_title">
@@ -291,7 +216,7 @@
                         <div class="w_center w_55">
                           <div class="progress">
                             <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                              <span class="sr-only">{{$lag5Agence->count}}</span>
+                              <span class="sr-only">{{$lag5Agence->ratio}}</span>
                             </div>
                           </div>
                         </div>
@@ -301,71 +226,6 @@
                         <div class="clearfix"></div>
                       </div>
                       @endforeach
-                      <!--
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>RIVIERA 2</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>53k</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>ATTECOUBE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>23k</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>NIABLE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>3k</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>HIRE</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                              <span class="sr-only">60% Complete</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>1k</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>-->
                     </div>
                   </div>
                 </div>
@@ -411,7 +271,6 @@
                             <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
                           </td>
                           <td>
-
                             <table class="tile_info">
                              <!-- for loop to loop throug the data-->
                              @foreach($solvedByCategoryCollection as $categoryPerform)
@@ -422,30 +281,6 @@
                               <td>{{$categoryPerform->count}}</td>
                             </tr>
                             @endforeach
-                          <!--  <tr>
-                              <td>
-                                <p><i class="fa fa-square green"></i>Android </p>
-                              </td>
-                              <td>10%</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <p><i class="fa fa-square purple"></i>Blackberry </p>
-                              </td>
-                              <td>20%</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <p><i class="fa fa-square aero"></i>Symbian </p>
-                              </td>
-                              <td>15%</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <p><i class="fa fa-square red"></i>Others </p>
-                              </td>
-                              <td>30%</td>
-                            </tr>-->
                           </table>
                         </td>
                       </tr>
@@ -458,7 +293,7 @@
                 <div class="ccol-md-12 col-sm-12 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Responsive example<small>Users</small></h2>
+                      <h2>Recentes Reclamations<small>Reclamations</small></h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -478,82 +313,78 @@
                     </div>
                     <div class="x_content">
                       <p class="text-muted font-13 m-b-30">
-                        Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
+                        Les reclamations les plus recentes sont resumees dans le tableau suivant
                       </p>
-
                       <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                        <thead>
-                          <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            <th>Extn.</th>
-                            <th>E-mail</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                         <!-- for loop to loop throug the data-->
+                       <thead>
                          <tr>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>2011/04/25</td>
-                          <td>$320,800</td>
-                          <td>5421</td>
-                          <td>t.nixon@datatables.net</td>
-                        </tr>
-                        <tr>
-                          <td>Garrett</td>
-                          <td>Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>63</td>
-                          <td>2011/07/25</td>
-                          <td>$170,750</td>
-                          <td>8422</td>
-                          <td>g.winters@datatables.net</td>
-                        </tr>
-                        <tr>
-                          <td>Ashton</td>
-                          <td>Cox</td>
-                          <td>Junior Technical Author</td>
-                          <td>San Francisco</td>
-                          <td>66</td>
-                          <td>2009/01/12</td>
-                          <td>$86,000</td>
-                          <td>1562</td>
-                          <td>a.cox@datatables.net</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+                           <th>Id</th>
+                           <th>Title</th>
+                           <th>Status</th>
+                           <th>Owner</th>
+                           <th>Category</th>
+                           <th>Department</th>
+        <!-- <th>Post link</th>
+         <th>Comments</th>-->
+         <th>Soumission</th>
+         <th>Modification</th>
+         <th style="width: 20%">Action</th>
+       </tr>
+     </thead>
+     <tbody>
+      @if($allpost)
+      @foreach($allpost as $post)
+      <tr>
+        <td>{{$post->id}}</td>
+        <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
+        <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
+        <td>{{$post->user->name}}</td>
+        <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
+        <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
+       <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
+        <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>-->
+        <td>{{$post->created_at->diffForhumans()}}</td>
+        <td>{{$post->updated_at->diffForhumans()}}</td>
+        <td>
+          <div class="col-xs-4 text-left">
+            <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
           </div>
-        </div>
-      </div>
-      <!-- /page content -->
-      <!-- footer content -->
-      @include('includes.ha_footer')
-      <!-- /footer content -->
-    </div>
-  </div>
-  <!--Includes scripts -->
-  @include('includes.ha_script')
+          <div class="col-xs-4 text-center">
+            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
+          </div>
+          <div class="col-xs-4 text-right">
+            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
+          </div>
+        </td>
+      </tr>
+      @endforeach
+      @endif
+    </tbody>
+  </table>
 
-  <!-- my script here -->
-  <!-- Chart.js -->
-  <script>
-    Chart.defaults.global.legend = {
-      enabled: false
-    };
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- /page content -->
+<!-- footer content -->
+@include('includes.ha_footer')
+<!-- /footer content -->
+</div>
+</div>
+<!--Includes scripts -->
+@include('includes.ha_script')
+
+<!-- my script here -->
+<!-- Chart.js -->
+<script>
+  Chart.defaults.global.legend = {
+    enabled: false
+  };
       // Line chart
       var ctx = document.getElementById("lineChart");
       var lineChart = new Chart(ctx, {
@@ -586,6 +417,18 @@
 
       // Bar chart
       var ctx = document.getElementById("mybarChart");
+      var Years = new Array();
+      var Category = new Array();
+      var Ratio = new Array();
+
+      @forelse($solvedByCategoryCollection as $analysis) 
+      Category.push("{{$analysis->name}}");
+      Ratio.push("{{$analysis->ratio}}");
+      costArray.push("{{$analysis->total_cost}}");
+      @empty
+      @endforelse
+
+
       var mybarChart = new Chart(ctx, {
         type: 'bar',
         data: {
