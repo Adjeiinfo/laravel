@@ -39,7 +39,7 @@
          <th>Modification</th>
          <th style="width: 20%">Action</th>
        </tr>
-       </thead>
+     </thead>
      <tbody>
       @if($posts)
       @foreach($posts as $post)
@@ -52,18 +52,18 @@
         <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
        <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
         <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>-->
-     <td>{{$post->created_at->diffForhumans()}}</td>
+        <td>{{$post->created_at->diffForhumans()}}</td>
         <td>{{$post->updated_at->diffForhumans()}}</td>
         <td>
           <div class="col-xs-4 text-left">
-          <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
-        </div>
-        <div class="col-xs-4 text-center">
-          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
-        </div>
-        <div class="col-xs-4 text-right">
-          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
-        </div>
+            <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
+          </div>
+          <div class="col-xs-4 text-center">
+            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
+          </div>
+          <div class="col-xs-4 text-right">
+            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
+          </div>
         </td>
       </tr>
       @endforeach

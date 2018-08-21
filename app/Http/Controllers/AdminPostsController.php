@@ -174,4 +174,22 @@ class AdminPostsController extends Controller
 
         return redirect('/admin/posts');
     }
+
+    //post complete 
+   /* public function complete($id)
+    {
+        $post = Post:findOrFail($id);
+
+        $post->status = Status:::where('status', 'complete')->first()->get();
+
+        //ajouter cette colonne a la base de donnnee
+        $post->complete_at = Carbon::now();
+
+        $post->save();
+    }*/
+
+    //get the context 
+
+
+
 }

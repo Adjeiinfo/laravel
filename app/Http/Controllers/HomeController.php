@@ -51,13 +51,17 @@ class HomeController extends Controller
         $percentagesolved = 100* $solvedTicket / $postsCount;
 
         //Collection for trend
-  /*      $topclaimcollection = [];
-        $categories_all = Category::all();
-        $categories_share = [];
-        foreach ($categories_all as $cat) {
-            $topclaimcollection[$cat->name] = $cat->posts()->count();
-        }
-*/
+        $topclaimcollection =  Post::join('categories', 'categories.id', '=', 'posts.category_id')
+        ->groupBy('categories.id')
+        ->get([
+            'categories.id',
+            'categories.name',
+            DB::raw('count(posts.category_id) as count')
+        ]);
+        $topclaimcollection = $topclaimcollection->sortByDesc('ratio')->values()->all();
+
+        //return ($topclaimcollection);
+
         $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
         ->where('posts.status_id', '5')
@@ -67,7 +71,7 @@ class HomeController extends Controller
             DB::raw('count(posts.category_id) as count'),
             DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
         ]);
-        $solvedByCategoryCollection = $solvedByCategoryCollection->sortBy('count')->values()->all();
+        $solvedByCategoryCollection = $solvedByCategoryCollection->sortByDesc('ratio')->values()->all();
 
        /* $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->selectRaw('*, count(*)')
@@ -75,7 +79,7 @@ class HomeController extends Controller
         ->groupBy('categories.id')
         ->get();*/
 
-        return ($solvedByCategoryCollection);
+       // return ($solvedByCategoryCollection);
         //Top claim
         $topclaimcollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
@@ -125,8 +129,15 @@ class HomeController extends Controller
         ->get(['categories.id', 'categories.name', DB::raw('count(categories.id) as count')]);
         */
 
+        // Total tickets counter per category for google pie chart
+        $categories_all = Category::all();
+        $categories_share = [];
+        foreach ($categories_all as $cat) {
+            $categories_share[$cat->name] = $cat->posts()->count();
+        }
+
        // return view('/front/home',compact('posts','categories'));
-        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost'));
+        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share'));
     }
 
     public function post($slug){

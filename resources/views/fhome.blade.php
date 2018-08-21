@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('includes.ha_header')
-
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
@@ -105,275 +104,244 @@
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-
-                    <!-- for loop for the agences -->
+                    <!-- Progression par categories: -->
                     <div class="x_content">
-                      <h4>Agence de:</h4>
-                      <!-- for loop to get all element in the graph-->
-                      @foreach($solvedByCategoryCollection as $topCategorie)
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>{{$topCategorie->name}}</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                              <span class="sr-only">{{$topCategorie->ratio}}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>{{$topCategorie->count}}</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      @endforeach
-                      <!-- end for loop -->
-                    </div>
+                      <h4>Progression Par categorie:</h4>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                       <canvas id="yourbarChart"></canvas>
+                     </div>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
+             <br />
+             <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel tile fixed_height_320">
+                  <div class="x_title">
+                    <h2>TOP 5 Des Agences</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
                   </div>
-
-                </div>
-              </div>
-              <br />
-
-              <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <div class="x_panel tile fixed_height_320">
-                    <div class="x_title">
-                      <h2>TOP 5 Des Agences</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  <!-- for loop for the agences -->
+                  <div class="x_content">
+                    <h4>Agence de:</h4>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                     <canvas id="topAgencebarChart"></canvas>
+                   </div>
+                   <!-- end for loop -->
+                 </div>
+               </div>
+             </div>
+             <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>LAG 5 Des Agences</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
                         </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        <li><a href="#">Settings 2</a>
                         </li>
                       </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <!-- for loop for the agences -->
-                    <div class="x_content">
-                      <h4>Agence de:</h4>
-                      <!-- for loop to get all element in the graph-->
-                      @foreach($top5AgenceCollection as $topAgence)
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>{{$topAgence->name}}</span>
-                        </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                              <span class="sr-only">{{$topAgence->ratio}}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>{{$topAgence->count}}</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                      @endforeach
-                      <!-- end for loop -->
-                    </div>
-                  </div>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <div class="x_panel tile fixed_height_320">
-                    <div class="x_title">
-                      <h2>LAG 5 Des Agences</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
+                <div class="x_content">
+                  <h4>Les Lag 5 Des Agences</h4>
+                  <!-- for loop to get all element in the graph-->
+                <!--  @foreach($lag5AgenceCollection as $lag5Agence)
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>{{$lag5Agence->name}}</span>
                     </div>
-                    <div class="x_content">
-                      <h4>Les Lag 5 Des Agences</h4>
-                      <!-- for loop to get all element in the graph-->
-                      @foreach($lag5AgenceCollection as $lag5Agence)
-                      <div class="widget_summary">
-                        <div class="w_left w_25">
-                          <span>{{$lag5Agence->name}}</span>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+                          <span class="sr-only">{{$lag5Agence->ratio}}</span>
                         </div>
-                        <div class="w_center w_55">
-                          <div class="progress">
-                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                              <span class="sr-only">{{$lag5Agence->ratio}}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="w_right w_20">
-                          <span>{{$lag5Agence->count}}</span>
-                        </div>
-                        <div class="clearfix"></div>
                       </div>
-                      @endforeach
                     </div>
+                    <div class="w_right w_20">
+                      <span>{{$lag5Agence->count}}</span>
+                    </div>
+                    <div class="clearfix"></div>
                   </div>
-                </div>
+                  @endforeach -->
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <div class="x_panel tile fixed_height_320 overflow_hidden">
-                    <div class="x_title">
-                      <h2>Resolution par Categorie</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <table class="" style="width:100%">
-                        <tr>
-                          <th style="width:37%;">
-                            <p>Distribution par Categorie</p>
-                          </th>
-                          <th>
-                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                              <p class="">Categorie</p>
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                              <p class="">Progres</p>
-                            </div>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>
-                            <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                          </td>
-                          <td>
-                            <table class="tile_info">
-                             <!-- for loop to loop throug the data-->
-                             @foreach($solvedByCategoryCollection as $categoryPerform)
-                             <tr>
-                              <td>
-                                <p><i class="fa fa-square blue"></i>{{$categoryPerform->name}} </p>
-                              </td>
-                              <td>{{$categoryPerform->count}}</td>
-                            </tr>
-                            @endforeach
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <canvas id="lagAgencebarChart"></canvas>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="row">
-                <div class="ccol-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Recentes Reclamations<small>Reclamations</small></h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                  <h2>Resolution par Categorie</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
                         </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        <li><a href="#">Settings 2</a>
                         </li>
                       </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <p class="text-muted font-13 m-b-30">
-                        Les reclamations les plus recentes sont resumees dans le tableau suivant
-                      </p>
-                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                       <thead>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                 <h4>Les Lag 5 Des Agences 2</h4>
+                 <table class="" style="width:100%">
+                    <tr>
+                      <th style="width:37%;">
+                        <p>Distribution par Categorie</p>
+                      </th>
+                      <th>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                          <p class="">Categorie</p>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                          <p class="">Progres</p>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <canvas class="categoryDoughnut"></canvas>
+                      </td>
+                      <td>
+                        <table class="tile_info">
+                         <!-- for loop to loop throug the data-->
+                        @foreach($solvedByCategoryCollection as $categoryPerform)
                          <tr>
-                           <th>Id</th>
-                           <th>Title</th>
-                           <th>Status</th>
-                           <th>Owner</th>
-                           <th>Category</th>
-                           <th>Department</th>
-        <!-- <th>Post link</th>
-         <th>Comments</th>-->
-         <th>Soumission</th>
-         <th>Modification</th>
-         <th style="width: 20%">Action</th>
-       </tr>
-     </thead>
-     <tbody>
-      @if($allpost)
-      @foreach($allpost as $post)
-      <tr>
-        <td>{{$post->id}}</td>
-        <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
-        <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
-        <td>{{$post->user->name}}</td>
-        <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
-        <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
-       <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>
-        <td><a href="{{route('admin.comments.show', $post->id)}}">View Comments</a></td>-->
-        <td>{{$post->created_at->diffForhumans()}}</td>
-        <td>{{$post->updated_at->diffForhumans()}}</td>
-        <td>
-          <div class="col-xs-4 text-left">
-            <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
+                          <td>
+                            <p><i class="fa fa-square blue"></i>{{$categoryPerform->name}} </p>
+                          </td>
+                          <td>{{$categoryPerform->count}}</td>
+                        </tr>
+                        @endforeach
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+               <!--<div class="col-md-9 col-sm-9 col-xs-12">
+                  <canvas id="categoryDoughnut"></canvas>
+                </div>-->
+              </div>
+            </div>
           </div>
-          <div class="col-xs-4 text-center">
-            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
-          </div>
-          <div class="col-xs-4 text-right">
-            <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
-          </div>
-        </td>
-      </tr>
-      @endforeach
-      @endif
-    </tbody>
-  </table>
 
+          <div class="row">
+            <div class="ccol-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Recentes Reclamations<small>Reclamations</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <p class="text-muted font-13 m-b-30">
+                    Les reclamations les plus recentes sont resumees dans le tableau suivant
+                  </p>
+                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                   <thead>
+                     <tr>
+                       <th>Id</th>
+                       <th>Title</th>
+                       <th>Status</th>
+                       <th>Owner</th>
+                       <th>Category</th>
+                       <th>Department</th>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- /page content -->
-<!-- footer content -->
-@include('includes.ha_footer')
-<!-- /footer content -->
+                       <th>Soumission</th>
+                       <th>Modification</th>
+                       <th style="width: 20%">Action</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                    @if($allpost)
+                    @foreach($allpost as $post)
+                    <tr>
+                      <td>{{$post->id}}</td>
+                      <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
+                      <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
+                      <td>{{$post->user->name}}</td>
+                      <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
+                      <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
+
+                      <td>{{$post->created_at->diffForhumans()}}</td>
+                      <td>{{$post->updated_at->diffForhumans()}}</td>
+                      <td>
+                        <div class="col-xs-4 text-left">
+                          <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                          <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
+                        </div>
+                      </td>
+                    </tr>
+                    @endforeach
+                    @endif
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /page content -->
+  <!-- footer content -->
+  @include('includes.ha_footer')
+  <!-- /footer content -->
 </div>
 </div>
 <!--Includes scripts -->
@@ -416,80 +384,131 @@
       });
 
       // Bar chart
-      var ctx = document.getElementById("mybarChart");
-      var Years = new Array();
+      var ctx = document.getElementById("yourbarChart");
       var Category = new Array();
       var Ratio = new Array();
-
       @forelse($solvedByCategoryCollection as $analysis) 
       Category.push("{{$analysis->name}}");
       Ratio.push("{{$analysis->ratio}}");
-      costArray.push("{{$analysis->total_cost}}");
       @empty
       @endforelse
-
-
-      var mybarChart = new Chart(ctx, {
-        type: 'bar',
+      var yourbarChart = new Chart(ctx, {
+        type: 'horizontalBar',
         data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          labels:Category,
           datasets: [{
-            label: '# of Votes',
+            label: '# Resolution',
             backgroundColor: "#26B99A",
-            data: [51, 30, 40, 28, 92, 50, 45]
-          }, {
-            label: '# of Votes',
-            backgroundColor: "#03586A",
-            data: [41, 56, 25, 48, 72, 34, 12]
+            data: Ratio
           }]
         },
-
         options: {
           scales: {
             yAxes: [{
               ticks: {
                 beginAtZero: true
               }
-            }]
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+          }
+        }
+      });
+
+      //Top agence bar chart 
+      var ctx = document.getElementById("topAgencebarChart");
+      var Category = new Array();
+      var Ratio = new Array();
+      @forelse($top5AgenceCollection as $analysis) 
+      Category.push("{{$analysis->name}}");
+      Ratio.push("{{$analysis->ratio}}");
+      @empty
+      @endforelse
+      var yourbarChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+          labels:Category,
+          datasets: [{
+            label: '# Resolution',
+            backgroundColor: "#26B99A",
+            data: Ratio
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+          }
+        }
+      });
+
+      //lagagence bar chart 
+      var ctx = document.getElementById("lagAgencebarChart");
+      var Category = new Array();
+      var Ratio = new Array();
+      @forelse($lag5AgenceCollection as $analysis) 
+      Category.push("{{$analysis->name}}");
+      Ratio.push("{{$analysis->ratio}}");
+      @empty
+      @endforelse
+      var yourbarChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+          labels:Category,
+          datasets: [{
+            label: '# Resolution',
+            backgroundColor: "#26B99A",
+            data: Ratio
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
           }
         }
       });
 
       // Doughnut chart
-      var ctx = document.getElementById("canvasDoughnut");
-      var datatest = {
-        labels: [
-        "Dark Grey",
-        "Purple Color",
-        "Gray Color",
-        "Green Color",
-        "Blue Color"
-        ],
+      var ctx = document.getElementById("categoryDoughnut");
+      var Category = new Array();
+      var Ratio = new Array();
+      @forelse($topclaimcollection as $analysis) 
+      Category.push("{{$analysis->name}}");
+      Ratio.push("{{$analysis->count}}");
+      @empty
+      @endforelse
+      var data = {
         datasets: [{
-          data: [120, 50, 140, 180, 100],
-          backgroundColor: [
-          "#455C73",
-          "#9B59B6",
-          "#BDC3C7",
-          "#26B99A",
-          "#3498DB"
-          ],
-          hoverBackgroundColor: [
-          "#34495E",
-          "#B370CF",
-          "#CFD4D8",
-          "#36CAAB",
-          "#49A9EA"
-          ]
-
-        }]
+          data:Ratio
+        }],
+        labels: Category
       };
 
-      var canvasDoughnut = new Chart(ctx, {
-        type: 'doughnut',
-        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-        data: datatest
-      });
+  var canvasDoughnut = new Chart(ctx, {
+    type: 'pie',
+    tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+    data: data
+  });
 
       // Radar chart
       var ctx = document.getElementById("canvasRadar");
@@ -524,6 +543,7 @@
       // Pie chart
       var ctx = document.getElementById("pieChart");
       var data = {
+
         datasets: [{
           data: [120, 50, 140, 180, 100],
           backgroundColor: [
@@ -533,8 +553,11 @@
           "#26B99A",
           "#3498DB"
           ],
+
+
           label: 'My dataset' // for legend
         }],
+
         labels: [
         "Dark Gray",
         "Purple",
@@ -542,6 +565,8 @@
         "Green",
         "Blue"
         ]
+
+
       };
 
       var pieChart = new Chart(ctx, {
@@ -588,5 +613,6 @@
       });
     </script>
     <!-- end of my script-->
-  </body>
-  </html>
+  </div>
+</body>
+</html>
