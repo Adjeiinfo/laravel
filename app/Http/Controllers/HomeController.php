@@ -45,7 +45,7 @@ class HomeController extends Controller
         $posts = Post::paginate(2);
         $categories = Category::all();
 
-        $solvedTicket =Post::where('status_id', '5')->count();
+        $solvedTicket =Post::where('status_id', '3')->count();
         $suspendedTicket = Post::where('status_id', '3')->count();
         $inProgressTicket = Post::where('status_id', '4')->count();
         $percentagesolved = 100* $solvedTicket / $postsCount;
@@ -64,7 +64,7 @@ class HomeController extends Controller
 
         $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
-        ->where('posts.status_id', '5')
+        ->where('posts.status_id', '3')
         ->get([
             'categories.id',
             'categories.name',
@@ -90,7 +90,7 @@ class HomeController extends Controller
         //top agences (changer departement par agence ici apres avoir defini comment les agences seront tratees)
         $top5AgenceCollection =Post::join('departments', 'departments.id', '=', 'posts.department_id')
         ->groupBy('departments.id')
-        ->where('posts.status_id', '5')
+        ->where('posts.status_id', '3')
         ->get([
             'departments.id',
             'departments.name',
@@ -110,7 +110,7 @@ class HomeController extends Controller
         //lagger with ration 
         $lag5AgenceCollection= Post::join('departments', 'departments.id', '=', 'posts.department_id')
         ->groupBy('departments.id')
-        ->where('posts.status_id', '5')
+        ->where('posts.status_id', '3')
         ->get([
             'departments.id',
             'departments.name',
