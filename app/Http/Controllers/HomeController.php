@@ -6,11 +6,14 @@ use App\Post;
 use App\Category;
 use App\Comment;
 use App\User;
-
 use DB;
 use App\Quotation;
-
 use Illuminate\Http\Request;
+
+//
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class HomeController extends Controller
@@ -22,7 +25,13 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth');
+      $this->middleware('auth');
+
+      $this->middleware('permission:reclam-list');
+       $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
+       $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
+       $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
+       $this->middleware('permission:reclam-close', ['only' => ['close']]);
    }
 
     /**
@@ -136,13 +145,11 @@ class HomeController extends Controller
             $categories_share[$cat->name] = $cat->posts()->count();
         }
 
-       // return view('/front/home',compact('posts','categories'));
+        //return compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share');
         return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share'));
     }
 
     public function post($slug){
-
-
         $post = Post::findBySlugOrFail($slug);
         $categories = Category::all();
         $comments = $post->comments()->whereIsActive(1)->get();

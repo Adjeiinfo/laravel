@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
-use App\Role;
+//use App\Role;
 use App\User;
 use App\Department;
 use Illuminate\Http\Request;
@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
+//For spatie
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
 
 class AdminUsersController extends Controller
 {
@@ -71,7 +77,12 @@ class AdminUsersController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
-        User::create($input);
+        $user = User::create($input);
+        
+        //spatie roles assigment
+        $user->assignRole($request->input('roles'));
+
+
         return redirect('/admin/users');
 
 //        return $request->all();
@@ -101,11 +112,10 @@ class AdminUsersController extends Controller
         //
 
         $user = User::findOrFail($id);
-
         $roles = Role::pluck('name','id')->all();
-
         $departments = Department::pluck('name','id')->all();
-        return view('admin.users.edit', compact('user','roles','departments'));
+        $userRoles = $user->roles->pluck('name','name')->all();
+        return view('admin.users.edit', compact('user','roles','departments','userRoles'));
     }
 
     /**
@@ -130,9 +140,6 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-
-
-
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
@@ -140,6 +147,11 @@ class AdminUsersController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $user->update($input);
+
+        //spatie roles assigment 
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        $user->assignRole($request->input('roles'));
+
         return redirect('/admin/users');
     }
 

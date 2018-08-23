@@ -17,7 +17,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/','HomeController@index');
 
-Route::group(['middleware'=>'admin'], function(){
+Route::group(['middleware'=>'auth'], function(){
 
     Route::get('/admin', 'AdminController@index');
 
@@ -97,6 +97,13 @@ Route::group(['middleware'=>'admin'], function(){
         'store'=>'admin.departments.store',
         'edit'=>'admin.departments.edit'
     ]]);
+
+    Route::resource('/roles','RoleController',['names'=>[ 
+     'roles','roles.index',
+     'create','roles.create',
+     'show','roles.show',
+     'edit','roles.edit'
+ ]]);
 
 
 });

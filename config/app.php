@@ -163,7 +163,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         //spatie 
-        //Spatie\Permission\PermissionServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
@@ -215,8 +215,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
 
         //spatie
-        //'permission' => Spatie\Permission\Models\Permission::class,
-        //'role' => Spatie\Permission\Models\Role::class,
+        'permission' => Spatie\Permission\Models\Permission::class,
+        'role' => Spatie\Permission\Models\Role::class,
 
 
     ],

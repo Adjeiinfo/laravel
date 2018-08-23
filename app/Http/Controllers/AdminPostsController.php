@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Category;
 use App\Http\Requests\PostsCreateRequest;
 use App\Photo;
@@ -21,16 +20,22 @@ class AdminPostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    function __construct()
     {
-        //
+     $this->middleware('permission:reclam-list');
+     $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
+     $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
+     $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
+     $this->middleware('permission:reclam-close', ['only' => ['close']]);
+ }
 
-        $posts = Post::paginate(6);
-
-       return view('admin.posts.index', compact('posts','categories','status','departments'));
-
-
-    }
+ public function index()
+ {
+    //
+    $posts = Post::paginate(6);
+    return view('admin.posts.index', compact('posts','categories','status','departments'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -40,15 +45,9 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-
-
         $categories = Category::pluck('name','id')->all();
-
         $status = Status::pluck('name','id')->all();
-
         $departments = Department::pluck('name', 'id')->all();
-
-
         return view('admin.posts.create', compact('categories','status','departments'));
     }
 
@@ -117,8 +116,6 @@ class AdminPostsController extends Controller
         $departments = Department::pluck('name','id')->all();
 
         return view('admin.posts.edit', compact('post','categories','status','departments'));
-
-
     }
 
     /**
@@ -152,8 +149,8 @@ class AdminPostsController extends Controller
 
         }
 
-      Auth::user()->posts()->whereId($id)->first()->update($input);
-      return redirect('/admin/posts');
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+        return redirect('/admin/posts');
     }
 
     /**

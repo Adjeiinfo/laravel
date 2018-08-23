@@ -13,13 +13,13 @@ class Post extends Model
     use SluggableScopeHelpers;
     protected $fillable = [
 
-        'category_id',
-        'photo_id',
+       // 'category_id',
+       // 'photo_id',
         'title',
         'body',
-        'status_id',
-        'status_id',
-        'department_id'
+       // 'status_id',
+        //'status_id',
+        //'department_id'
 
     ];
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Role;
+use Spatie\Permission\Models\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,21 +13,31 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-       	$role_employee = Role::where('name', 'employee')->first();
-    	$role_manager  = Role::where('name', 'manager')->first();
+       	//$role_employee = Role::where('name', 'employee')->first();
+    	//$role_manager  = Role::where('name', 'manager')->first();
 
     	$employee = new User();
-    	$employee->name = 'Employee Name';
-    	$employee->email = 'employee@example.com';
+    	$employee->name = 'Koffi';
+    	$employee->email = 'koffieli@gmail.com';
     	$employee->password = bcrypt('secret');
-    	$employee->save();
+    	
+        $employee->save();
 
-    	$employee->roles()->attach($role_employee);
-    	$manager = new User();
-    	$manager->name = 'Manager Name';
-    	$manager->email = 'manager@example.com';
-    	$manager->password = bcrypt('secret');
-    	$manager->save();
-    	$manager->roles()->attach($role_manager);
+        $employee->assignRole('super-admin');
+
+        $manager = new User();
+        $manager->name = 'Eli';
+        $manager->email = 'koffieli@yahoo.fr';
+        $manager->password = bcrypt('secret');
+
+
+        $manager->save();
+        
+
+        $manager->assignRole('super-admin');
+
+        $manager->save();
+
+
     }
 }

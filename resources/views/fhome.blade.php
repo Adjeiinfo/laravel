@@ -324,7 +324,7 @@
                       </div>
                     </td>
                   </tr>
-                  @endforeach
+                  @endforeach 
                   @endif
                 </tbody>
               </table>
