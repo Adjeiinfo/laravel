@@ -17,14 +17,13 @@
     <div class="card well">
         <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
             <span>Tar</span>
-
-            <div pull-right>
-                <a href="http://ticketit.test/tickets/1/complete" class="btn btn-success">Mark Complete</a>
+            <div class="float-right">
+                <a href="#" class="btn btn-success">Fermer</a>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-edit-modal">
-                    Edit
+                    Modifier
                 </button>
-                <a href="http://ticketit.test/tickets/1" class="btn btn-danger deleteit" form="delete-ticket-1" node="Tar">Delete</a>
-
+                <a href="#" class="btn btn-danger " form="delete-ticket-1" node="Tar">Supprier</a>
+                <a href="#" class="btn btn-info " form="delete-ticket-1" node="Tar">Notifier Client</a>
             </div>
         </h5>
         <hr>

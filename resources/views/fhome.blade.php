@@ -30,11 +30,7 @@
             <div class="count">{{$postsCount}}</div>
             <span class="count_bottom"><i class="green">4% </i> Mois Precedent</span>
           </div>
-           <!-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Moyenne Quotidienne</span>
-              <div class="count">{{number_format($percentagesolved,2)}}%</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> Mois Precedent</span>
-            </div>-->
+
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="glyphicon glyphicon-check"></i> Total Resolu</span>
               <div class="count green">{{$solvedTicket}}</div>
@@ -42,7 +38,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="glyphicon glyphicon-hourglass"></i> Pourcentage Resolu</span>
-              <div class="count">{{number_format($percentagesolved,1)}}%</div>
+              <div class="count">{{number_format(0.1,1)}}%</div>
               <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> Mois Precedent</span>
             </div>
 

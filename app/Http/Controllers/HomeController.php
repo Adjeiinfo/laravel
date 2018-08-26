@@ -25,14 +25,17 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('auth');
-
+      $this->middleware(['auth', 'clearance'])->except('index', 'show');
       $this->middleware('permission:reclam-list');
-       $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
-       $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
-       $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
-       $this->middleware('permission:reclam-close', ['only' => ['close']]);
-   }
+      $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
+      $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
+      $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
+      $this->middleware('permission:reclam-close', ['only' => ['close']]);
+
+    
+
+
+  }
 
     /**
      * Show the application dashboard.
@@ -43,7 +46,6 @@ class HomeController extends Controller
     {
 
         //return  view('fhome');
-
         //$request->user()->authorizeRoles(['employee', 'manager']);
         //return view('home');
         $allpost = Post::all();
@@ -53,7 +55,6 @@ class HomeController extends Controller
         $usersCount      = User::count();
         $posts = Post::paginate(2);
         $categories = Category::all();
-
         $solvedTicket =Post::where('status_id', '3')->count();
         $suspendedTicket = Post::where('status_id', '3')->count();
         $inProgressTicket = Post::where('status_id', '4')->count();
@@ -70,7 +71,6 @@ class HomeController extends Controller
         $topclaimcollection = $topclaimcollection->sortByDesc('ratio')->values()->all();
 
         //return ($topclaimcollection);
-
         $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
         ->where('posts.status_id', '3')
@@ -132,11 +132,10 @@ class HomeController extends Controller
         //donuts 
 
         //solved by category
-        /* $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
+        $solvedByCategoryCollection = Post::join('categories', 'categories.id', '=', 'posts.category_id')
         ->groupBy('categories.id')
         ->where('posts.status_id', '5')
         ->get(['categories.id', 'categories.name', DB::raw('count(categories.id) as count')]);
-        */
 
         // Total tickets counter per category for google pie chart
         $categories_all = Category::all();
@@ -146,7 +145,7 @@ class HomeController extends Controller
         }
 
         //return compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share');
-        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share'));
+        return view('fhome',compact('posts','categories','postsCount','categoriesCount','usersCount','solvedTicket','suspendedTicket','percentagesolved','inProgressTicket','topclaimcollection','top5AgenceCollection','lag5AgenceCollection','solvedByCategoryCollection','allpost','categories_share','solvedByCategoryCollection'));
     }
 
     public function post($slug){

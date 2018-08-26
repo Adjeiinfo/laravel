@@ -14,7 +14,6 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         //
-
         $roles = [
            'Chef Departement',
            'Agent Central',

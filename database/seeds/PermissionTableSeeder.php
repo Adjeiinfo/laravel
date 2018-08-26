@@ -33,7 +33,6 @@ class PermissionTableSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         // create roles and assign created permissions
-
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo(['role-list', 'reclam-create','reclam-edit','reclam-delete']);
 

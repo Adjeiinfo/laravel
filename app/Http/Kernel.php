@@ -56,5 +56,8 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+
+        'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
+        'clearance' => \App\Http\Middleware\ClearanceMiddleware::class,
     ];
 }
