@@ -13,7 +13,8 @@
         "intervention/image": "^2.3",
         "spatie/laravel-permission": "^2.16",
         "laravel/passport": "^7.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "twilio/sdk": "^5.21"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

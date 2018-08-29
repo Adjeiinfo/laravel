@@ -25,16 +25,15 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-      $this->middleware(['auth', 'clearance'])->except('index', 'show');
+
+      $this->middleware('auth');
+
+      $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
       $this->middleware('permission:reclam-list');
       $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
       $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
       $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
       $this->middleware('permission:reclam-close', ['only' => ['close']]);
-
-    
-
-
   }
 
     /**

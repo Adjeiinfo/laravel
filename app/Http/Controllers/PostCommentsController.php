@@ -46,14 +46,8 @@ class PostCommentsController extends Controller
     {
         //
 
-
         $user = Auth::user();
-
-
-
-
         $data = [
-
             'post_id' => $request->post_id,
             'author'=> $user->name,
             'email' =>$user->email,
@@ -104,8 +98,9 @@ class PostCommentsController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+    
+      //
+   }
 
     /**
      * Update the specified resource in storage.
@@ -117,13 +112,8 @@ class PostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-
         Comment::findOrFail($id)->update($request->all());
-
         return redirect('/admin/comments');
-
-
     }
 
     /**
@@ -135,11 +125,8 @@ class PostCommentsController extends Controller
     public function destroy($id)
     {
         //
-
         Comment::findOrFail($id)->delete();
-
         return redirect()->back();
-
 
     }
 }

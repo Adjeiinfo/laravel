@@ -6,8 +6,9 @@
 </head>
 
 <body>
-
-<h1>{{$title}}</h1>
-
-<p>{{$content}}</p>
+  <p>Name: {{ $name }}</p>
+  <p>E-Mail: {{ $email }}</p>
+  <p>Subject: {{ $title }}</p>
+  <p>Message: <br>
+  {{ $content }}</p>
 </body>

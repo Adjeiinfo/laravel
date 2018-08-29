@@ -2,14 +2,14 @@
 
 @section('content')
 
-    @include('includes.tinyeditor')
+@include('includes.tinyeditor')
 
 <h1>Edit Post</h1>  
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="" class="img-responsive"> 
-            </div>
-        <div class="col-sm-9">
+<div class="row">
+    <div class="col-sm-3">
+        <img src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="" class="img-responsive"> 
+    </div>
+    <div class="col-sm-9">
         {!! Form::model($post, ['method'=>'PATCH', 'action'=> ['AdminPostsController@update', $post->id], 'files'=>true]) !!}
 
         <div class="form-group">
@@ -53,21 +53,21 @@
 
         {!! Form::open(['method'=>'DELETE', 'action'=> ['AdminPostsController@destroy', $post->id]]) !!}
 
-             <div class="form-group">
-                 {!! Form::submit('Delete Post', ['class'=>'btn btn-danger col-sm-6']) !!}
-             </div>
-        {!! Form::close() !!}
-        
-        </div>
+        <div class="form-group">
+           {!! Form::submit('Delete Post', ['class'=>'btn btn-danger col-sm-6']) !!}
+       </div>
+       {!! Form::close() !!}
+       
+   </div>
 
 
-    </div>
+</div>
 
 
-    <div class="row">
+<div class="row">
 
-        @include('includes.form_error')
+    @include('includes.form_error')
 
-    </div>
+</div>
 
 @stop

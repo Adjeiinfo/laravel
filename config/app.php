@@ -179,7 +179,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -219,6 +218,11 @@ return [
         'role' => Spatie\Permission\Models\Role::class,
 
 
+    ],
+    'twilio' => [
+        'TWILIO_AUTH_TOKEN'  => getenv('TWILIO_AUTH_TOKEN'),
+        'TWILIO_ACCOUNT_SID' => getenv('TWILIO_ACCOUNT_SID'),
+        'TWILIO_NUMBER' => getenv('TWILIO_NUMBER'),
     ],
 
 ];
