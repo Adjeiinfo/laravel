@@ -56,14 +56,8 @@ class PostCommentsController extends Controller
         ];
 
         Comment::create($data);
-
-        $request->session()->flash('comment_message','Your message has been submitted and is waiting moderation');
-
-        return redirect()->back();
-
-
-
-
+       // $request->session()->flash('comment_message','Your message has been submitted and is waiting moderation');
+        return redirect()->back()->with("comment_message",'Votre commentaire a ete ajoute avec success');
 
     }
 
@@ -76,18 +70,9 @@ class PostCommentsController extends Controller
     public function show($id)
     {
         //
-
-
-
         $post = Post::findOrFail($id);
-
         $comments = $post->comments;
-
-
         return view('admin.comments.show', compact('comments'));
-
-
-
     }
 
     /**

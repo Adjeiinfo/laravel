@@ -122,7 +122,8 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
         Auth::user()->posts()->whereId($id)->first()->update($input);
-        return redirect('/admin/posts');
+
+        return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }
 
     /**
@@ -137,7 +138,7 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
        // unlink(public_path() . $post->photo->file);
         $post->delete();
-        return redirect('/admin/posts');
+        return redirect('/admin/posts')->with("reclam_delete",'Reclamation effacee avec succes');
     }
 
     public function sendmail($id) {
@@ -166,12 +167,28 @@ class AdminPostsController extends Controller
     }
 
     //post complete 
-    public function complete($id)
+ /*   public function complete($id)
     {
         $post = Post::findOrFail($id);
         $post->status_id = Status::where('name', 'Complete')->first()->get();
         //ajouter cette colonne a la base de donnnee
         $post->complete_at = Carbon::now();
         $post->save();
+    }*/
+
+    public function close($id)
+    {
+
+        $post = Post::findOrFail($id);
+
+       //$post->status_id = Status::where('name','Close')->first()->get();
+        $post->status_id = Status::where('name', 'Close')->first()->id;
+
+        $post->close_at = Carbon::now();
+
+        $post->save();
+
+        return redirect()->back()->with("success",'Reclamation fermee avec success');
+
     }
 }
