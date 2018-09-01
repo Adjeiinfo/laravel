@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         DB::table('photos')->truncate();
         DB::table('comments')->truncate();
         DB::table('comment_replies')->truncate();
+        DB::table('agences')->truncate();
 
 
         factory(App\User::class, 10)->create()->each(function($user){
