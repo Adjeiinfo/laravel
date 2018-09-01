@@ -21,29 +21,34 @@
     </div>
     @endif
 
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
     @if (session('fail'))
     <div class="alert alert-danger">
         {{ session('status') }}
     </div>
     @endif
 
+    @if (session('comment_message'))
+    <div class="alert alert-success">
+        {{ session('comment_message') }}
+    </div>
+    @endif
     <div class="card well">
         <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
             <div class="float-right">
-                <a href="#" class="btn btn-success">Fermer</a>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-edit-modal">
-                    Modifier
-                </button>
-                
-                <button type="button" class="btn btn-info" onclick="myFunction()">
-                    Tout modifier
-                </button>
-                
-                <!--<a href="{{route('ticket_email',$post->id)}}" class="btn btn-info " form="delete-ticket-1" node="Tar">Notifier</a>-->
-                <a href="#" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
+                <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
+                    Notifier Client
+                </button> 
+                <a href="{{route('ticket_close',$post->id)}}" class="btn btn-success">Fermer</a>                
+                <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
             </div>
 
-            <div id="myDIV">
+            <div id="myDIV" style="display: none">
                 @if ($post->type_notification=='email')
                 <div class="well">
                     <h4>Votre Message Au Client</h4>
@@ -71,7 +76,7 @@
                     </div>
                 </div>
                 @endif
-                <div id="myDIV">
+                <div id="yourDIV">
                 </h5>
                 <hr>
                 <div class="card-body ">

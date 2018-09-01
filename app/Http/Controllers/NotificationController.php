@@ -39,7 +39,7 @@ class NotificationController extends Controller
 		catch (Exception $e)
 		{
 
-			return redirect()->back()->with('fail', "Error: " . $e->getMessage();
+			return redirect()->back()->with('fail', "Error: " . $e->getMessage());
 		}
 		
 		
@@ -76,7 +76,7 @@ class NotificationController extends Controller
 		}
 		catch (Exception $e)
 		{
-			return redirect()->back()->with('fail', "Error: " . $e->getMessage();
+			return redirect()->back()->with('fail', "Error: " . $e->getMessage());
 
 		}
 	}

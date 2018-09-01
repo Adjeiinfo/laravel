@@ -19,7 +19,8 @@ class Post extends Model
      'body',
      'status_id',
      'status_id',
-     'department_id'
+     'department_id',
+     'agence_id'
 
  ];
 
@@ -61,6 +62,11 @@ public function department(){
 public function comments(){
     return $this->hasMany('App\Comment');
 }
+
+public function agences(){
+    return $this->belongsTo('App\Agence');
+}
+
 
 public function statuts(){
     return $this->belongsTo('App\Statut');

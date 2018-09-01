@@ -2,6 +2,11 @@
 
 @section('content')
 
+@if (session('reclam_delete'))
+<div class="alert alert-danger">
+  {{ session('reclam_delete') }}
+</div>
+@endif
 <h1>Reclamations</h1>
 <div class="ccol-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">

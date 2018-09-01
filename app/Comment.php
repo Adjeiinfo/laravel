@@ -16,8 +16,6 @@ class Comment extends Model
         'photo',
         'body',
         'is_active'
-
-
     ];
 
 
