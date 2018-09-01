@@ -29,13 +29,10 @@
       <div class="x_content">
 
        {!! Form::open(['method'=>'POST', 'action'=> 'AdminUsersController@store','files'=>true]) !!}
-
-
        <div class="form-group">
          {!! Form::label('name', 'Name:') !!}
          {!! Form::text('name', null, ['class'=>'form-control'])!!}
        </div>
-
 
        <div class="form-group">
         {!! Form::label('email', 'Email:') !!}
@@ -48,24 +45,41 @@
       </div>
 
       <div class="form-group">
+        {!! Form::label('permission_id', 'Permission: (A specifier quand necessaire)') !!}
+        {!! Form::select('Permission_id', [''=>'Choose Options'] + $permissions , null, ['class'=>'form-control'])!!}
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+          <strong>Permission:</strong>
+          <br/>
+          @foreach($permissions as $value)
+          <label>{{ Form::checkbox('permissions[]', $value, false, array('class' => 'name')) }}
+          {{ $value }}</label>
+          <br/>
+          @endforeach
+        </div>
+      </div>
+
+      <div class="form-group">
         {!! Form::label('department_id', 'Department:') !!}
         {!! Form::select('department_id', [''=>'Choose Options'] + $departments , null, ['class'=>'form-control'])!!}
       </div>
 
+      <div class="form-group">
+        {!! Form::label('agence_id', 'Agence:') !!}
+        {!! Form::select('department_id', [''=>'Choose Options'] + $agences , null, ['class'=>'form-control'])!!}
+      </div>
 
       <div class="form-group">
         {!! Form::label('is_active', 'Status:') !!}
         {!! Form::select('is_active', array(1 => 'Active', 0=> 'Not Active'), 0 , ['class'=>'form-control'])!!}
       </div>
 
-
       <div class="form-group">
         {!! Form::label('photo_id', 'Photo:') !!}
         {!! Form::file('photo_id', null, ['class'=>'form-control'])!!}
       </div>
-
-
-
       <div class="form-group">
         {!! Form::label('password', 'Password:') !!}
         {!! Form::password('password', ['class'=>'form-control'])!!}
@@ -77,8 +91,6 @@
       </div>
 
       {!! Form::close() !!}
-
-
       @include('includes.form_error')
 
     </div>

@@ -9,6 +9,7 @@ use App\Photo;
 use App\User;
 use App\Department;
 use Illuminate\Http\Request;
+use App\Agence;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 //For spatie
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use DB;
 use Hash;
 
@@ -54,8 +56,10 @@ class AdminUsersController extends Controller
 
         $roles = Role::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
+        $agences = Agence::pluck('name','id')->all();
+        $permissions = Permission::pluck('name','id')->all();
 
-        return view('admin.users.create', compact('roles','departments'));
+        return view('admin.users.create', compact('roles','departments','agences','permissions'));
 
     }
 
@@ -87,6 +91,9 @@ class AdminUsersController extends Controller
         
         //spatie roles assigment
         $user->assignRole($request->input('roles'));
+
+        //Spatie permissions 
+        $user->givePermissionTo($request->input('permissions'));
 
 
         return redirect('/admin/users');
@@ -121,7 +128,8 @@ class AdminUsersController extends Controller
         $roles = Role::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
         $userRoles = $user->roles->pluck('name','name')->all();
-        return view('admin.users.edit', compact('user','roles','departments','userRoles'));
+        $userPermissions = $user->permissions->pluck('name','name')->all();
+        return view('admin.users.edit', compact('user','roles','departments','userRoles','userPermissions'));
     }
 
     /**
@@ -134,7 +142,6 @@ class AdminUsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
         //
-
         $user = User::findOrFail($id);
         if(trim($request->password) == ''){
 
@@ -153,11 +160,13 @@ class AdminUsersController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $user->update($input);
-
         //spatie roles assigment 
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles'));
 
+        //spatie permission assignment 
+        DB::table('model_has_permission')->where('mode_id',$id)->delete();
+        $user->givePermissionTo($request->input('permissions'));
         return redirect('/admin/users');
     }
 
@@ -170,7 +179,6 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
-
         $user = User::findOrFail($id);
         unlink(public_path() . $user->photo->file);
         $user->delete();
