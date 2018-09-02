@@ -22,11 +22,11 @@ class User extends Authenticatable
       'name', 
       'email', 
       'password',
-        //'role_id',
       'photo_id',
       'is_active',
       '',
-      'department_id'
+      'department_id',
+      'agence_id',
     ];
 
     /**
@@ -54,6 +54,10 @@ class User extends Authenticatable
 
     public function department(){
         return $this->belongsTo('App\Department');
+    }
+
+    public function agence(){
+      return $this->belongsTo('App\Agence');
     }
 
 }

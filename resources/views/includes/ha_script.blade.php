@@ -54,4 +54,10 @@
     <script src="{{asset('/vendors/vendor_backend/jszip/dist/jszip.min.js')}}"></script>
     <script src="{{asset('/vendors/vendor_backend/pdfmake/build/pdfmake.min.js')}}"></script>
     <script src="{{asset('/vendors/vendor_backend/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/vendors/vendor_backend/parsleyjs/dist/parsley.min.js')}}"></script>
+      <!-- Switchery -->
+    <script src="{{asset('/vendors/vendor_backend/switchery/dist/switchery.min.js')}}"></script>
+        <!-- Select2 -->
+    <script src="{{asset('/vendors/vendor_backend/select2/dist/js/select2.full.min.js')}}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>

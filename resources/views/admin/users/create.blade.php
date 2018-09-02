@@ -29,58 +29,61 @@
       <div class="x_content">
 
        {!! Form::open(['method'=>'POST', 'action'=> 'AdminUsersController@store','files'=>true]) !!}
-       <div class="form-group">
+       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
          {!! Form::label('name', 'Name:') !!}
          {!! Form::text('name', null, ['class'=>'form-control'])!!}
        </div>
 
-       <div class="form-group">
+       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('email', 'Email:') !!}
         {!! Form::email('email', null, ['class'=>'form-control'])!!}
       </div>
 
-      <div class="form-group">
-        {!! Form::label('role_id', 'Role:') !!}
-        {!! Form::select('role_id', [''=>'Choose Options'] + $roles , null, ['class'=>'form-control'])!!}
-      </div>
+     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <div class="form-group">
+                <strong>Roles:</strong>
+                <br/>
+                @foreach($roles as $value)
+                <label>{{ Form::checkbox('roles[]', $value, false, array('class' => 'name')) }}
+                {{ $value }}</label>
+                <br/>
+                @endforeach
+            </div>
+        </div>
 
-      <div class="form-group">
-        {!! Form::label('permission_id', 'Permission: (A specifier quand necessaire)') !!}
-        {!! Form::select('Permission_id', [''=>'Choose Options'] + $permissions , null, ['class'=>'form-control'])!!}
-      </div>
 
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-          <strong>Permission:</strong>
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+     
+          <strong>Permission (A specifier quand necessaire)'):</strong>
           <br/>
           @foreach($permissions as $value)
           <label>{{ Form::checkbox('permissions[]', $value, false, array('class' => 'name')) }}
           {{ $value }}</label>
           <br/>
           @endforeach
-        </div>
+  
       </div>
 
-      <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('department_id', 'Department:') !!}
         {!! Form::select('department_id', [''=>'Choose Options'] + $departments , null, ['class'=>'form-control'])!!}
       </div>
 
-      <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('agence_id', 'Agence:') !!}
         {!! Form::select('department_id', [''=>'Choose Options'] + $agences , null, ['class'=>'form-control'])!!}
       </div>
 
-      <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('is_active', 'Status:') !!}
         {!! Form::select('is_active', array(1 => 'Active', 0=> 'Not Active'), 0 , ['class'=>'form-control'])!!}
       </div>
 
-      <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('photo_id', 'Photo:') !!}
         {!! Form::file('photo_id', null, ['class'=>'form-control'])!!}
       </div>
-      <div class="form-group">
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {!! Form::label('password', 'Password:') !!}
         {!! Form::password('password', ['class'=>'form-control'])!!}
       </div>

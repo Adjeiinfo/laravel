@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Photo;
-//use App\Role;
 use App\User;
 use App\Department;
 use Illuminate\Http\Request;
@@ -30,7 +29,7 @@ class AdminUsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     function __construct()
+    function __construct()
     {
         $this->middleware(['auth', 'isAdmin']); //middleware 
     }
@@ -38,9 +37,11 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        $users = User::all();
-      
-        return view('admin.users.index', compact('users'));
+        $users = User::with('roles.permissions')->get();
+   
+       // $roles = $users->roles->pluck('name','id')->all();
+
+        return view('admin.users.index', compact('users','roles'));
 
     }
 
@@ -52,15 +53,11 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-
-
         $roles = Role::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
         $agences = Agence::pluck('name','id')->all();
         $permissions = Permission::pluck('name','id')->all();
-
         return view('admin.users.create', compact('roles','departments','agences','permissions'));
-
     }
 
     /**
@@ -71,36 +68,37 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
+     $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required',
+        'roles' => 'required'
+    ]);
+
         //
-        if(trim($request->password) == ''){
-            $input = $request->except('password');
+     if(trim($request->password) == ''){
+        $input = $request->except('password');
+    } else{
+        $input = $request->all();
+        $input['password'] = bcrypt($request->password);
+    }
 
-        } else{
-            $input = $request->all();
-            $input['password'] = bcrypt($request->password);
-        }
+    if($file = $request->file('photo_id')) {
+        $name = time() . $file->getClientOriginalName();
+        $file->move('images', $name);
+        $photo = Photo::create(['file'=>$name]);
+        $input['photo_id'] = $photo->id;
+    }
 
-        if($file = $request->file('photo_id')) {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $photo = Photo::create(['file'=>$name]);
-            $input['photo_id'] = $photo->id;
-        }
-
-        $user = User::create($input);
-        
+    $user = User::create($input);
         //spatie roles assigment
-        $user->assignRole($request->input('roles'));
+    $user->assignRole($request->input('roles'));
 
         //Spatie permissions 
-        $user->givePermissionTo($request->input('permissions'));
+    $user->givePermissionTo($request->input('permissions'));
+    return redirect('/admin/users');
 
-
-        return redirect('/admin/users');
-
-//        return $request->all();
-
-    }
+}
 
     /**
      * Display the specified resource.
@@ -123,13 +121,19 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
-
         $user = User::findOrFail($id);
-        $roles = Role::pluck('name','id')->all();
+       // $roles = Role::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
-        $userRoles = $user->roles->pluck('name','name')->all();
-        $userPermissions = $user->permissions->pluck('name','name')->all();
-        return view('admin.users.edit', compact('user','roles','departments','userRoles','userPermissions'));
+        //$userRoles = $user->roles->pluck('name','id')->all();
+        $agences = Agence::pluck('name','id')->all();
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','id')->all();
+        $permissions = Permission::get();
+        $userPermissions = DB::table("model_has_permissions")->where("model_has_permissions.model_id",$id)
+        ->pluck('model_has_permissions.permission_id','model_has_permissions.permission_id')
+        ->all();
+
+        return view('admin.users.edit', compact('user','roles','departments','userRole','permissions','userPermissions','agences'));
     }
 
     /**
@@ -142,13 +146,12 @@ class AdminUsersController extends Controller
     public function update(UsersEditRequest $request, $id)
     {
         //
+
+
         $user = User::findOrFail($id);
         if(trim($request->password) == ''){
-
             $input = $request->except('password');
-
         } else{
-
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
         }
@@ -159,13 +162,18 @@ class AdminUsersController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+
+        //update all values assigned (any new value should be in the mass-assignment!)
         $user->update($input);
+
         //spatie roles assigment 
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-        $user->assignRole($request->input('roles'));
+        if($role = $request->input('roles')){
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
+            $user->assignRole($request->input('roles'));
+        }
 
         //spatie permission assignment 
-        DB::table('model_has_permission')->where('mode_id',$id)->delete();
+        DB::table('model_has_permissions')->where('model_id',$id)->delete();
         $user->givePermissionTo($request->input('permissions'));
         return redirect('/admin/users');
     }
@@ -180,7 +188,10 @@ class AdminUsersController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        unlink(public_path() . $user->photo->file);
+        if($file = $user->photo_id)
+        {
+            unlink(public_path() . $user->photo->file);
+        }
         $user->delete();
         Session::flash('deleted_user','The user has been deleted');
         return redirect('/admin/users');

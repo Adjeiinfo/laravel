@@ -12,12 +12,10 @@
           </div>
           <div class="clearfix"></div>
           <!-- include quick side profile -->
-          @include('includes.ha_quick_prof')
-          
+          @include('includes.ha_quick_prof') 
           <br />
           <!-- include sidebar-->
           @include('includes.ha_side_bar')
-
           <!-- include footer buttons -->
           @include('includes.ha_footer_button')
         </div>
