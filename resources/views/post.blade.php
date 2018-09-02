@@ -5,14 +5,14 @@
 <div class="container">
     <div class ="col-md-8">
       <!-- Title -->
-      <h1>{{$post->title}}</h1>
+      <h3>{{$post->title}}</h3>
       <!-- Author -->
       <p class="lead">
         Par {{$post->nom}}
     </p>
 
     <!-- Date/Time -->
-    <p><span class="glyphicon glyphicon-time"></span> Envoye {{$post->created_at->diffForHumans()}}</p>
+    <!--  <p><span class="glyphicon glyphicon-time"></span> Envoye {{$post->created_at->diffForHumans()}}</p>-->
     <hr>
 
     @if (session('status'))
@@ -38,93 +38,149 @@
         {{ session('comment_message') }}
     </div>
     @endif
-    <div class="card well">
-        <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
-            <div class="float-right">
-                <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
-                    Notifier Client
-                </button> 
-                <a href="{{route('ticket_close',$post->id)}}" class="btn btn-success">Fermer</a>                
-                <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
+    <div class="well">
+       <div class="card mb-3">
+        <div class="card-body row">
+            <strong><h3>Information du Client:</h3></strong>
+            <hr>
+            <div class="col-md-6">
+                <p><strong>Nom Client</strong>: {!!$post->user->name!!}</p>
+                <p><strong>Type Client</strong>: 
+                    <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                </p>
+                <p><strong>N. De Compte</strong>: 
+                    <span style="color: #830909">
+                        High
+                    </span>
+                </p>
             </div>
+            <div class="col-md-6">
+                <p> <strong>Addresse Postale</strong>: {!!$post->user->name!!}</p>
+                <p><strong>Telephone</strong>: 
+                    <span style="color: #ff0000">1</span></p>
+                    <p> <strong>Email</strong>: 2 weeks ago</p>
+                    <p> <strong>A notifier par: </strong>: 1 week ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <div class="card mb-3">
+            <div class="card-body row">
+                <strong><h3>Classification NSIA:</h3></strong>
+                <hr>
+                <div class="col-md-6">
+                 <p><strong>Departement: </strong>: {!!$post->user->name!!}</p>
+                 <p><strong>Assigne a: </strong>: {!!$post->user->name!!}</p>
+                 <p><strong>Status</strong>: 
+                    <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                </p>
+                <p><strong>Priorite</strong>:<span style="color: #830909">High</span></p>
+            </div>
+            <div class="col-md-6">
+                <p> <strong>Date de Soumission</strong>: {!!$post->user->name!!}</p>
+                <p>
+                    <strong>Derniere Modification</strong>: 
+                    <span style="color: #ff0000">
+                        1
+                    </span>
+                </p>
+                <p> <strong>Date de Cloture</strong>: 2 weeks ago</p>
+                <p> <strong>Date de fermeture </strong>: 1 week ago</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-            <div id="myDIV" style="display: none">
-                @if ($post->type_notification=='email')
-                <div class="well">
-                    <h4>Votre Message Au Client</h4>
-                    {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}
-                    <input type="hidden" name="post_id" value="{{$post->id}}">
-                    <div class="form-group">
-                        {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-                @else
-                <div class="well">
-                    <h4>Votre SMS Au client (70 Character Max)</h4>
-                    {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
-                    <input type="hidden" name="post_id" value="{{$post->id}}">
-                    <div class="form-group">
-                        {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3,'maxlength' => '70'])!!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-                @endif
-                <div id="yourDIV">
-                </h5>
-                <hr>
-                <div class="card-body ">
-                    <div class="card mb-3">
-                        <div class="card-body row">
-                            <div class="col-md-6">
-                                <p><strong>Owner</strong>: {!!$post->user->name!!}</p>
-                                <p>
-                                    <strong>Status</strong>: 
-                                    <span style="color: #e9551e">{!! $post->status->name!!}</span>
-                                </p>
-                                <p>
-                                    <strong>Priority</strong>: 
-                                    <span style="color: #830909">
-                                        High
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p> <strong>Responsible</strong>: {!!$post->user->name!!}</p>
-                                <p>
-                                    <strong>Category</strong>: 
-                                    <span style="color: #ff0000">
-                                        1
-                                    </span>
-                                </p>
-                                <p> <strong>Created</strong>: 2 weeks ago</p>
-                                <p> <strong>Last Update</strong>: 1 week ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <p>{!!$post->body!!}</p>
-            </div>
+<div class="card well">
+    <h3>Detail et Action:</h3>
+    <hr>
+    <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
+        <div class="form-group float-right">
+            <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
+                Notifier Client
+            </button> 
+            <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
+            <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
+            
+        </div>
+
+        <div id="myDIV" style="display: none">
+            @if ($post->type_notification=='email')
             <div class="well">
-                <h4>Votre Commentaire:</h4>
-                {!! Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) !!}
+                <h4>Votre Message Au Client</h4>
+                {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
-                    {!! Form::label('body', 'Body:') !!}
                     {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
                 </div>
                 <div class="form-group">
-                    {!! Form::submit('Submit comment', ['class'=>'btn btn-primary']) !!}
+                    {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
+            @else
+            <div class="well">
+                <h4>Votre SMS Au client (70 Character Max)</h4>
+                {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
+                <input type="hidden" name="post_id" value="{{$post->id}}">
+                <div class="form-group">
+                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3,'maxlength' => '70'])!!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+            @endif
+            <div id="yourDIV">
+            </h5>
+            <hr>
+            <div class="card-body ">
+                <div class="card mb-3">
+                    <div class="card-body row">
+                        <div class="col-md-6">
+                            <p> <strong>Objet de la reclamation</strong>: 1 week ago</p>
+                            <p><strong>Date de la  transaction</strong>: {!!$post->user->name!!}</p>
+                            <p>
+                                <strong>Lieu de la Transaction</strong>: 
+                                <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                            </p>
+
+                        </div>
+                        <div class="col-md-6">
+                            <p> <strong>Nature de l'evenement</strong>: {!!$post->user->name!!}</p>
+                            <p>
+                                <strong>Evenement observe</strong>: 
+                                <span style="color: #ff0000">
+                                    1
+                                </span>
+                            </p>
+                            <p> <strong>Resultat</strong>: 2 weeks ago</p>
+                            <p> <strong>Montant de la transaction</strong>: 2 weeks ago</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p><strong>Detail de la Reclamation</strong></p>
+            <hr>
+            <p>{!!$post->body!!}</p>
+        </div>
+        <div class="well">
+            <h4>Votre Commentaire:</h4>
+            {!! Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) !!}
+            <input type="hidden" name="post_id" value="{{$post->id}}">
+            <div class="form-group">
+                {!! Form::label('body', 'Body:') !!}
+                {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
+            </div>
+            <div class="form-group">
+                {!! Form::submit('Submit comment', ['class'=>'btn btn-primary']) !!}
+                {!! Form::close() !!}
+            </div>
+        </div>
     <!-- Preview Image 
     <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="">
     <hr>

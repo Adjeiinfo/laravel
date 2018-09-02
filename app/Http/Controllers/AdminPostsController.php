@@ -13,6 +13,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use DB;
 
 class AdminPostsController extends Controller
 {
@@ -25,19 +26,21 @@ class AdminPostsController extends Controller
     function __construct()
     {
 
-       $this->middleware('auth');
-       $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
-       $this->middleware('permission:reclam-list');
-       $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
-       $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
-       $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
-       $this->middleware('permission:reclam-close', ['only' => ['close']]);
-   }
+     $this->middleware('auth');
+     $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
+     $this->middleware('permission:reclam-list');
+     $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
+     $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
+     $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
+     $this->middleware('permission:reclam-close', ['only' => ['close']]);
+ }
 
-   public function index()
-   {
+ public function index()
+ {
     //
     $posts = Post::paginate(6);
+
+
     return view('admin.posts.index', compact('posts','categories','status','departments'));
 }
 
@@ -135,6 +138,7 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+
         $post = Post::findOrFail($id);
        // unlink(public_path() . $post->photo->file);
         $post->delete();
@@ -178,17 +182,14 @@ class AdminPostsController extends Controller
 
     public function close($id)
     {
-
         $post = Post::findOrFail($id);
-
-       //$post->status_id = Status::where('name','Close')->first()->get();
-        $post->status_id = Status::where('name', 'Close')->first()->id;
+        //$post->status_id = Status::where('name','Close')->first()->get();
+         $post->status_id = DB::table('statuses')->where('name', 'Closed')->value('id');
+        //$post->status_id = Status::where('name', 'Closed')->get(['id']);
+   
 
         $post->close_at = Carbon::now();
-
         $post->save();
-
         return redirect()->back()->with("success",'Reclamation fermee avec success');
-
     }
 }

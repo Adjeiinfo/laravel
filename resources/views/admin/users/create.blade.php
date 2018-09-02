@@ -39,65 +39,69 @@
         {!! Form::email('email', null, ['class'=>'form-control'])!!}
       </div>
 
-     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <div class="form-group">
-                <strong>Roles:</strong>
-                <br/>
-                @foreach($roles as $value)
-                <label>{{ Form::checkbox('roles[]', $value, false, array('class' => 'name')) }}
-                {{ $value }}</label>
-                <br/>
-                @endforeach
-            </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <strong>Roles:</strong>
+        <div class="well">
+          <div class="form-group">
+            
+            <br/>
+            @foreach($roles as $value)
+            <label>{{ Form::checkbox('roles[]', $value, false, array('class' => 'name')) }}
+            {{ $value }}</label>
+            <br/>
+            @endforeach
+          </div>
         </div>
+      </div>
 
 
       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-     
-          <strong>Permission (A specifier quand necessaire)'):</strong>
-          <br/>
-          @foreach($permissions as $value)
-          <label>{{ Form::checkbox('permissions[]', $value, false, array('class' => 'name')) }}
-          {{ $value }}</label>
-          <br/>
-          @endforeach
-  
+         <strong>Permission (A specifier quand necessaire)'):</strong>
+       <div class="well">
+
+        <br/>
+        @foreach($permissions as $value)
+        <label>{{ Form::checkbox('permissions[]', $value, false, array('class' => 'name')) }}
+        {{ $value }}</label>
+        <br/>
+        @endforeach
       </div>
-
-      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {!! Form::label('department_id', 'Department:') !!}
-        {!! Form::select('department_id', [''=>'Choose Options'] + $departments , null, ['class'=>'form-control'])!!}
-      </div>
-
-      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {!! Form::label('agence_id', 'Agence:') !!}
-        {!! Form::select('department_id', [''=>'Choose Options'] + $agences , null, ['class'=>'form-control'])!!}
-      </div>
-
-      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {!! Form::label('is_active', 'Status:') !!}
-        {!! Form::select('is_active', array(1 => 'Active', 0=> 'Not Active'), 0 , ['class'=>'form-control'])!!}
-      </div>
-
-      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {!! Form::label('photo_id', 'Photo:') !!}
-        {!! Form::file('photo_id', null, ['class'=>'form-control'])!!}
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {!! Form::label('password', 'Password:') !!}
-        {!! Form::password('password', ['class'=>'form-control'])!!}
-      </div>
-
-
-      <div class="form-group">
-        {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
-      </div>
-
-      {!! Form::close() !!}
-      @include('includes.form_error')
-
     </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+      {!! Form::label('department_id', 'Department:') !!}
+      {!! Form::select('department_id', [''=>'Choose Options'] + $departments , null, ['class'=>'form-control'])!!}
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+      {!! Form::label('agence_id', 'Agence:') !!}
+      {!! Form::select('department_id', [''=>'Choose Options'] + $agences , null, ['class'=>'form-control'])!!}
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+      {!! Form::label('is_active', 'Status:') !!}
+      {!! Form::select('is_active', array(1 => 'Active', 0=> 'Not Active'), 0 , ['class'=>'form-control'])!!}
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+      {!! Form::label('photo_id', 'Photo:') !!}
+      {!! Form::file('photo_id', null, ['class'=>'form-control'])!!}
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+      {!! Form::label('password', 'Password:') !!}
+      {!! Form::password('password', ['class'=>'form-control'])!!}
+    </div>
+
+
+    <div class="form-group">
+      {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+    </div>
+
+    {!! Form::close() !!}
+    @include('includes.form_error')
+
   </div>
+</div>
 </div>
 </div>
 @stop
