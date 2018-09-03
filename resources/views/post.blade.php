@@ -121,11 +121,11 @@
             </div>
             @else
             <div class="well">
-                <h4>Votre SMS Au client (70 Character Max)</h4>
+                <h4>Votre SMS Au client (64 Character Max)</h4>
                 {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
-                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3,'maxlength' => '70'])!!}
+                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
