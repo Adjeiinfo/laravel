@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use DB;
+use App\Agence;
 
 class AdminPostsController extends Controller
 {
@@ -55,7 +56,8 @@ class AdminPostsController extends Controller
         $categories = Category::pluck('name','id')->all();
         $status = Status::pluck('name','id')->all();
         $departments = Department::pluck('name', 'id')->all();
-        return view('admin.posts.create', compact('categories','status','departments'));
+        $agences = Agence::pluck('name','id')->all();
+        return view('admin.posts.create', compact('categories','status','departments','agences'));
     }
 
     /**
