@@ -9,6 +9,7 @@ use App\User;
 use DB;
 use App\Quotation;
 use Illuminate\Http\Request;
+use App\Agence;
 
 //
 use App\Http\Controllers\Controller;
@@ -151,6 +152,7 @@ class HomeController extends Controller
         $post = Post::findBySlugOrFail($slug);
         $categories = Category::all();
         $comments = $post->comments()->whereIsActive(1)->get();
-        return view('post', compact('post','comments','categories'));
+        $agences = Agence::all();
+        return view('post', compact('post','comments','categories','agences'));
     }
 }

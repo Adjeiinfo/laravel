@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use DB;
 use App\Agence;
-
 class AdminPostsController extends Controller
 {
     /**
@@ -27,20 +26,23 @@ class AdminPostsController extends Controller
     function __construct()
     {
 
-     $this->middleware('auth');
-     $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
-     $this->middleware('permission:reclam-list');
-     $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
-     $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
-     $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
-     $this->middleware('permission:reclam-close', ['only' => ['close']]);
- }
+       $this->middleware('auth');
+       $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
+       $this->middleware('permission:reclam-list');
+       $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
+       $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
+       $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
+       $this->middleware('permission:reclam-close', ['only' => ['close']]);
+   }
 
- public function index()
- {
+   public function index()
+   {
     //
     $posts = Post::paginate(6);
-
+    $categories = Category::pluck('name','id')->all();
+    $status = Status::pluck('name','id')->all();
+    $departments = Department::pluck('name', 'id')->all();
+    $agences = Agence::pluck('name', 'id')->all();
 
     return view('admin.posts.index', compact('posts','categories','status','departments'));
 }
@@ -56,7 +58,7 @@ class AdminPostsController extends Controller
         $categories = Category::pluck('name','id')->all();
         $status = Status::pluck('name','id')->all();
         $departments = Department::pluck('name', 'id')->all();
-        $agences = Agence::pluck('name','id')->all();
+        $agences = Agence::pluck('name', 'id')->all();
         return view('admin.posts.create', compact('categories','status','departments','agences'));
     }
 
@@ -77,6 +79,8 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+
+        
         $user->posts()->create($input);
         return redirect('/admin/posts');
 
@@ -106,7 +110,9 @@ class AdminPostsController extends Controller
         $categories = Category::pluck('name','id')->all();
         $status = Status::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
-        return view('admin.posts.edit', compact('post','categories','status','departments'));
+        $agences = Agence::pluck('name', 'id')->all();
+
+        return view('admin.posts.edit', compact('post','categories','status','departments','agences'));
     }
 
     /**
@@ -127,7 +133,6 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
         Auth::user()->posts()->whereId($id)->first()->update($input);
-
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }
 
@@ -148,20 +153,7 @@ class AdminPostsController extends Controller
     }
 
     public function sendmail($id) {
-           //dd($request->all());
-      /*  $validator = \Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'subject' => 'required',
-            'bodymessage' => 'required']
-        );
-        if ($validator->fails()) {
-            return redirect('contact')->withInput()->withErrors($validator);
-        }
-        $name = $request->name;
-        $email = $request->email;
-        $title = $request->subject;
-        $content = $request->bodymessage;*/
+
         $name = "Koffi";
         $email = "koffieli@gmail.com";
         $title = "Title";
@@ -173,23 +165,20 @@ class AdminPostsController extends Controller
     }
 
     //post complete 
- /*   public function complete($id)
+    public function complete($id)
     {
         $post = Post::findOrFail($id);
         $post->status_id = Status::where('name', 'Complete')->first()->get();
         //ajouter cette colonne a la base de donnnee
         $post->complete_at = Carbon::now();
         $post->save();
-    }*/
+    }
 
+    //mark as closed 
     public function close($id)
     {
         $post = Post::findOrFail($id);
-        //$post->status_id = Status::where('name','Close')->first()->get();
-         $post->status_id = DB::table('statuses')->where('name', 'Closed')->value('id');
-        //$post->status_id = Status::where('name', 'Closed')->get(['id']);
-   
-
+        $post->status_id = DB::table('statuses')->where('name', 'Closed')->value('id');
         $post->close_at = Carbon::now();
         $post->save();
         return redirect()->back()->with("success",'Reclamation fermee avec success');

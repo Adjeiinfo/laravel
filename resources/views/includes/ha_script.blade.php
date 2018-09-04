@@ -61,3 +61,14 @@
     <script src="{{asset('/vendors/vendor_backend/select2/dist/js/select2.full.min.js')}}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    
+
+<script type="text/javascript">
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  });
+  </script>
