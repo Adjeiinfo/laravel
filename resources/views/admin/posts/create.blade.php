@@ -59,7 +59,7 @@
              </div>
              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                <!-- <input type="text" class="form-control" id="inputSuccess3" placeholder="Notifer par">-->
-               {!! Form::select('ns_notification_type', [''=>'Comment Vous Contacter'] + array("SMS","E-Mail"), null,['class' => 'form-control has-feedback-left']) !!}
+               {!! Form::select('ns_notification_type', [''=>'Comment Vous Contacter'] + array("SMS" => "SMS","E-Mail" => 'E-Mail'), null,['class' => 'form-control has-feedback-left']) !!}
                <span class="fa fa-comments form-control-feedback left" aria-hidden="true"></span>
              </div>
            </div>
@@ -73,14 +73,14 @@
             <hr>
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-             {!! Form::select('ns_user_type', [''=>'Statut Client'] + array("Client NSIA BANQUE","Agent NSIA BANQUE","Visiteur"), null,['class' => 'form-control has-feedback-left']) !!}
+             {!! Form::select('ns_user_status', [''=>'Statut Client'] + array("Client NSIA BANQUE","Agent NSIA BANQUE","Visiteur"), null,['class' => 'form-control has-feedback-left']) !!}
              <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email">-->
              <span class="fa fa-bank form-control-feedback left" aria-hidden="true"></span>
            </div>
 
            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-            {!! Form::select('ns_agence', [''=>'Choisir Agence'] + $agences, null,['class' => 'form-control has-feedback-left']) !!}
+            {!! Form::select('ns_user_agence', [''=>'Choisir Agence'] + $agences, null,['class' => 'form-control has-feedback-left']) !!}
 
             <span class="fa fa-bank form-control-feedback left" aria-hidden="true"></span>
 
@@ -95,13 +95,12 @@
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
            <!-- <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="N. Compte">-->
-           {!! Form::text('ns_compte_bancaire',null, ['placeholder' => 'N. Compte', 'class' => 'form-control has-feedback-left']) !!}
+           {!! Form::text('ns_user_compte',null, ['placeholder' => 'N. Compte', 'class' => 'form-control has-feedback-left']) !!}
            <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
          </div>
 
-         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-          {!! Form::text('ns_date_summission',null, ['placeholder' => 'Date Soumission', 'class' => 'datepicker form-control has-feedback-left']) !!}
-          <!--<input type="text" class="form-control" id="inputSuccess3" placeholder="Type">-->
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="t1">
+          {!! Form::text('ns_date_summission',null, ['placeholder' => 'Date Soumission', 'class' => 'form-control has-feedback-left datepicker11','id' => 'datepicker'])!!}
           <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -127,7 +126,7 @@
         <span class="fa fa-question-circle form-control-feedback left" aria-hidden="true"></span>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-       {!! Form::text('ns_date_transaction',   null, ['placeholder' => 'Date Transaction', 'class' => 'form-control has-feedback-left']) !!}
+       {!! Form::text('ns_date_transaction' ,null, ['placeholder' => 'Date de la Transaction', 'class' => 'form-control has-feedback-left datepicker','id' => 'datepicker22']) !!}
        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
      </div>
 
@@ -228,10 +227,12 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function($) {
-        $('.datepicker').datepicker({
-            dateFormat: "yy-mm-dd"
-        });
+    $('.datepicker').datepicker({
+      dateFormat: "yy-mm-dd"
     });
-  </script>
+  });
+</script>
+
+
 @stop
 

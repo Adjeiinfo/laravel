@@ -79,8 +79,6 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
-
-        
         $user->posts()->create($input);
         return redirect('/admin/posts');
 
@@ -125,7 +123,10 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $input = $request->all();
+        //return $request->ns_date_summission;
+
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);

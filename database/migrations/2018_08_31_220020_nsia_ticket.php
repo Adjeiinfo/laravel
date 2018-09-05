@@ -20,13 +20,15 @@ class NsiaTicket extends Migration
             $table->string('ns_user_type');
             $table->string('ns_phone');
             $table->timestamp('ns_date_transaction');
+            $table->string('ns_reclam_objet');
             $table->string('ns_event_detail');
             $table->string('ns_event_result');
             $table->string('ns_event_montant');
             $table->string('ns_event_place');
             $table->string('ns_event_nature');
+
             $table->string('ns_nom_prenom');
-            $table->string('ns_reclam_objet');
+            
             $table->string('ns_carte_type');
             $table->string('ns_transaction_type');
             $table->string('ns_address_email');
