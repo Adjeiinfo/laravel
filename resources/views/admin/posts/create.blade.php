@@ -44,9 +44,6 @@
                {!! Form::text('ns_address_email',   null, ['placeholder' => 'Address E-mail', 'class' => 'form-control has-feedback-left']) !!}
                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
              </div>
-
-
-
              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                <!-- <input type="text" class="form-control" id="inputSuccess5" placeholder="Phone">-->
                {!! Form::text('ns_phone',null, ['placeholder' => 'Telephone +225 XXXX', 'class' => 'form-control has-feedback-left']) !!}
@@ -59,7 +56,7 @@
              </div>
              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                <!-- <input type="text" class="form-control" id="inputSuccess3" placeholder="Notifer par">-->
-               {!! Form::select('ns_notification_type', [''=>'Comment Vous Contacter'] + array("SMS" => "SMS","E-Mail" => 'E-Mail'), null,['class' => 'form-control has-feedback-left']) !!}
+               {!! Form::select('typenotification_id', [''=>'Comment Vous Contacter'] +$notifications, null,['class' => 'form-control has-feedback-left']) !!}
                <span class="fa fa-comments form-control-feedback left" aria-hidden="true"></span>
              </div>
            </div>
@@ -73,14 +70,14 @@
             <hr>
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-             {!! Form::select('ns_user_status', [''=>'Statut Client'] + array("Client NSIA BANQUE","Agent NSIA BANQUE","Visiteur"), null,['class' => 'form-control has-feedback-left']) !!}
+             {!! Form::select('typeclient_id', [''=>'Statut Client'] + $clients, null,['class' => 'form-control has-feedback-left']) !!}
              <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email">-->
              <span class="fa fa-bank form-control-feedback left" aria-hidden="true"></span>
            </div>
 
            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-            {!! Form::select('ns_user_agence', [''=>'Choisir Agence'] + $agences, null,['class' => 'form-control has-feedback-left']) !!}
+            {!! Form::select('agence_id', [''=>'Choisir Agence'] + $agences, null,['class' => 'form-control has-feedback-left']) !!}
 
             <span class="fa fa-bank form-control-feedback left" aria-hidden="true"></span>
 
@@ -88,14 +85,13 @@
 
           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nom & Prenom">-->
-
-            {!! Form::select('ns_carte_type', [''=>'Choisissez Type de Carte'] + array("Crystal","Quartz","Saphir", "Emeraude", "Classic", "Gold"), null,['class' => 'form-control has-feedback-left']) !!}
+            {!! Form::select('typecarte_id', [''=>'Choisissez Type de Carte'] + $cartes, null,['class' => 'form-control has-feedback-left']) !!}
 
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
            <!-- <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="N. Compte">-->
-           {!! Form::text('ns_user_compte',null, ['placeholder' => 'N. Compte', 'class' => 'form-control has-feedback-left']) !!}
+           {!! Form::text('ns_compte_bancaire',null, ['placeholder' => 'N. Compte', 'class' => 'form-control has-feedback-left']) !!}
            <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
          </div>
 
@@ -103,10 +99,9 @@
           {!! Form::text('ns_date_summission',null, ['placeholder' => 'Date Soumission', 'class' => 'form-control has-feedback-left datepicker11','id' => 'datepicker'])!!}
           <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
         </div>
-
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
          <!-- <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="N. Compte">-->
-         {!! Form::text('ns_priority',null, ['placeholder' => 'Priorite', 'class' => 'form-control has-feedback-left']) !!}
+         {!! Form::select('priority_id', [''=>'Choisissez Type la priorite'] + $prirorities, null,['class' => 'form-control has-feedback-left']) !!}
          <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
        </div>
      </div>
@@ -121,7 +116,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <!--<input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nom & Prenom">-->
 
-        {!! Form::select('ns_reclam_objet', [''=>'Choisir objet de la reclamation'] + $departments, null,['class' => 'form-control has-feedback-left']) !!}
+        {!! Form::select('department_id', [''=>'Choisir objet de la reclamation'] + $departments, null,['class' => 'form-control has-feedback-left']) !!}
 
         <span class="fa fa-question-circle form-control-feedback left" aria-hidden="true"></span>
       </div>
@@ -132,7 +127,7 @@
 
      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-       {!! Form::select('ns_transaction_type', [''=>'Choisir Type Transaction'] + array("GAB","TPE", "INTERNET"), null,['class' => 'form-control has-feedback-left']) !!}
+       {!! Form::select('ns_transaction_type', [''=>'Choisir Type Transaction'] + $transactions, null,['class' => 'form-control has-feedback-left']) !!}
 
 
        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
@@ -140,7 +135,7 @@
 
      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-       {!! Form::select('ns_event_nature', [''=>'Nature Transaction'] + array("Retrait","Versement", "Achat", "Change"), null,['class' => 'form-control has-feedback-left']) !!}
+       {!! Form::select('nature_transaction_id', [''=>'Nature Transaction'] + $naturetransactions, null,['class' => 'form-control has-feedback-left']) !!}
 
        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
      </div>

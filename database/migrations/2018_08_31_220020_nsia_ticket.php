@@ -26,9 +26,7 @@ class NsiaTicket extends Migration
             $table->string('ns_event_montant');
             $table->string('ns_event_place');
             $table->string('ns_event_nature');
-
-            $table->string('ns_nom_prenom');
-            
+            $table->string('ns_nom_prenom'); 
             $table->string('ns_carte_type');
             $table->string('ns_transaction_type');
             $table->string('ns_address_email');

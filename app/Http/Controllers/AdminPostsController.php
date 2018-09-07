@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use DB;
 use App\Agence;
+use App\typenotification;
+use App\type_transaction;
+use App\typecarte;
+use App\typeclient;
+use App\nature_transaction;
+use App\Priority;
+use App\User;
+
 class AdminPostsController extends Controller
 {
     /**
@@ -28,7 +36,7 @@ class AdminPostsController extends Controller
 
        $this->middleware('auth');
        $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
-       $this->middleware('permission:reclam-list');
+      $this->middleware('permission:reclam-list');
        $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
        $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
        $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
@@ -43,7 +51,7 @@ class AdminPostsController extends Controller
     $status = Status::pluck('name','id')->all();
     $departments = Department::pluck('name', 'id')->all();
     $agences = Agence::pluck('name', 'id')->all();
-
+    $prirorities = Priority::pluck('name','id')->all();
     return view('admin.posts.index', compact('posts','categories','status','departments'));
 }
 
@@ -59,7 +67,17 @@ class AdminPostsController extends Controller
         $status = Status::pluck('name','id')->all();
         $departments = Department::pluck('name', 'id')->all();
         $agences = Agence::pluck('name', 'id')->all();
-        return view('admin.posts.create', compact('categories','status','departments','agences'));
+
+
+        $prirorities = Priority::pluck('name','id')->all();
+        $cartes = typecarte::pluck('name','id')->all();
+        $clients = typeclient::pluck('name','id')->all();
+        $notifications = typenotification::pluck('name','id')->all();
+        $transactions = type_transaction::pluck('name','id')->all();
+        $naturetransactions = nature_transaction::pluck('name', 'id')->all();
+     
+        return view('admin.posts.create', compact('categories','status','departments','agences',
+            'prirorities', 'cartes','clients','notifications','transactions','naturetransactions'));
     }
 
     /**
@@ -79,7 +97,10 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+
+        //set prirority
         $user->posts()->create($input);
+
         return redirect('/admin/posts');
 
     }
@@ -109,8 +130,14 @@ class AdminPostsController extends Controller
         $status = Status::pluck('name','id')->all();
         $departments = Department::pluck('name','id')->all();
         $agences = Agence::pluck('name', 'id')->all();
-
-        return view('admin.posts.edit', compact('post','categories','status','departments','agences'));
+        $users = User::pluck('name','id')->all();
+        $prirorities = Priority::pluck('name','id')->all();
+        $cartes = typecarte::pluck('name','id')->all();
+        $clients = typeclient::pluck('name','id')->all();
+        $notifications = typenotification::pluck('name','id')->all();
+        $transactions = type_transaction::pluck('name','id')->all();
+        $naturetransactions = nature_transaction::pluck('name', 'id')->all();
+        return view('admin.posts.edit', compact('post','categories','status','departments','agences','naturetransactions','notifications','clients','prirorities','transactions','naturetransactions','cartes','users'));
     }
 
     /**
@@ -123,10 +150,7 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        $input = $request->all();
-        //return $request->ns_date_summission;
-
+        $input = $request->all();      
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
@@ -134,6 +158,7 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
         Auth::user()->posts()->whereId($id)->first()->update($input);
+
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }
 
@@ -146,7 +171,6 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
-
         $post = Post::findOrFail($id);
        // unlink(public_path() . $post->photo->file);
         $post->delete();

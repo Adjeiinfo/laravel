@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDescriptionToRole extends Migration
+class CreateTypeTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddDescriptionToRole extends Migration
      */
     public function up()
     {
-        Schema::table('roles', function (Blueprint $table) {
-            //
-            $table->string('description');
+        Schema::create('type_transactions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class AddDescriptionToRole extends Migration
      */
     public function down()
     {
-        Schema::table('roles', function (Blueprint $table) {
-            //
-            $table->dropColumn('description');
-        });
+        Schema::dropIfExists('type_transactions');
     }
 }

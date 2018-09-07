@@ -15,8 +15,6 @@ class UsersTableSeeder extends Seeder
 
 
         DB::table('users')->insert([
-
-
             'name'=> str_random(10),
             'role_id'=>2,
             'is_active'=>1,

@@ -17,15 +17,19 @@ class UserTableSeeder extends Seeder
     	$employee->name = 'Koffi';
     	$employee->email = 'koffieli@gmail.com';
     	$employee->password = bcrypt('secret');
+        $employee->is_active = 1;
         $employee->save();
-        $employee->assignRole('super-admin');
+        $employee->assignRole('admin');
+
+         $employee->save();
 
         $manager = new User();
         $manager->name = 'Eli';
         $manager->email = 'koffieli@yahoo.fr';
         $manager->password = bcrypt('secret');
+        $manager->is_active =1;
         $manager->save();
-        $manager->assignRole('admin');
+        $manager->assignRole('super-admin');
         $manager->save();
     }
 }

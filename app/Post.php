@@ -12,51 +12,47 @@ class Post extends Model
     use Sluggable;
     use SluggableScopeHelpers;
     protected $fillable = [
-
-     'category_id',
-     'photo_id',
-     'title',
-     'body',
-     'status_id',
-     'status_id',
-     'department_id',
-     'agence_id',
-
-     'ns_user_type',
-     'ns_phone',
-     'ns_date_transaction',
-     'ns_event_detail',
-     'ns_event_result',
-     'ns_event_montant',
-     'ns_resultid',
-     'ns_event_place',
-     'ns_event_nature',
-     'ns_nom_prenom',
-     'ns_reclam_objet',
-     'ns_carte_type',
-     'ns_transaction_type',
-     'ns_address_email',
-     'ns_address_postale',
-     'ns_signature',
-     'ns_date_summission',
-     'ns_date_survey',
-     'ns_devices',
-     'ns_latitude',
-     'ns_longitude',
-     'ns_notification_type',
-     'ns_agence',
-     'ns_compte_bancaire',
-     'ns_complete_at',
-     'ns_close_at',
-     'ns_event',
-
+       'category_id',
+       'photo_id',
+       'title',
+       'body',
+    // 'status_id',
+       'status_id',
+       'department_id',
+       'agence_id',
+       'typeclient_id',
+       'typecarte_id',
+       'type_transaction_id',
+       'typenotifications_id',
+       'priority_id',
+       'department_id',
+       'nature_transaction_id',
+       
+       'ns_phone',
+       'ns_date_transaction',
+       'ns_event_detail',
+       'ns_event_result',
+       'ns_event_montant',
+       'ns_resultid',
+       'ns_event_place',
+       'ns_nom_prenom',
+       'ns_address_email',
+       'ns_address_postale',
+       'ns_signature',
+       'ns_date_summission',
+       'ns_date_survey',
+       'ns_devices',
+       'ns_latitude',
+       'ns_longitude',
+       'ns_compte_bancaire',
+       'ns_complete_at',
+       'ns_close_at',
+       'ns_event',
      //
-     'ns_priority',
+   ];
+   public function sluggable()
 
- ];
- public function sluggable()
-
- {
+   {
     return [
         'slug' => [
             'source' => 'title'
@@ -85,7 +81,7 @@ public function status(){
 }
 
 public function priority(){
-    return $this->belongsTo('App\priority');
+    return $this->belongsTo('App\Priority');
 }
 
 
@@ -98,12 +94,31 @@ public function comments(){
 }
 
 public function agences(){
-    return $this->belongsTo('App\Agence');
+    return $this->belongsTo('App\Agence','ns_agence');
 }
 
+public function typenotifications(){
+    return $this->belongsTo('App\typenotification');
+}
+
+public function type_transaction(){
+    return $this->belongsTo('App\type_transaction');
+}
+
+public function typecarte(){
+    return $this->belongsTo('App\type_carte');
+}
+
+public function typeclient(){
+    return $this->belongsTo('App\typeclient');
+}
 
 public function statuts(){
     return $this->belongsTo('App\Statut');
+}
+
+public function nature_transactions(){
+    return $this->belongsTo('App\nature_transaction');
 }
 
 public function photoPlaceholder(){

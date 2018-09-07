@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDepartmentToPost extends Migration
+class CreateNatureTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddDepartmentToPost extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-             $table->integer('department_id');
+        Schema::create('nature_transactions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,10 +27,6 @@ class AddDepartmentToPost extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-            //$table->dropColumn('department_id');
-
-        });
+        Schema::dropIfExists('nature_transactions');
     }
 }

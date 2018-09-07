@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeRoleName extends Migration
+class CreateTypeNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class ChangeRoleName extends Migration
      */
     public function up()
     {
-        Schema::rename('roles', 'old_roles');
+        Schema::create('typenotifications', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,8 +27,6 @@ class ChangeRoleName extends Migration
      */
     public function down()
     {
-        //
-         Schema::rename('roles', 'old_roles');
-    
+        Schema::dropIfExists('typenotifications');
     }
 }

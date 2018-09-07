@@ -19,7 +19,6 @@ class RoleTableSeeder extends Seeder
            'Agent Central',
            'Super Chef Agence',
            'Chef Agence ',
-           'reclam-list',
            'Qualite',
            'Compagnie',
         ];

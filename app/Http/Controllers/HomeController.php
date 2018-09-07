@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Post;
 use App\Category;
 use App\Comment;
@@ -10,12 +9,15 @@ use DB;
 use App\Quotation;
 use Illuminate\Http\Request;
 use App\Agence;
-
-//
+use App\typenotification;
+use App\type_transaction;
+use App\typecarte;
+use App\typeclient;
+use App\nature_transaction;
+use App\Priority;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
 
 class HomeController extends Controller
 {
@@ -151,8 +153,11 @@ class HomeController extends Controller
     public function post($slug){
         $post = Post::findBySlugOrFail($slug);
         $categories = Category::all();
-        $comments = $post->comments()->whereIsActive(1)->get();
+        $comments = $post->comments()->get();
         $agences = Agence::all();
-        return view('post', compact('post','comments','categories','agences'));
+        $clients = typeclient::all();
+        $naturetransaction = nature_transaction::all();
+                
+        return view('post', compact('post','comments','categories','agences','clients','naturetransaction'));
     }
 }

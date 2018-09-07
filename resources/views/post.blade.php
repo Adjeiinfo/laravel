@@ -10,86 +10,78 @@
       <p class="lead">
         Par {{$post->nom}}
     </p>
-
     <!-- Date/Time -->
     <!--  <p><span class="glyphicon glyphicon-time"></span> Envoye {{$post->created_at->diffForHumans()}}</p>-->
     <hr>
-
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
     @endif
-
     @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
-
     @if (session('fail'))
     <div class="alert alert-danger">
         {{ session('status') }}
     </div>
     @endif
-
     @if (session('comment_message'))
     <div class="alert alert-success">
         {{ session('comment_message') }}
     </div>
     @endif
     <div class="well">
-       <div class="card mb-3">
+     <div class="card mb-3">
         <div class="card-body row">
             <strong><h3>Information du Client:</h3></strong>
             <hr>
             <div class="col-md-6">
-                <p><strong>Nom Client</strong>: {!!$post->user->name!!}</p>
+                <p><strong>Nom Client</strong>: {!! $post->ns_nom_prenom !!}</p>
                 <p><strong>Type Client</strong>: 
-                    <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                    <span style="color: #e9551e">{!! $post->typeclient->name !!}</span>
                 </p>
-                <p><strong>N. De Compte</strong>: 
-                    <span style="color: #830909">
-                        High
-                    </span>
+                <p><strong>N. Compte</strong>: 
+                    <span style="color: #e9551e">{!! $post->ns_compte_bancaire !!}</span>
                 </p>
             </div>
             <div class="col-md-6">
-                <p> <strong>Addresse Postale</strong>: {!!$post->user->name!!}</p>
-                <p><strong>Telephone</strong>: 
-                    <span style="color: #ff0000">1</span></p>
-                    <p> <strong>Email</strong>: 2 weeks ago</p>
-                    <p> <strong>A notifier par: </strong>: 1 week ago</p>
-                </div>
+                <p> <strong>Addresse Postale: </strong> {!!$post->ns_address_postale!!}</p>
+                <p> <strong>Email: </strong> {!!$post->ns_address_email!!}</p>
+                <p> <strong>Telephone: </strong> {!!$post->ns_phone!!}</p>
+                <p> <strong>A Notifier Par: </strong> {!!$post->type_transaction->name!!}</p>
             </div>
         </div>
     </div>
-    <div class="well">
-        <div class="card mb-3">
-            <div class="card-body row">
-                <strong><h3>Classification NSIA:</h3></strong>
-                <hr>
-                <div class="col-md-6">
-                 <p><strong>Departement: </strong>: {!!$post->user->name!!}</p>
-                 <p><strong>Assigne a: </strong>: {!!$post->user->name!!}</p>
-                 <p><strong>Status</strong>: 
-                    <span style="color: #e9551e">{!! $post->status->name!!}</span>
-                </p>
-                <p><strong>Priorite</strong>:<span style="color: #830909">High</span></p>
-            </div>
+</div>
+<div class="well">
+    <div class="card mb-3">
+        <div class="card-body row">
+            <strong><h3>Classification NSIA: </h3></strong>
+            <hr>
             <div class="col-md-6">
-                <p> <strong>Date de Soumission</strong>: {!!$post->user->name!!}</p>
-                <p>
-                    <strong>Derniere Modification</strong>: 
-                    <span style="color: #ff0000">
-                        1
-                    </span>
-                </p>
-                <p> <strong>Date de Cloture</strong>: 2 weeks ago</p>
-                <p> <strong>Date de fermeture </strong>: 1 week ago</p>
-            </div>
+               <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
+               <p><strong>Assigne a: </strong>: {!! $post->user->name !!}</p>
+               <p><strong>Status</strong>: 
+                <span style="color: #e9551e">{!! $post->status->name!!}</span>
+            </p>
+            <p><strong>Priorite: </strong><span style="color: #830909">{!! $post->priority->name!!}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p> <strong>Date de Soumission: </strong> {!!$post->ns_date_summission!!}</p>
+            <p>
+                <strong>Derniere Modification: </strong>
+                <span style="color: #ff0000">
+                    {!!$post->updated_at!!}
+                </span>
+            </p>
+            <p> <strong>Date de Completion: </strong>{!! $post->ns_complete_at !!}</p>
+            <p> <strong>Date de fermeture: </strong>{!! $post->ns_close_at!!}</p>
         </div>
     </div>
+</div>
 </div>
 
 <div class="card well">
@@ -102,17 +94,15 @@
             </button> 
             <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
             <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
-            
         </div>
-
         <div id="myDIV" style="display: none">
-            @if ($post->type_notification=='email')
+            @if ($post->typenotification->name =='E-MAIL')
             <div class="well">
                 <h4>Votre Message Au Client</h4>
                 {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
-                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
+                    {!! Form::textarea('mailbody', null, ['class'=>'form-control','rows'=>3])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
@@ -125,7 +115,7 @@
                 {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <div class="form-group">
-                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
+                    {!! Form::textarea('smsbody', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
@@ -140,33 +130,30 @@
                 <div class="card mb-3">
                     <div class="card-body row">
                         <div class="col-md-6">
-                            <p> <strong>Objet de la reclamation</strong>: 1 week ago</p>
-                            <p><strong>Date de la  transaction</strong>: {!!$post->user->name!!}</p>
+                            <p> <strong>Objet de la reclamation: </strong>{!!$post->department->name!!}</p>
+                            <p><strong>Date de la  transaction: </strong>{!!$post->ns_date_transaction!!}</p>
                             <p>
-                                <strong>Lieu de la Transaction</strong>: 
-                                <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                                <strong>Lieu de la Transaction: </strong> 
+                                <span style="color: #e9551e">{!! $post->ns_event_place !!}</span>
                             </p>
-
                         </div>
                         <div class="col-md-6">
-                            <p> <strong>Nature de l'evenement</strong>: {!!$post->user->name!!}</p>
+                            <p> <strong>Nature de l'evenement: </strong> {!! $post->nature_transaction!!}</p>
                             <p>
-                                <strong>Evenement observe</strong>: 
+                                <strong>Evenement observe: </strong>
                                 <span style="color: #ff0000">
-                                    1
+                                    {!! $post->ns_event_observe!!}
                                 </span>
                             </p>
-                            <p> <strong>Resultat</strong>: 2 weeks ago</p>
-                            <p> <strong>Montant de la transaction</strong>: 2 weeks ago</p>
-                            
+                            <p> <strong>Resultat: </strong>{!!$post->ns_event_result !!}</p>
+                            <p> <strong>Montant de la transaction: </strong>{!! $post->ns_event_montant !!}</p>         
                         </div>
                     </div>
                 </div>
             </div>
-            
             <p><strong>Detail de la Reclamation</strong></p>
             <hr>
-            <p>{!!$post->body!!}</p>
+            <p>{!!$post->ns_event_detail!!}</p>
         </div>
         <div class="well">
             <h4>Votre Commentaire:</h4>
@@ -227,7 +214,6 @@
                     {!! Form::label('body', 'Body:') !!}
                     {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>1])!!}
                 </div>
-
                 <div class="form-group">
                     {!! Form::submit('submit', ['class'=>'btn btn-primary']) !!}
                     {!! Form::close() !!}
@@ -243,7 +229,6 @@
     </div>
     @endforeach
     @endif
-
 </div>
 @include('includes.front_sidebar')
 </div>

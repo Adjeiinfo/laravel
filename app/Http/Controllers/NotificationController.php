@@ -21,28 +21,28 @@ class NotificationController extends Controller
 
 		$post=Post::findOrfail($id);
 		$title="Reponse a votre requete:  {$id}";
-		$mail_to=$post->user_email;
-		$typenotif= $post->type_notification ;
+		$input = $request->all();
+
+		//$mail_to=$post->ns_address_email;
+		//$typenotif= $post->typenotification ;
 
 
 		$name = $post->nom;
 		$email = "koffieli@gmail.com";
 		//$from-> $post->user->name;
-		$content = $request->body;
+		$content = $request->mailbody;
+	
 		try{
 			Mail::send('admin.posts.sendmail', ['name' => $name, 'email' => $email, 'title' => $title, 'content' => $content], function ($message) use ($post, $title) {
 				$message->from('koffielie@h-aigis.com', 'Nsia Service Qualite');
-				$message->to($post->user_email, $post->nom)->subject("Reponse a votre requete ".$post->id);
+				$message->to($post->ns_address_email, $post->ns_nom_prenom)->subject("Reponse a votre requete ".$post->id);
 			});
 			return redirect()->back()->with('status', 'Votre message a ete envoye avec success');
 		}
 		catch (Exception $e)
 		{
-
 			return redirect()->back()->with('fail', "Error: " . $e->getMessage());
-		}
-		
-		
+		}	
 	}
 
 	//send sms from here
@@ -58,13 +58,14 @@ class NotificationController extends Controller
 		$authToken  = config('app.twilio')['TWILIO_AUTH_TOKEN'];
 		$twilio_number  = config('app.twilio')['TWILIO_NUMBER'];
 
+
 		$client = new Client($accountSid, $authToken);
 		try
 		{
             // Use the client to do fun stuff like send text messages!
 			$client->messages->create(
             // the number you'd like to send the message to
-				$post->phone,
+				$post->ns_phone,
 				array(
                  // A Twilio phone number you purchased at twilio.com/console
 					'from' => $twilio_number,
