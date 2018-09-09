@@ -40,13 +40,11 @@ class DatabaseSeeder extends Seeder
         // User seeder will use the roles above created.
         //$this->call(UserTableSeeder::class);
 
- 
-
-        $this->call(PostDependSeeders::class);
-
         $this->call(AgenceTableSeeder::class);
 
         $this->call(UserTableSeeder::class);
+
+        $this->call(PostDependSeeders::class);
 
 
         factory(App\Category::class, 10)->create();

@@ -14,10 +14,13 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'role_id'=> $faker->numberBetween(1,3),
+       // 'role_id'=> $faker->numberBetween(1,3),
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+        'agence_id' => $faker->numberBetween(1,50),
+        'department_id' => $faker->numberBetween(1,4),
+        'photo_id'  =>1,
     ];
 });
 
@@ -33,7 +36,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'ns_phone' => $faker->numberBetween(1000000,100000050),
         'ns_date_transaction' =>$faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'ns_event_detail' =>$faker->sentence(7,11),
-         'ns_event_observe' =>$faker->sentence(7,11),
+        'ns_event_observe' =>$faker->sentence(7,11),
         'ns_event_result'=>$faker->sentence(7,11),
         'ns_event_montant'=>$faker->numberBetween(10000,10000000),
         'ns_resultid'=>$faker->numberBetween(100,1000),
@@ -43,7 +46,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'ns_address_postale'=> $faker->address,
         'ns_signature' =>$faker->sentence(1,2),
         'ns_date_summission' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'), 
-        'ns_date_survey' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
+        //'ns_date_survey' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'ns_devices'=>$faker->numberBetween(10000,10000000),
         'ns_latitude'=>$faker->numberBetween(10000,10000000),
         'ns_longitude'=>$faker->numberBetween(10000,10000000),

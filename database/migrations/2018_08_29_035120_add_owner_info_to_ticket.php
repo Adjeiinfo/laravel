@@ -15,10 +15,10 @@ class AddOwnerInfoToTicket extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->string("nom");
-            $table->string("user_email");
-            $table->string("type_notification");
-            $table->string("phone");
+           // $table->string("nom");
+           // $table->string("user_email");
+           // $table->string("type_notification");
+           // $table->string("phone");
 
         });
     }
@@ -32,10 +32,10 @@ class AddOwnerInfoToTicket extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-           $table->dropColumn("nom");
-           $table->dropColumn("user_email");
-           $table->dropColumn("type_notification");
-           $table->dropColumn("phone");
+          // $table->dropColumn("nom");
+         //  $table->dropColumn("user_email");
+          // $table->dropColumn("type_notification");
+         //  $table->dropColumn("phone");
        });
     }
 }

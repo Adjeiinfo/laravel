@@ -34,7 +34,7 @@
     </div>
     @endif
     <div class="well">
-     <div class="card mb-3">
+       <div class="card mb-3">
         <div class="card-body row">
             <strong><h3>Information du Client:</h3></strong>
             <hr>
@@ -62,9 +62,9 @@
             <strong><h3>Classification NSIA: </h3></strong>
             <hr>
             <div class="col-md-6">
-               <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
-               <p><strong>Assigne a: </strong>: {!! $post->user->name !!}</p>
-               <p><strong>Status</strong>: 
+             <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
+             <p><strong>Assigne a: </strong>: {!! $post->user ? $post->user->name : 'Not assigned' !!}</p>
+             <p><strong>Status</strong>: 
                 <span style="color: #e9551e">{!! $post->status->name!!}</span>
             </p>
             <p><strong>Priorite: </strong><span style="color: #830909">{!! $post->priority->name!!}</span></p>
@@ -96,7 +96,7 @@
             <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
         </div>
         <div id="myDIV" style="display: none">
-            @if ($post->typenotification->name =='E-MAIL')
+            @if ($post->typenotification->name =='Par EMAIL')
             <div class="well">
                 <h4>Votre Message Au Client</h4>
                 {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}

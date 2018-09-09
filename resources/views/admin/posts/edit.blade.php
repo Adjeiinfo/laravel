@@ -54,7 +54,7 @@
              </div>
              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                <!-- <input type="text" class="form-control" id="inputSuccess3" placeholder="Notifer par">-->
-               {!! Form::select('type_notification_id', [''=>'Comment Vous Contacter'] + $notifications, null,['class' => 'form-control has-feedback-left']) !!}
+               {!! Form::select('typenotification_id', [''=>'Comment Vous Contacter'] + $notifications, null,['class' => 'form-control has-feedback-left']) !!}
                <span class="fa fa-comments form-control-feedback left" aria-hidden="true"></span>
              </div>
            </div>
@@ -142,7 +142,7 @@
      <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
    </div>
    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-     {!! Form::select('ns_transaction_type', [''=>'Choisir Type Transaction'] + $transactions, null,['class' => 'form-control has-feedback-left']) !!}
+     {!! Form::select('type_transaction_id', [''=>'Choisir Type Transaction'] + $transactions, null,['class' => 'form-control has-feedback-left']) !!}
      <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
    </div>
 

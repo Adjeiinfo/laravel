@@ -50,9 +50,9 @@
       @foreach($posts as $post)
       <tr>
         <td>{{$post->id}}</td>
-        <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
+        <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->status ? $post->status->name : 'Status Unknown'}}</a></td>
         <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
-        <td>{{$post->user->name}}</td>
+        <td>{{$post->user ? $post->user->name : 'Not Assigned'}}</td>
         <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
         <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
        <!-- <td><a href="{{route('home.post', $post->slug)}}">View Post</a></td>

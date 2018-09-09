@@ -14,8 +14,8 @@ class PostDependSeeders extends Seeder
         //
         //notification 
     	$notifications = [
-    		['name'=>"SMS"],
-    		['name'=> "E-MAIL"]
+    		['name'=>"Par SMS"],
+    		['name'=> "Par Email"]
     	];
     	DB::table('typenotifications')->insert($notifications);
 
@@ -48,10 +48,10 @@ class PostDependSeeders extends Seeder
 
       	//departement 
     	$department = [
-    		['name'=>'Carte'],
-    		['name'=>'Compte'],
-    		['name'=>'Pret'],
-    		['name'=>'Qualite']
+    		['name'=>'CARTE BANCAIRE'],
+    		['name'=>'COMPTE BANCAIRE'],
+    		['name'=>'PRET'],
+    		['name'=>'QUALITE']
     	];
     	DB::table('departments')->insert($department);
 

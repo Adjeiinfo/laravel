@@ -47,7 +47,7 @@ class Post extends Model
        'ns_compte_bancaire',
        'ns_complete_at',
        'ns_close_at',
-       'ns_event',
+      // 'ns_event',
      //
    ];
    public function sluggable()
@@ -94,10 +94,10 @@ public function comments(){
 }
 
 public function agences(){
-    return $this->belongsTo('App\Agence','ns_agence');
+    return $this->belongsTo('App\Agence');
 }
 
-public function typenotifications(){
+public function typenotification(){
     return $this->belongsTo('App\typenotification');
 }
 
@@ -106,18 +106,18 @@ public function type_transaction(){
 }
 
 public function typecarte(){
-    return $this->belongsTo('App\type_carte');
+    return $this->belongsTo('App\typecarte');
 }
 
 public function typeclient(){
     return $this->belongsTo('App\typeclient');
 }
 
-public function statuts(){
+/*public function statuts(){
     return $this->belongsTo('App\Statut');
-}
+}*/
 
-public function nature_transactions(){
+public function nature_transaction(){
     return $this->belongsTo('App\nature_transaction');
 }
 

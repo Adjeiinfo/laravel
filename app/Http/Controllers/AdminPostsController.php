@@ -99,6 +99,7 @@ class AdminPostsController extends Controller
         }
 
         //set prirority
+       
         $user->posts()->create($input);
 
         return redirect('/admin/posts');
@@ -157,6 +158,8 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+        //
+        //return $input;
         Auth::user()->posts()->whereId($id)->first()->update($input);
 
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');

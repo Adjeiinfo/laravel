@@ -46,7 +46,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
         //return  view('fhome');
         //$request->user()->authorizeRoles(['employee', 'manager']);
         //return view('home');
@@ -157,7 +156,9 @@ class HomeController extends Controller
         $agences = Agence::all();
         $clients = typeclient::all();
         $naturetransaction = nature_transaction::all();
-                
+       # $typenotificatio = typenotification::all();
+        
+       
         return view('post', compact('post','comments','categories','agences','clients','naturetransaction'));
     }
 }

@@ -16,33 +16,33 @@ class AddNsColumnsToPost extends Migration
         Schema::table('posts', function (Blueprint $table) {
             //
            $table->string('ns_resultid');
-           $table->string('ns_event');
-           $table->string('typeclient_id');
+          // $table->string('ns_event');
+           $table->integer('typeclient_id');
            $table->string('ns_phone');
-           $table->timestamp('ns_date_transaction');
+           $table->timestamp('ns_date_transaction')->nullable();;
            $table->string('ns_event_detail');
            $table->string('ns_event_result');
            $table->string('ns_event_montant');
            $table->string('ns_event_place');
-           $table->string('nature_transaction_id');
+           $table->integer('nature_transaction_id');
            $table->string('ns_event_observe');
            $table->string('ns_nom_prenom');
-           $table->string('typecarte_id');
-           $table->string('type_transaction_id');
+           $table->integer('typecarte_id');
+           $table->integer('type_transaction_id');
            $table->string('ns_address_email');
            $table->string('ns_address_postale');
            $table->string('ns_signature');
-           $table->timestamp('ns_date_summission');
-           $table->timestamp('ns_date_survey');
+           $table->timestamp('ns_date_summission')->default(DB::raw('CURRENT_TIMESTAMP(0)'));
+           //$table->timestamp('ns_date_survey')->nullable();;
            $table->string('ns_devices');
            $table->string('ns_latitude');
            $table->string('ns_longitude');
-           $table->string('typenotification_id');
+           $table->integer('typenotification_id');
            
            $table->string('ns_compte_bancaire');
-           $table->timestamp('ns_complete_at');
-           $table->timestamp('ns_close_at');
-           $table->string('priority_id');
+           $table->timestamp('ns_complete_at')->nullable();;
+           $table->timestamp('ns_close_at')->nullable();;
+           $table->integer('priority_id');
 
        });
     }
@@ -57,7 +57,7 @@ class AddNsColumnsToPost extends Migration
         Schema::table('posts', function (Blueprint $table) {
             //
            //$table->dropColumn('ns_resultid');
-           $table->dropColumn('ns_event');
+          // $table->dropColumn('ns_event');
            $table->dropColumn('typeclient_id');
            $table->dropColumn('ns_phone');
            $table->dropColumn('ns_date_transaction');
@@ -75,7 +75,7 @@ class AddNsColumnsToPost extends Migration
            $table->dropColumn('ns_address_postale');
            $table->dropColumn('ns_signature');
            $table->dropColumn('ns_date_summission');
-           $table->dropColumn('ns_date_survey');
+           //$table->dropColumn('ns_date_survey');
            $table->dropColumn('ns_devices');
            $table->dropColumn('ns_latitude');
            $table->dropColumn('ns_longitude');

@@ -302,7 +302,7 @@
                     <td>{{$post->id}}</td>
                     <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
                     <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
-                    <td>{{$post->user->name}}</td>
+                    <td>{{$post->cateer ? $post->user->name : 'user unkown'}}</td>
                     <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
                     <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
 
