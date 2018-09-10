@@ -16,7 +16,7 @@ class Post extends Model
        'photo_id',
        'title',
        'body',
-    // 'status_id',
+       'user_id',
        'status_id',
        'department_id',
        'agence_id',
@@ -93,7 +93,7 @@ public function comments(){
     return $this->hasMany('App\Comment');
 }
 
-public function agences(){
+public function agence(){
     return $this->belongsTo('App\Agence');
 }
 

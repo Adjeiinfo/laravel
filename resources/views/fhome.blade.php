@@ -283,15 +283,16 @@
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                  <thead>
                    <tr>
-                     <th>Id</th>
-                     <th>Title</th>
-                     <th>Status</th>
-                     <th>Owner</th>
-                     <th>Category</th>
-                     <th>Department</th>
+                     <th>Identifiant</th>
+                     <th>Objet</th>
 
-                     <th>Soumission</th>
-                     <th>Modification</th>
+                     <th>Status</th>
+                     <th>Nom Client</th>
+                     <th>Agence</th>
+                     <th>Assigné A</th>
+
+                     <th>Date Transaction</th>
+                     <th>Date Soumission</th>
                      <th style="width: 20%">Action</th>
                    </tr>
                  </thead>
@@ -299,13 +300,13 @@
                   @if($allpost)
                   @foreach($allpost as $post)
                   <tr>
-                    <td>{{$post->id}}</td>
-                    <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
-                    <td>{{$post->status ? $post->status->name : 'Status Unknown'}}</td>
-                    <td>{{$post->cateer ? $post->user->name : 'user unkown'}}</td>
-                    <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
-                    <td>{{$post->department? $post->department->name : 'Department Unknown'}}</td>
-
+                    <td>{{$post->ns_resultid}}</td>
+                    <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->department? $post->department->name . " -  ". $post->ns_event_observe : 'Objet non Defini'}}</a></td>
+                    <td>{{$post->status ? $post->status->name : 'Status Inconnu'}}</td>
+                    <td>{{$post->ns_nom_prenom ? $post->ns_nom_prenom : 'Sans Nom'}}</td>
+                   <td>{{$post->agence ? $post->agence->name : 'Agence Inconnue'}}</td>
+                    
+                    <td>{{$post->user? $post->user->name : 'Pas Assigne'}}</td>
                     <td>{{$post->created_at->diffForhumans()}}</td>
                     <td>{{$post->updated_at->diffForhumans()}}</td>
                     <td>

@@ -36,7 +36,7 @@ class AdminPostsController extends Controller
 
        $this->middleware('auth');
        $this->middleware(['isAdmin', 'clearance'])->except('index', 'show');
-      $this->middleware('permission:reclam-list');
+       $this->middleware('permission:reclam-list');
        $this->middleware('permission:reclam-create', ['only' => ['create','store']]);
        $this->middleware('permission:reclam-edit', ['only' => ['edit','update']]);
        $this->middleware('permission:reclam-delete', ['only' => ['destroy']]);
@@ -46,7 +46,7 @@ class AdminPostsController extends Controller
    public function index()
    {
     //
-    $posts = Post::paginate(6);
+    $posts = Post::paginate(10);
     $categories = Category::pluck('name','id')->all();
     $status = Status::pluck('name','id')->all();
     $departments = Department::pluck('name', 'id')->all();
@@ -158,9 +158,13 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
-        //
+        //user_id
+        $post = Post::findOrFail($id);
         //return $input;
-        Auth::user()->posts()->whereId($id)->first()->update($input);
+        $post->update($input);
+       // Auth::user()->posts()->whereId('user_id',$id)->first()->update($input);
+
+        //return redirect()->back()->with("sucess",'Reclamation mise a jour avec succes');
 
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }

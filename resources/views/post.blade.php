@@ -33,28 +33,32 @@
         {{ session('comment_message') }}
     </div>
     @endif
-    <div class="well">
-       <div class="card mb-3">
-        <div class="card-body row">
-            <strong><h3>Information du Client:</h3></strong>
-            <hr>
-            <div class="col-md-6">
-                <p><strong>Nom Client</strong>: {!! $post->ns_nom_prenom !!}</p>
-                <p><strong>Type Client</strong>: 
-                    <span style="color: #e9551e">{!! $post->typeclient->name !!}</span>
-                </p>
-                <p><strong>N. Compte</strong>: 
-                    <span style="color: #e9551e">{!! $post->ns_compte_bancaire !!}</span>
-                </p>
-            </div>
-            <div class="col-md-6">
-                <p> <strong>Addresse Postale: </strong> {!!$post->ns_address_postale!!}</p>
-                <p> <strong>Email: </strong> {!!$post->ns_address_email!!}</p>
-                <p> <strong>Telephone: </strong> {!!$post->ns_phone!!}</p>
-                <p> <strong>A Notifier Par: </strong> {!!$post->type_transaction->name!!}</p>
-            </div>
+</div>
+<div class="well">
+ <div class="card mb-3">
+    <div class="card-body row">
+        <strong><h3>Information du Client:</h3></strong>
+        <hr>
+        <div class="col-md-6">
+            <p><strong>Nom Client</strong>: {!! $post->ns_nom_prenom !!}</p>
+            <p><strong>Type Client</strong>: 
+                <span style="color: #e9551e">{!! $post->typeclient->name !!}</span>
+            </p>
+            <p><strong>N. Compte</strong>: 
+                <span style="color: #e9551e">{!! $post->ns_compte_bancaire !!}</span>
+            </p>
+            <p><strong>Agence</strong>: 
+                <span style="color: #e9551e">{!! $post->agence->name !!}</span>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p> <strong>Addresse Postale: </strong> {!!$post->ns_address_postale!!}</p>
+            <p> <strong>Email: </strong> {!!$post->ns_address_email!!}</p>
+            <p> <strong>Telephone: </strong> {!!$post->ns_phone!!}</p>
+            <p> <strong>A Notifier Par: </strong> {!!$post->type_transaction->name!!}</p>
         </div>
     </div>
+</div>
 </div>
 <div class="well">
     <div class="card mb-3">
@@ -62,9 +66,9 @@
             <strong><h3>Classification NSIA: </h3></strong>
             <hr>
             <div class="col-md-6">
-             <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
-             <p><strong>Assigne a: </strong>: {!! $post->user ? $post->user->name : 'Not assigned' !!}</p>
-             <p><strong>Status</strong>: 
+               <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
+               <p><strong>Assigne a: </strong>: {!! $post->user ? $post->user->name : 'Not assigned' !!}</p>
+               <p><strong>Status</strong>: 
                 <span style="color: #e9551e">{!! $post->status->name!!}</span>
             </p>
             <p><strong>Priorite: </strong><span style="color: #830909">{!! $post->priority->name!!}</span></p>
@@ -82,12 +86,12 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <div class="card well">
     <h3>Detail et Action:</h3>
     <hr>
-    <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
+    <div class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
         <div class="form-group float-right">
             <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
                 Notifier Client
@@ -124,29 +128,30 @@
             </div>
             @endif
             <div id="yourDIV">
-            </h5>
-            <hr>
-            <div class="card-body ">
-                <div class="card mb-3">
-                    <div class="card-body row">
-                        <div class="col-md-6">
-                            <p> <strong>Objet de la reclamation: </strong>{!!$post->department->name!!}</p>
-                            <p><strong>Date de la  transaction: </strong>{!!$post->ns_date_transaction!!}</p>
-                            <p>
-                                <strong>Lieu de la Transaction: </strong> 
-                                <span style="color: #e9551e">{!! $post->ns_event_place !!}</span>
-                            </p>
-                        </div>
-                        <div class="col-md-6">
-                            <p> <strong>Nature de l'evenement: </strong> {!! $post->nature_transaction!!}</p>
-                            <p>
-                                <strong>Evenement observe: </strong>
-                                <span style="color: #ff0000">
-                                    {!! $post->ns_event_observe!!}
-                                </span>
-                            </p>
-                            <p> <strong>Resultat: </strong>{!!$post->ns_event_result !!}</p>
-                            <p> <strong>Montant de la transaction: </strong>{!! $post->ns_event_montant !!}</p>         
+
+                <hr>
+                <div class="card-body ">
+                    <div class="card mb-3">
+                        <div class="card-body row">
+                            <div class="col-md-6">
+                                <p> <strong>Objet de la reclamation: </strong>{!!$post->department->name!!}</p>
+                                <p><strong>Date de la  transaction: </strong>{!!$post->ns_date_transaction!!}</p>
+                                <p>
+                                    <strong>Lieu de la Transaction: </strong> 
+                                    <span style="color: #e9551e">{!! $post->ns_event_place !!}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p> <strong>Nature de l'evenement: </strong> {!! $post->nature_transaction->name!!}</p>
+                                <p>
+                                    <strong>Evenement observe: </strong>
+                                    <span style="color: #ff0000">
+                                        {!! $post->ns_event_observe!!}
+                                    </span>
+                                </p>
+                                <p> <strong>Resultat: </strong>{!!$post->ns_event_result !!}</p>
+                                <p> <strong>Montant de la transaction: </strong>{!! $post->ns_event_montant !!}</p>         
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -230,8 +235,10 @@
     @endforeach
     @endif
 </div>
-@include('includes.front_sidebar')
-</div>
+
+<!--</div>-->
+<!--@include('includes.front_sidebar')-->
+<!--</div>-->
 
 @stop
 

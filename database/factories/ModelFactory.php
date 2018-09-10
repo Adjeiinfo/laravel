@@ -21,6 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'agence_id' => $faker->numberBetween(1,50),
         'department_id' => $faker->numberBetween(1,4),
         'photo_id'  =>1,
+        'is_active' =>1,
     ];
 });
 
@@ -67,6 +68,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'priority_id' =>$faker->numberBetween(1,3),
         'department_id' =>$faker->numberBetween(1,3),
         'nature_transaction_id'=>$faker->numberBetween(1,3),
+        'user_id'=>$faker->numberBetween(1,10),
     ];
 });
 

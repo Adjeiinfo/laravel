@@ -28,6 +28,7 @@
       </div>
       <!-- /page content -->
       <!-- footer content -->
+    </div>
       @include('includes.ha_footer')
       <!-- /footer content -->
     </div>

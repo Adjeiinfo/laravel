@@ -95,7 +95,7 @@
            <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
          </div>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="t1">
+         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="t1">
           {!! Form::text('ns_date_summission',null, ['placeholder' => 'Date Soumission', 'class' => 'form-control has-feedback-left datepicker11','id' => 'datepicker'])!!}
           <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
         </div>
@@ -165,7 +165,7 @@
      <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
    </div>
 
-   <div class="form-group">
+   <div class="form-group col-xs-12">
     {!! Form::label('body', 'Decrire Evement:') !!}
     {!! Form::textarea('ns_event_detail', null, ['class'=>'form-control'])!!}
   </div>
@@ -208,12 +208,15 @@
   {!! Form::label('body', 'Description:') !!}
   {!! Form::textarea('body', null, ['class'=>'form-control'])!!}
 </div>
-<div class="form-group">
+<div class="row">
+<div class="well">
+
   {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
+</div>
 </div>
 
 {!! Form::close() !!}
-
+</div>
 </div>
 <div class="row">
   @include('includes.form_error')
@@ -227,7 +230,5 @@
     });
   });
 </script>
-
-
 @stop
 
