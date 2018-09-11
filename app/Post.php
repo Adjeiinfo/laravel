@@ -56,8 +56,7 @@ class Post extends Model
 
     return [
         'slug' => [
-            'source' => ['ns_event_result','ns_event_result']
-        ]
+            'source' => 'ns_event_result'
     ];
 }
 
