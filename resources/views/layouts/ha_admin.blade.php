@@ -29,10 +29,11 @@
       <!-- /page content -->
       <!-- footer content -->
     </div>
-      @include('includes.ha_footer')
+   
       <!-- /footer content -->
     </div>
   </div>
+    @include('includes.ha_footer')
   <!--Includes scripts -->
   @include('includes.ha_script')
 </body>

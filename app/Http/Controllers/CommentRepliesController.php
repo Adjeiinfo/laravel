@@ -43,7 +43,7 @@ class CommentRepliesController extends Controller
     }
 
 
-   /* public function createReply(Request $request){
+    public function createReply(Request $request){
 
 
         $user = Auth::user();
@@ -70,7 +70,7 @@ class CommentRepliesController extends Controller
 
 
 
-    }*/
+    }
 
 
 

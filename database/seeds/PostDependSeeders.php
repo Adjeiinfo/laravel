@@ -69,7 +69,8 @@ class PostDependSeeders extends Seeder
     		['name'=>'Traitement en cours'],
     		['name'=> 'Traite'],
     		['name'=>'Suspendu'],
-    		['name'=>'Closed']
+    		['name'=>'Closed'],
+            ['name' => 'Non-Fonde']
     	];
     	DB::table('statuses')->insert($status);
 

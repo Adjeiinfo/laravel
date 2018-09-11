@@ -29,6 +29,7 @@ Route::group(['middleware'=>'isAdmin'], function(){
     Route::get('/admin/posts/{id}/destroy', 'AdminPostsController@destroy')->name('ticket_delete');
     Route::get('/admin/posts/{id}/complete', 'AdminPostsController@complete')->name('ticket_complete');
     Route::get('/admin/posts/{id}/close', 'AdminPostsController@close')->name('ticket_close');
+     Route::get('/admin/posts/{id}/nonfonde', 'AdminPostsController@nonfonde')->name('ticket_nonfonde');
 
     Route::resource('admin/users', 'AdminUsersController',['names'=>[
         'index'=>'admin.users.index',

@@ -1,18 +1,18 @@
 @extends('layouts.ha_admin')
-
 @section('content')
-<!-- Blog Post -->
+@include('includes.tinyeditor')
+<h1>Information Detaillee de la Reclamation</h1>  
 <div class="container">
     <div class ="col-md-8">
       <!-- Title -->
-      <h3>{{$post->title}}</h3>
+      <h3>{{$post->ns_event_object}}</h3>
       <!-- Author -->
       <p class="lead">
-        Par {{$post->nom}}
+        Par Mr/Mme:  {{$post->ns_nom_prenom}}
     </p>
     <!-- Date/Time -->
     <!--  <p><span class="glyphicon glyphicon-time"></span> Envoye {{$post->created_at->diffForHumans()}}</p>-->
-    <hr>
+    
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -34,101 +34,116 @@
     </div>
     @endif
 </div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 ">
+    <div class="x_panel">
+
+        <div class="x_content">
+            <div class="row row-eq-height ">
+                <div class="col-md-6">
+                  <div class="well">
+                     <div class="card mb-3">
+                        <div class="card-body row">
+                          <strong><h3>Information du Client:</h3></strong>
+                          <hr>
+                          <div class="col-md-6">
+                            <p><strong>Nom Client</strong>: {!! $post->ns_nom_prenom !!}</p>
+                            <p><strong>Type Client</strong>: 
+                                <span style="color: #e9551e">{!! $post->typeclient->name !!}</span>
+                            </p>
+                            <p><strong>N. Compte</strong>: 
+                                <span style="color: #e9551e">{!! $post->ns_compte_bancaire !!}</span>
+                            </p>
+                            <p><strong>Agence</strong>: 
+                                <span style="color: #e9551e">{!! $post->agence->name !!}</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p> <strong>Addresse Postale: </strong> {!!$post->ns_address_postale!!}</p>
+                            <p> <strong>Email: </strong> {!!$post->ns_address_email!!}</p>
+                            <p> <strong>Telephone: </strong> {!!$post->ns_phone!!}</p>
+                            <p> <strong>Type Nofication: </strong> {!!$post->typenotification->name!!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+               <div class="card mb-3">
+                  <div class="card-body row">
+                    <strong><h3>NSIA CLASSIFICATION:</h3></strong>
+                    <hr>
+                    <div class="col-md-6">
+                       <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
+                       <p><strong>Assigne a: </strong>: {!! $post->user ? $post->user->name : 'Not assigned' !!}</p>
+                       <p><strong>Status</strong>: 
+                        <span style="color: #e9551e">{!! $post->status->name!!}</span>
+                    </p>
+                    <p><strong>Priorite: </strong><span style="color: #830909">{!! $post->priority->name!!}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p> <strong>Date de Soumission: </strong> {!!$post->ns_date_summission!!}</p>
+                    <p>
+                        <strong>Derniere Modification: </strong>
+                        <span style="color: #ff0000">
+                            {!!$post->updated_at!!}
+                        </span>
+                    </p>
+                    <p> <strong>Date de Completion: </strong>{!! $post->ns_complete_at !!}</p>
+                    <p> <strong>Date de fermeture: </strong>{!! $post->ns_close_at!!}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <div class="well">
- <div class="card mb-3">
-    <div class="card-body row">
-        <strong><h3>Information du Client:</h3></strong>
+   <div class="card mb-3">
+      <div class="card-body row">
+        <strong><h3>Detail de la Reclamation:</h3></strong>
         <hr>
-        <div class="col-md-6">
-            <p><strong>Nom Client</strong>: {!! $post->ns_nom_prenom !!}</p>
-            <p><strong>Type Client</strong>: 
-                <span style="color: #e9551e">{!! $post->typeclient->name !!}</span>
-            </p>
-            <p><strong>N. Compte</strong>: 
-                <span style="color: #e9551e">{!! $post->ns_compte_bancaire !!}</span>
-            </p>
-            <p><strong>Agence</strong>: 
-                <span style="color: #e9551e">{!! $post->agence->name !!}</span>
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p> <strong>Addresse Postale: </strong> {!!$post->ns_address_postale!!}</p>
-            <p> <strong>Email: </strong> {!!$post->ns_address_email!!}</p>
-            <p> <strong>Telephone: </strong> {!!$post->ns_phone!!}</p>
-            <p> <strong>A Notifier Par: </strong> {!!$post->type_transaction->name!!}</p>
-        </div>
-    </div>
-</div>
-</div>
-<div class="well">
-    <div class="card mb-3">
-        <div class="card-body row">
-            <strong><h3>Classification NSIA: </h3></strong>
-            <hr>
-            <div class="col-md-6">
-               <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>
-               <p><strong>Assigne a: </strong>: {!! $post->user ? $post->user->name : 'Not assigned' !!}</p>
-               <p><strong>Status</strong>: 
-                <span style="color: #e9551e">{!! $post->status->name!!}</span>
-            </p>
-            <p><strong>Priorite: </strong><span style="color: #830909">{!! $post->priority->name!!}</span></p>
-        </div>
-        <div class="col-md-6">
-            <p> <strong>Date de Soumission: </strong> {!!$post->ns_date_summission!!}</p>
-            <p>
-                <strong>Derniere Modification: </strong>
-                <span style="color: #ff0000">
-                    {!!$post->updated_at!!}
-                </span>
-            </p>
-            <p> <strong>Date de Completion: </strong>{!! $post->ns_complete_at !!}</p>
-            <p> <strong>Date de fermeture: </strong>{!! $post->ns_close_at!!}</p>
-        </div>
-    </div>
-</div>
-
-
-<div class="card well">
-    <h3>Detail et Action:</h3>
-    <hr>
-    <div class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
-        <div class="form-group float-right">
-            <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
-                Notifier Client
-            </button> 
-            <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
-            <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>
-        </div>
-        <div id="myDIV" style="display: none">
-            @if ($post->typenotification->name =='Par EMAIL')
-            <div class="well">
-                <h4>Votre Message Au Client</h4>
-                {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}
-                <input type="hidden" name="post_id" value="{{$post->id}}">
-                <div class="form-group">
-                    {!! Form::textarea('mailbody', null, ['class'=>'form-control','rows'=>3])!!}
-                </div>
-                <div class="form-group">
-                    {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
-                    {!! Form::close() !!}
-                </div>
+        <div class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
+            <div class="form-group float-right">
+                <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
+                    Notifier Client
+                </button> 
+                <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
+                <!--<a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>-->
+                <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger  pull-right" form="delete-ticket-1">Supprimer</a>
+                <a href="{{route('ticket_nonfonde',$post->id)}}" class="btn btn-info pull-right" form="ticket_nonfonde">Marquer Non-Fonde</a>
             </div>
-            @else
-            <div class="well">
-                <h4>Votre SMS Au client (64 Character Max)</h4>
-                {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
-                <input type="hidden" name="post_id" value="{{$post->id}}">
-                <div class="form-group">
-                    {!! Form::textarea('smsbody', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
+            <div id="myDIV" style="display: none">
+                @if ($post->typenotification->name =='Par Email')
+                <div class="well">
+                    <h4>Votre Email Au client (Pas de limite de caractere mais soyons bref et clair!)</h4>
+
+                    {!! Form::open(array('action' => array('NotificationController@sendmail', $post->id), 'method' => 'get')) !!}
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                    <div class="form-group">
+                        {!! Form::textarea('mailbody', null, ['class'=>'form-control','rows'=>3])!!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
-                <div class="form-group">
-                    {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
-                    {!! Form::close() !!}
+                @else
+                <div class="well">
+                    <h4>Votre SMS Au client (64 Character Max)</h4>
+                    {!! Form::open(array('action' => array('NotificationController@sendsms', $post->id), 'method' => 'get')) !!}
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
+                    <div class="form-group">
+                        {!! Form::textarea('smsbody', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
+                @endif
             </div>
-            @endif
             <div id="yourDIV">
-
                 <hr>
                 <div class="card-body ">
                     <div class="card mb-3">
@@ -160,19 +175,23 @@
             <hr>
             <p>{!!$post->ns_event_detail!!}</p>
         </div>
-        <div class="well">
-            <h4>Votre Commentaire:</h4>
-            {!! Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) !!}
-            <input type="hidden" name="post_id" value="{{$post->id}}">
-            <div class="form-group">
-                {!! Form::label('body', 'Body:') !!}
-                {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
-            </div>
-            <div class="form-group">
-                {!! Form::submit('Submit comment', ['class'=>'btn btn-primary']) !!}
-                {!! Form::close() !!}
-            </div>
-        </div>
+    </div>
+</div>
+</div>
+
+<div class="well">
+   <strong><h3>Votre Commentaire:</h3></strong>
+   {!! Form::open(['method'=>'POST', 'action'=> 'PostCommentsController@store']) !!}
+   <input type="hidden" name="post_id" value="{{$post->id}}">
+   <div class="form-group">
+    {!! Form::label('body', 'Body:') !!}
+    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>3])!!}
+</div>
+<div class="form-group">
+    {!! Form::submit('Submit comment', ['class'=>'btn btn-primary']) !!}
+    {!! Form::close() !!}
+</div>
+
     <!-- Preview Image 
     <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="">
     <hr>
@@ -194,73 +213,19 @@
                 <small>{{$comment->created_at->diffForHumans()}}</small>
             </h4>
             <p>{{$comment->body}}</p>
-            @if(count($comment->replies) > 0)
-            @foreach($comment->replies as $reply)
-            @if($reply->is_active == 1)
-            <!-- Nested Comment -->
-            <div id="nested-comment" class=" media">
-                <a class="pull-left" href="#">
-                    <img height="64" class="media-object" src="{{$reply->photo}}" alt="">
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading"{{$reply->author}}
-                    <small>{{$reply->created_at->diffForHumans()}}</small>
-                </h4>
-                <p>{{$reply->body}}</p>
-            </div>
-            <div class="comment-reply-container">
-                <button class="toggle-reply btn btn-primary pull-right">Reply</button>
-                <div class="comment-reply col-sm-6">
-                    {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="comment_id" value="{{$comment->id}}">
-                    {!! Form::label('body', 'Body:') !!}
-                    {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>1])!!}
-                </div>
-                <div class="form-group">
-                    {!! Form::submit('submit', ['class'=>'btn btn-primary']) !!}
-                    {!! Form::close() !!}
-                </div>
-            </div>
-            <!-- End Nested Comment -->
-            @else
-            <h1 class="text-center">No Replies</h1>
-            @endif
-            @endforeach
-            @endif
         </div>
     </div>
     @endforeach
     @endif
 </div>
+</div>
+</div>
+</div>
 
-<!--</div>-->
-<!--@include('includes.front_sidebar')-->
-<!--</div>-->
+<div class="row">
+  @include('includes.form_error')
+</div>
 
+
+</div>
 @stop
-
-@section('scripts')
-<script>
-    $(".comment-reply-container .toggle-reply").click(function(){
-        $(this).next().slideToggle("slow");
-    });
-</script>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-</script>
-
-@stop
-
-
-
-

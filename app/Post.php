@@ -53,9 +53,10 @@ class Post extends Model
    public function sluggable()
 
    {
+
     return [
         'slug' => [
-            'source' => 'title'
+            'source' => ['ns_event_result','ns_event_result']
         ]
     ];
 }

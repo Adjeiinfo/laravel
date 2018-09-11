@@ -220,4 +220,5 @@
 <div class="row">
   @include('includes.form_error')
 </div>
+</div>
 @stop
