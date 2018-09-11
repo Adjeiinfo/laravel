@@ -35,5 +35,18 @@ class UserTableSeeder extends Seeder
         $manager->save();
         $manager->assignRole('super-admin');
         $manager->save();
+
+
+        $manager = new User();
+        $manager->name = 'Simon';
+        $manager->email = 'simondejo@gmail.com';
+        $manager->password = bcrypt('secret');
+        $manager->is_active =1;
+        $manager->department_id = 1;
+        $manager->agence_id = 1;
+        $manager->save();
+        $manager->assignRole('super-admin');
+        $manager->save();
+
     }
 }
