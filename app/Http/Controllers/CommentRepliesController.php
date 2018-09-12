@@ -72,11 +72,6 @@ class CommentRepliesController extends Controller
 
     }
 
-
-
-
-
-
     /**
      * Display the specified resource.
      *
@@ -119,11 +114,7 @@ class CommentRepliesController extends Controller
 
         CommentReply::findOrFail($id)->update($request->all());
 
-
         return redirect()->back();
-
-
-
     }
 
     /**

@@ -54,9 +54,11 @@ class Post extends Model
 
    {
 
+   // $val = 'ns_nom_prenom'.'ns_event_result';
     return [
         'slug' => [
-            'source' => ['ns_event_result','ns_event_result']
+
+            'source' => 'ns_nom_prenom'
         ]
     ];
 }
