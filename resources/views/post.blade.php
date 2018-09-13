@@ -10,7 +10,7 @@
       <p class="lead">
 
 
-       Identifiant de la Reclamation:  {{$post->id}}
+       Identifiant de la Reclamation:  {{$post->ns_resultid}}
    </p>
    <!-- Date/Time -->
    <!--  <p><span class="glyphicon glyphicon-time"></span> Envoye {{$post->created_at->diffForHumans()}}</p>-->

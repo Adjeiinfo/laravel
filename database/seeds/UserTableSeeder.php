@@ -22,8 +22,7 @@ class UserTableSeeder extends Seeder
         $employee->agence_id = 1;
         $employee->save();
         $employee->assignRole('admin');
-
-         $employee->save();
+        $employee->save();
 
         $manager = new User();
         $manager->name = 'Eli';
@@ -36,10 +35,20 @@ class UserTableSeeder extends Seeder
         $manager->assignRole('super-admin');
         $manager->save();
 
-
         $manager = new User();
         $manager->name = 'Simon';
         $manager->email = 'simondejo@gmail.com';
+        $manager->password = bcrypt('secret');
+        $manager->is_active =1;
+        $manager->department_id = 1;
+        $manager->agence_id = 1;
+        $manager->save();
+        $manager->assignRole('super-admin');
+        $manager->save();
+
+        $manager = new User();
+        $manager->name = 'Kouame Daniel';
+        $manager->email = '2kdaniel04@gmail.com';
         $manager->password = bcrypt('secret');
         $manager->is_active =1;
         $manager->department_id = 1;

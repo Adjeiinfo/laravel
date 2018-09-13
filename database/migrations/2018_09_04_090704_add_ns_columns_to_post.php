@@ -15,7 +15,7 @@ class AddNsColumnsToPost extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-           $table->string('ns_resultid');
+           $table->string('ns_resultid')->unique();
           // $table->string('ns_event');
            $table->integer('typeclient_id');
            $table->string('ns_phone');

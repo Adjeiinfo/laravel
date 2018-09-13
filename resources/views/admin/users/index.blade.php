@@ -1,13 +1,8 @@
 @extends('layouts.ha_admin')
-
 @section('content')
-
-
 @if(Session::has('deleted_user'))
 <p class="bg-danger">{{session('deleted_user')}}</p>
 @endif
-
-
 <h1>Users</h1>
 <div class="ccol-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
@@ -38,11 +33,9 @@
          <th>Name</th>
          <th style="width: 20%">Role </th>
          <th style="width: 15%">Permissions</th>
-         
          <th style="width: 15%">Agence</th>
          <th>Department</th>
          <th>Status</th>
-
          <th>Updated</th>
          <th style="width: 10%">Action</th>
        </tr>
@@ -53,9 +46,7 @@
       <tr>
         <td>{{$user->id}}</td>
         <td> <img height="20" src="{{$user->photo ? $user->photo->file : 'http://placehold.it/400x400'}}" alt="" ></td>
-
         <td><a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a></td>
-
         <td>
           @if(!empty($user->roles))
           @foreach($user->roles as $v)
@@ -70,18 +61,11 @@
          @endforeach
          @endif
        </td>
-
        <!--<td>{{$user->role ? $user->role->name : 'User has no role'}}</td>-->
-
-
        <td>{{$user->agence ?     $user->agence->name : 'Sans agence'}}</td>
-
        <td>{{$user->department ? $user->department->name : 'Pas de departement'}}</td>
-
        <td>{{$user->is_active == 1 ? 'Active' : 'Not Active' }}</td>
-
        <td>{{$user->updated_at->diffForHumans()}}</td>
-
        <td>
         <div class="col-xs-4 text-center">
           <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
@@ -97,6 +81,4 @@
 </table>
 </div>
 </div>
-
-
 @stop
