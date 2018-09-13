@@ -18,11 +18,11 @@ class CreateNotificationTable extends Migration
             $table->text('body');
             $table->integer('post_id')->unsigned()->index();
             $table->string('notification_to');
-            $table->string('message_type');
-            $table->integer('user_id');
-            $table->timestamps();
+            $table->string('notification_type');
+            $table->string('notification_nom_prenom');
+            $table->timestamps()->date_default_timezone_get();
 
-             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

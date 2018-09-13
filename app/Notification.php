@@ -10,10 +10,10 @@ class Notification extends Model
      protected $fillable = [
 
         'post_id',
-        'author',
-        'email',
-        'body',
-        'is_active'
+        'notification_to',
+        'notification_type',
+        'notification_nom_prenom',
+        'body'
     ];
 
      public function post(){

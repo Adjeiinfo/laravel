@@ -18,6 +18,7 @@ use App\Priority;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Notification;
 
 class HomeController extends Controller
 {
@@ -156,9 +157,8 @@ class HomeController extends Controller
         $agences = Agence::all();
         $clients = typeclient::all();
         $naturetransaction = nature_transaction::all();
-       # $typenotificatio = typenotification::all();
-        
+        $notifications = $post->notifications()->get();
        
-        return view('post', compact('post','comments','categories','agences','clients','naturetransaction'));
+        return view('post', compact('post','comments','categories','agences','clients','naturetransaction','notifications'));
     }
 }

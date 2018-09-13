@@ -57,9 +57,8 @@ class Post extends Model
    // $val = 'ns_nom_prenom'.'ns_event_result';
     return [
         'slug' => [
-
-            'source' => 'ns_nom_prenom'
-        ]
+      'source' => 'ns_nom_prenom'
+          ]
     ];
 }
 
@@ -95,6 +94,11 @@ public function department(){
 public function comments(){
     return $this->hasMany('App\Comment');
 }
+
+public function notifications(){
+    return $this->hasMany('App\Notification');
+}
+
 
 public function agence(){
     return $this->belongsTo('App\Agence');

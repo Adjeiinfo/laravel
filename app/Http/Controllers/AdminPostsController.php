@@ -22,7 +22,7 @@ use App\typeclient;
 use App\nature_transaction;
 use App\Priority;
 use App\User;
-
+use App\Notification;
 class AdminPostsController extends Controller
 {
     /**
@@ -221,7 +221,7 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
         $post->status_id = DB::table('statuses')->where('name', 'Non-Fonde')->value('id');
         $post->close_at = Carbon::now();
-         $post->complete_at = Carbon::now();
+        $post->complete_at = Carbon::now();
         $post->save();
         return redirect()->back()->with("success",'Reclamation marquee Non-Fondee');
 
