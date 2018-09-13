@@ -20,7 +20,7 @@ class CreateNotificationTable extends Migration
             $table->string('notification_to');
             $table->string('notification_type');
             $table->string('notification_nom_prenom');
-            $table->timestamps()->date_default_timezone_get();
+            $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
