@@ -202,6 +202,7 @@
 </div>
 </div>
 </div>
+@can('reclam-update-status')
 <div class="well">
  <strong><h3>Changement de statut:</h3></strong>
  {!! Form::model($post, ['method'=>'PATCH', 'action'=> ['AdminPostsController@updatestatus', $post->id], 'files'=>true]) !!}
@@ -215,6 +216,7 @@
     {!! Form::close() !!}
 </div>
 </div>
+@endcan
 
 <div class="well">
  <strong><h3>Votre Commentaire:</h3></strong>

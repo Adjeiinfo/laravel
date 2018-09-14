@@ -26,7 +26,8 @@ class PermissionTableSeeder extends Seeder
            'reclam-close',
            'reclam-reopen',
            'reclam-nonfonde',
-           'send-notification'
+           'send-notification',
+           'reclam-update-status',
         ];
 
         foreach ($permissions as $permission) {
