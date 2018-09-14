@@ -7,7 +7,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ url('/admin/') }}" class="site_title"><i class="fa fa-paw"></i> <span>HaiGiSTicket!</span></a>
+            <a href="{{ asset('/admin/') }}" class="site_title"><i class="fa fa-paw"></i> <span>HaiGiSTicket!</span></a>
           </div>
           <div class="clearfix"></div>
           <!-- include quick side profile -->

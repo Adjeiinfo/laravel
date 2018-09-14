@@ -13,7 +13,7 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="{{ url('/admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="{{ asset('/admin/') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
