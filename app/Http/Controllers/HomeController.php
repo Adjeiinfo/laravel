@@ -159,7 +159,7 @@ class HomeController extends Controller
         $clients = typeclient::all();
         $naturetransaction = nature_transaction::all();
         $notifications = $post->notifications()->get();
-        $status = Status::pluck('name','id')->all();
+        $status = DB::table('statuses')->wherenotin('name', ['Closed','Non-Fonde'])->pluck('name','id')->all();
        
         return view('post', compact('post','comments','categories','agences','clients','naturetransaction','notifications','status'));
     }
