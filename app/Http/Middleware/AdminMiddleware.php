@@ -19,7 +19,7 @@ class AdminMiddleware
     {
         $user = User::all()->count();
         if (!($user == 1)) {
-            if (!Auth::user()->hasPermissionTo('role-list')) {
+            if (!Auth::user()->hasPermissionTo('reclam-list')) {
                 abort('401');
             }
         }
