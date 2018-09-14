@@ -110,11 +110,13 @@
             <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
                 Notifier Client
             </button> 
+
             <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
             <!--<a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>-->
             <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger  pull-right" form="delete-ticket-1">Supprimer</a>
             <a href="{{route('ticket_nonfonde',$post->id)}}" class="btn btn-warning pull-right" form="ticket_nonfonde">Marquer Non-Fonde</a>
         </div>
+
         <div id="myDIV" style="display: none">
             @if ($post->typenotification->name =='Par Email')
             <div class="well">
@@ -182,6 +184,19 @@
 </div>
 </div>
 </div>
+<div class="well">
+ <strong><h3>Changement de statut:</h3></strong>
+ {!! Form::model($post, ['method'=>'PATCH', 'action'=> ['AdminPostsController@updatestatus', $post->id], 'files'=>true]) !!}
+ <input type="hidden" name="post_id" value="{{$post->id}}">
+ <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+  {!! Form::select('status_id', [''=>'Choisir Statut'] + $status, null,['class' => 'form-control has-feedback-left']) !!}
+  <span class="fa fa-legal form-control-feedback left" aria-hidden="true"></span>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedbac">
+    {!! Form::submit('Soumettre Votre Changement', ['class'=>'btn btn-success']) !!}
+    {!! Form::close() !!}
+</div>
+</div>
 
 <div class="well">
  <strong><h3>Votre Commentaire:</h3></strong>
@@ -239,8 +254,9 @@
         <h4 class="media-heading">Type De message:        
             <small>{{$notification->notification_type}}</small>
         </h4>
-        <h4 class="media-heading">contenu du message:        
-            <p>{{$notification->body}}</p>
+        <h4 class="media-heading">contenu du message:  
+            <br>      
+            <small>{{$notification->body}}</small>
         </h4>
     </div>
     <hr>

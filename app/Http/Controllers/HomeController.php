@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Notification;
+use App\Status;
 
 class HomeController extends Controller
 {
@@ -158,7 +159,8 @@ class HomeController extends Controller
         $clients = typeclient::all();
         $naturetransaction = nature_transaction::all();
         $notifications = $post->notifications()->get();
+        $status = Status::pluck('name','id')->all();
        
-        return view('post', compact('post','comments','categories','agences','clients','naturetransaction','notifications'));
+        return view('post', compact('post','comments','categories','agences','clients','naturetransaction','notifications','status'));
     }
 }

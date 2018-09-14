@@ -5,6 +5,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
+
 class Post extends Model
 {
     //

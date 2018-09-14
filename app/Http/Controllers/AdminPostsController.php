@@ -169,6 +169,22 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }
 
+        public function updatestatus(Request $request, $id)
+    {
+        //
+        $input = $request->all();     
+
+        $post = Post::findOrFail($id);
+        //return $input;
+        $post->status_id = $request->status_id; ;
+        $post->save();
+       // Auth::user()->posts()->whereId('user_id',$id)->first()->update($input);
+
+        return redirect()->back()->with("success",'Reclamation mise a jour avec succes');
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

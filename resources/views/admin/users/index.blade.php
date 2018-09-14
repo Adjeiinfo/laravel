@@ -60,6 +60,8 @@
          <label class="label label-info">{{ $v->name }}</label>
          @endforeach
          @endif
+         
+       
        </td>
        <!--<td>{{$user->role ? $user->role->name : 'User has no role'}}</td>-->
        <td>{{$user->agence ?     $user->agence->name : 'Sans agence'}}</td>

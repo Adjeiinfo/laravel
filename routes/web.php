@@ -15,11 +15,13 @@ Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/','HomeController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::group(['middleware'=>'isAdmin'], function(){
 
-    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin', 'HomeController@index');
 
     //Route::get('/emails/test/{id}', 'NotificationController@sendmail')->name('ticket_email');
 
@@ -40,11 +42,13 @@ Route::group(['middleware'=>'isAdmin'], function(){
 
     Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'HomeController@post']);
 
+    Route::match(['put', 'patch'],'/updatestatus/{id}','AdminPostsController@updatestatus');
+
     Route::resource('admin/posts', 'AdminPostsController',['names'=>[
         'index'=>'admin.posts.index',
         'create'=>'admin.posts.create',
         'store'=>'admin.posts.store',
-        'edit'=>'admin.posts.edit',
+        'edit'=>'admin.posts.edit'
         
     ]]);
 

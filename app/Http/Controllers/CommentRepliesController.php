@@ -56,8 +56,6 @@ class CommentRepliesController extends Controller
             'email' =>$user->email,
             'photo'=>$user->photo->file,
             'body'=>$request->body
-
-
         ];
 
 
