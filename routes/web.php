@@ -21,7 +21,8 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>'isAdmin'], function(){
 
-    Route::get('/admin', 'HomeController@index');
+    //Route::get('/admin', 'HomeController@index');
+    Route::get('/admin', array('as' => 'admin', 'uses' => 'HomeController@index'));
 
     //Route::get('/emails/test/{id}', 'NotificationController@sendmail')->name('ticket_email');
 
