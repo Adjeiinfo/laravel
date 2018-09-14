@@ -7,7 +7,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>HaiGiSTicket!</span></a>
+            <a href="{{ url('/admin/') }}" class="site_title"><i class="fa fa-paw"></i> <span>HaiGiSTicket!</span></a>
           </div>
           <div class="clearfix"></div>
           <!-- include quick side profile -->
@@ -65,7 +65,7 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Reclamations: TRAITE versu NON TRAITE  <small>Graph title sub-title</small></h3>
+                    <h3>Reclamations: TRAITE versus NON TRAITE  <small>Graph title sub-title</small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
