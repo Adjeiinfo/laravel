@@ -59,9 +59,7 @@
          @foreach($user->permissions as $v)
          <label class="label label-info">{{ $v->name }}</label>
          @endforeach
-         @endif
-         
-       
+         @endif       
        </td>
        <!--<td>{{$user->role ? $user->role->name : 'User has no role'}}</td>-->
        <td>{{$user->agence ?     $user->agence->name : 'Sans agence'}}</td>
@@ -69,12 +67,16 @@
        <td>{{$user->is_active == 1 ? 'Active' : 'Not Active' }}</td>
        <td>{{$user->updated_at->diffForHumans()}}</td>
        <td>
+        @can('role-edit')
         <div class="col-xs-4 text-center">
           <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
         </div>
+        @endcan
+        @can('role-delete')
         <div class="col-xs-4 text-right">
           <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
         </div>
+        @endcan
       </td>
     </tr>
     @endforeach

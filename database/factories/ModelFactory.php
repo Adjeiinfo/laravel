@@ -109,8 +109,6 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     ];
 });
 
-
-
 $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
     return [
         'is_active'=> 1,
@@ -118,6 +116,15 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
         'photo'=> 'placeholder.jpg',
         'email' => $faker->safeEmail,
         'body' => $faker->paragraphs(1, true),
+
+    ];
+});
+
+$factory->define(App\Notification::class, function (Faker\Generator $faker) {
+    return [
+        'post_id' => $faker->numberBetween(1,10),
+        'notification_type'=> $faker->numberBetween(1,2),
+        'body'=>$faker->paragraphs(1, true),
 
     ];
 });

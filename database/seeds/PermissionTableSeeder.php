@@ -18,11 +18,15 @@ class PermissionTableSeeder extends Seeder
            'role-create',
            'role-edit',
            'role-delete',
+
            'reclam-list',
            'reclam-create',
            'reclam-edit',
            'reclam-delete',
-           'reclam-close'
+           'reclam-close',
+           'reclam-reopen',
+           'reclam-nonfonde',
+           'send-notification'
         ];
 
         foreach ($permissions as $permission) {
@@ -34,7 +38,7 @@ class PermissionTableSeeder extends Seeder
 
         // create roles and assign created permissions
         $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(['role-list', 'reclam-create','reclam-edit','reclam-delete']);
+        $role->givePermissionTo(['reclam-list','role-list', 'reclam-create','reclam-edit','reclam-delete']);
 
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());

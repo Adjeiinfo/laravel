@@ -8,8 +8,6 @@
       <h3>{{$post->ns_event_object}}</h3>
       <!-- Author -->
       <p class="lead">
-
-
        Identifiant de la Reclamation:  {{$post->ns_resultid}}
    </p>
    <!-- Date/Time -->
@@ -114,17 +112,28 @@
     <hr>
     <div class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
         <div class="form-group float-right">
+            @can('send-notification')
             <button type="button" class="btn btn-info" onclick="$('#myDIV').toggle();">
                 Notifier Client
             </button> 
+            @endcan
 
-            <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>    
-            <!--<a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>-->
+            @can('reclam-close')
+            <a href="{{route('ticket_close',$post->id)}}" class="btn btn-warning">Fermer</a>   
+            @endcan 
+
+            @can('reclam-delete')
             <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger  pull-right" form="delete-ticket-1">Supprimer</a>
-            <a href="{{route('ticket_nonfonde',$post->id)}}" class="btn btn-warning pull-right" form="ticket_nonfonde">Marquer Non-Fonde</a>
-            <a href="{{route('ticket_reopen',$post->id)}}" class="btn btn-info pull-right" form="ticket_reopen">Reouvrir</a>
-        </div>
+            @endcan
 
+            @can('reclam-nonfonde')
+            <a href="{{route('ticket_nonfonde',$post->id)}}" class="btn btn-warning pull-right" form="ticket_nonfonde">Marquer Non-Fonde</a>
+            @endcan
+            @can('reclam-reopen')
+            <a href="{{route('ticket_reopen',$post->id)}}" class="btn btn-info pull-right" form="ticket_reopen">Reouvrir</a>
+            @endcan
+        </div>
+        
         <div id="myDIV" style="display: none">
             @if ($post->typenotification->name =='Par Email')
             <div class="well">
@@ -157,6 +166,7 @@
             </div>
             @endif
         </div>
+     
         <div id="yourDIV">
             <hr>
             <div class="card-body ">

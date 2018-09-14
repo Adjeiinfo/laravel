@@ -313,12 +313,16 @@
                       <div class="col-xs-4 text-left">
                         <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
                       </div>
+                       @can('reclam-edit')
                       <div class="col-xs-4 text-center">
                         <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
                       </div>
+                       @endcan
+                      @can('reclam-delete')
                       <div class="col-xs-4 text-right">
                         <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
                       </div>
+                      @endcan
                     </td>
                   </tr>
                   @endforeach 
