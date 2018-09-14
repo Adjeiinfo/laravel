@@ -160,13 +160,14 @@ class AdminPostsController extends Controller
         }
         //user_id
         $post = Post::findOrFail($id);
+
+        if (self::canupdate($id) == true){
         //return $input;
-        $post->update($input);
-       // Auth::user()->posts()->whereId('user_id',$id)->first()->update($input);
+            $post->update($input);
+            return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
+        }
 
-        //return redirect()->back()->with("sucess",'Reclamation mise a jour avec succes');
-
-        return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
+        return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus ete modifiee car deja '. $post->status->name);
     }
 
     public function updatestatus(Request $request, $id)
@@ -177,15 +178,13 @@ class AdminPostsController extends Controller
 
         $post = Post::findOrFail($id);
 
-        if($post->status->name == "Closed" or $post->status->name=="Non-Fonde"){
-           return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus change car deja '. $post->status->name);
-       }
+        if (self::canupdate($id) == true){
         //return $input;
-       $post->status_id = $request->status_id;
-       $post->save();
-       // Auth::user()->posts()->whereId('user_id',$id)->first()->update($input);
-
-       return redirect()->back()->with("success",'Reclamation mise a jour avec succes');
+           $post->status_id = $request->status_id;
+           $post->save();
+           return redirect()->back()->with("success",'Reclamation mise a jour avec succes');
+       }
+       return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus change car deja '. $post->status->name);
    }
 
    public function reopen(Request $request, $id)
@@ -194,17 +193,16 @@ class AdminPostsController extends Controller
     $input = $request->all();    
     $post = Post::findOrFail($id);
 
-    if($post->status->name == "Closed" or $post->status->name=="Non-Fonde"){
+    if (self::canupdate($id) == false){
+        $post->status_id = DB::table('statuses')->where('name', 'Recu')->pluck('id')->first();
+        $post->ns_complete_at=null;
+        $post->ns_close_at = null;
+        $post->save();
 
-       $post->status_id = DB::table('statuses')->where('name', 'Recu')->pluck('id')->first();
-       $post->ns_complete_at=null;
-       $post->ns_close_at = null;
-       $post->save();
+        return redirect()->back()->with("success",'Reclamation reouverte avec succes');
+    }
 
-       return redirect()->back()->with("success",'Reclamation reouverte avec succes');
-   }
-
-   return redirect()->back()->with("Fail",'Reclamation deja ouverte');
+    return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus change car deja '. $post->status->name );
 }
 
 
@@ -248,21 +246,39 @@ class AdminPostsController extends Controller
     //mark as closed 
     public function close($id)
     {
-        $post = Post::findOrFail($id);
-        $post->status_id = DB::table('statuses')->where('name', 'Closed')->value('id');
-        $post->close_at = Carbon::now();
-        $post->save();
-        return redirect()->back()->with("success",'Reclamation fermee avec success');
-    }
+       $post = Post::findOrFail($id);
 
-    public function nonfonde($id)
-    {
-        $post = Post::findOrFail($id);
-        $post->status_id = DB::table('statuses')->where('name', 'Non-Fonde')->value('id');
-        $post->close_at = Carbon::now();
-        $post->complete_at = Carbon::now();
-        $post->save();
-        return redirect()->back()->with("success",'Reclamation marquee Non-Fondee');
+       if (self::canupdate($id) == true){
+           $post->status_id = DB::table('statuses')->where('name', 'Closed')->value('id');
+           $post->close_at = Carbon::now();
+           $post->save();
+           return redirect()->back()->with("success",'Reclamation fermee avec success');
+       }
+       return redirect()->back()->with("Fail",'Impossible de fermer car reclamation deja '. $post->status->name);
+   }
 
+   public function nonfonde($id)
+   {
+
+       $post = Post::findOrFail($id);
+
+       if (self::canupdate($id) == true){
+           $post->status_id = DB::table('statuses')->where('name', 'Non-Fonde')->value('id');
+           $post->close_at = Carbon::now();
+           $post->complete_at = Carbon::now();
+           $post->save();
+           return redirect()->back()->with("success",'Reclamation marquee Non-Fondee');
+       }
+       return redirect()->back()->with("Fail",'Impossible de Marquer Non-Fonde car reclamation deja '. $post->status->name);
+   }
+
+
+   private function canupdate($id) {
+    $post = Post::findOrFail($id);
+
+    if($post->status->name == "Closed" or $post->status->name=="Non-Fonde"){
+        return false;
     }
+    return true;
+}
 }
