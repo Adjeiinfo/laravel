@@ -75,7 +75,7 @@ class AdminPostsController extends Controller
         $notifications = typenotification::pluck('name','id')->all();
         $transactions = type_transaction::pluck('name','id')->all();
         $naturetransactions = nature_transaction::pluck('name', 'id')->all();
-     
+
         return view('admin.posts.create', compact('categories','status','departments','agences',
             'prirorities', 'cartes','clients','notifications','transactions','naturetransactions'));
     }
@@ -99,7 +99,7 @@ class AdminPostsController extends Controller
         }
 
         //set prirority
-       
+
         $user->posts()->create($input);
 
         return redirect('/admin/posts');
@@ -169,20 +169,43 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
     }
 
-        public function updatestatus(Request $request, $id)
+    public function updatestatus(Request $request, $id)
     {
         //
+
         $input = $request->all();     
 
         $post = Post::findOrFail($id);
+
+        if($post->status->name == "Closed" or $post->status->name=="Non-Fonde"){
+           return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus change car deja '. $post->status->name);
+       }
         //return $input;
-        $post->status_id = $request->status_id; ;
-        $post->save();
+       $post->status_id = $request->status_id;
+       $post->save();
        // Auth::user()->posts()->whereId('user_id',$id)->first()->update($input);
 
-        return redirect()->back()->with("success",'Reclamation mise a jour avec succes');
-    }
+       return redirect()->back()->with("success",'Reclamation mise a jour avec succes');
+   }
 
+   public function reopen(Request $request, $id)
+   {
+        //
+    $input = $request->all();    
+    $post = Post::findOrFail($id);
+
+    if($post->status->name == "Closed" or $post->status->name=="Non-Fonde"){
+
+       $post->status_id = DB::table('statuses')->where('name', 'Recu')->pluck('id')->first();
+       $post->ns_complete_at=null;
+       $post->ns_close_at = null;
+       $post->save();
+
+       return redirect()->back()->with("success",'Reclamation reouverte avec succes');
+   }
+
+   return redirect()->back()->with("Fail",'Reclamation deja ouverte');
+}
 
 
     /**

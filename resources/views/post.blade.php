@@ -35,6 +35,13 @@
     {{ session('comment_message') }}
 </div>
 @endif
+
+@if (session('Fail'))
+<div class="alert alert-warning">
+    {{ session('Fail') }}
+</div>
+@endif
+
 </div>
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12 ">
@@ -115,6 +122,7 @@
             <!--<a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger " form="delete-ticket-1">Supprimer</a>-->
             <a href="{{route('ticket_delete',$post->id)}}" class="btn btn-danger  pull-right" form="delete-ticket-1">Supprimer</a>
             <a href="{{route('ticket_nonfonde',$post->id)}}" class="btn btn-warning pull-right" form="ticket_nonfonde">Marquer Non-Fonde</a>
+            <a href="{{route('ticket_reopen',$post->id)}}" class="btn btn-info pull-right" form="ticket_reopen">Reouvrir</a>
         </div>
 
         <div id="myDIV" style="display: none">
