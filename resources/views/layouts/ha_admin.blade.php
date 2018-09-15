@@ -8,7 +8,6 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-             <link rel="icon" href="{{asset('/images/image_backend/imagetest.png')}}" type="image/ico" />
 
             <a href="{{url('/admin')}}" class="site_title"><i class="fa fa-paw"></i> <span> HaiGiSTicket!</span></a>
           </div>

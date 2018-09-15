@@ -1,20 +1,20 @@
  <!-- sidebar menu -->
  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
   <div class="menu_section">
-    <h3>General</h3>
+    <h3>Menu Principal</h3>
     <ul class="nav side-menu">
-       
-     <li>
-        <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Tableau de Board</a>
+     
+       <li>
+        <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Tableau de Bord</a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-wrench fa-fw"></i>Employés<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-wrench fa-fw"></i>Agents de la Banque<span class="fa arrow"></span></a>
         <ul class="nav child_menu">
             <li>
-                <a href="{{route('admin.users.index')}}">Liste des Employé</a>
+                <a href="{{route('admin.users.index')}}">Liste des Agents</a>
             </li>
             <li>
-                <a href="{{route('admin.users.create')}}">Creer Nouveau</a>
+                <a href="{{route('admin.users.create')}}">Nouvel Agent</a>
             </li>
 
         </ul>
