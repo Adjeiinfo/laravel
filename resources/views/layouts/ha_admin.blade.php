@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('includes.ha_header')
 
+ @include('includes.ha_header')
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span> HaiGiS Ticket</span></a>
+             <link rel="icon" href="{{asset('images/image_backend/logohaigis.png')}}" type="image/ico" />
+
+            <a href="{{url('/admin')}}" class="site_title"><i class="fa fa-paw"></i> <span> HaiGiSTicket!</span></a>
           </div>
+        
           <div class="clearfix"></div>
           <!-- include quick side profile -->
           @include('includes.ha_quick_prof') 
