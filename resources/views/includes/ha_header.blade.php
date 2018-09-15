@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{asset('/images/image_backend/favicon.png')}}" type="image/ico" />
 
-
     <title>HaiGiS Analytics Pour vous!</title>
-
     <!-- Bootstrap -->
     <link href="{{asset('vendors/vendor_backend/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -17,7 +15,6 @@
     <link href="{{asset('vendors/vendor_backend/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{asset('vendors/vendor_backend/iCheck/skins/flat/green.css')}}" rel="stylesheet">
-
     <!-- bootstrap-progressbar -->
     <link href="{{asset('vendors/vendor_backend/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
     <!-- JQVMap -->
