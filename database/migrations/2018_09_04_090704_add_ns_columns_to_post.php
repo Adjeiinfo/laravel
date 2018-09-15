@@ -19,7 +19,7 @@ class AddNsColumnsToPost extends Migration
           // $table->string('ns_event');
            $table->integer('typeclient_id');
            $table->string('ns_phone');
-           $table->timestamp('ns_date_transaction')->nullable();;
+           $table->timestamp('ns_date_transaction')->nullable();
            $table->string('ns_event_detail');
            $table->string('ns_event_result');
            $table->string('ns_event_montant');
@@ -40,8 +40,8 @@ class AddNsColumnsToPost extends Migration
            $table->integer('typenotification_id');
            
            $table->string('ns_compte_bancaire');
-           $table->timestamp('ns_complete_at')->nullable();;
-           $table->timestamp('ns_close_at')->nullable();;
+           $table->timestamp('ns_complete_at')->nullable();
+           $table->timestamp('ns_close_at')->nullable();
            $table->integer('priority_id');
 
        });

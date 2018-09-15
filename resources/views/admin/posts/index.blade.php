@@ -7,6 +7,17 @@
   {{ session('reclam_delete') }}
 </div>
 @endif
+@if (session('success'))
+<div class="alert alert-success">
+  {{ session('success') }}
+</div>
+@endif
+@if (session('Fail'))
+<div class="alert alert-warning">
+    {{ session('Fail') }}
+</div>
+@endif
+
 <h1>Reclamations</h1>
 <div class="ccol-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">

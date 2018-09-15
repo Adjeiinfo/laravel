@@ -162,9 +162,10 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
 
         if (self::canupdate($id) == true){
-        //return $input;
+            //return $input;
+            //return $post;
             $post->update($input);
-            return redirect('/admin/posts')->with("sucess",'Reclamation mise a jour avec succes');
+            return redirect('/admin/posts')->with("success",'Reclamation mise a jour avec succes');
         }
 
         return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus ete modifiee car deja '. $post->status->name);
