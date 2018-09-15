@@ -22,7 +22,7 @@ class Photo extends Model
     public function getFileAttribute($photo){
 
 
-        return $this->url('/'). uploads . $photo;
+        return url('/').$this->uploads . $photo;
 
 
     }
