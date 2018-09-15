@@ -3,8 +3,8 @@
   <div class="menu_section">
     <h3>Menu Principal</h3>
     <ul class="nav side-menu">
-     
-       <li>
+       
+     <li>
         <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Tableau de Bord</a>
     </li>
     <li>
@@ -50,12 +50,8 @@
 
     <!--Departement -->
     <li>
-        <a href="#"><i class="fa fa-wrench fa-fw"></i>Services & Produits<span class="fa arrow"></span></a>
-        <ul class="nav child_menu">
-            <li>
-                <a href="{{route('admin.departments.index')}}">Tous les Service & Produits</a>
-            </li>
-        </ul>
+        <a href="{{route('admin.departments.index')}}"><i class="fa fa-wrench fa-fw"></i>Services & Produits<span class="fa arrow"></span></a>
+        
         <!-- /.child_menu -->
     </li>
 

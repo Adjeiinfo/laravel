@@ -15,159 +15,165 @@
           <br />
           <!-- include sidebar-->
           @include('includes.ha_side_bar')
+         
           <!-- include footer buttons -->
           @include('includes.ha_footer_button')
+
+        </div>
+
+    </div>
+     @include('includes.ha_top_nav_bar_with_notif')
+  </div>
+</div>
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <!-- top tiles -->
+      <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="glyphicon glyphicon-phone-alt"></i> Total Reclamations</span>
+          <div class="count">{{$postsCount}}</div>
+          <span class="count_bottom"><i class="green">4% </i> Mois Precedent</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="glyphicon glyphicon-check"></i> Total Resolu</span>
+          <div class="count green">{{$solvedTicket}}</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="glyphicon glyphicon-hourglass"></i> Pourcentage Resolu</span>
+          <div class="count">{{number_format(0.1,1)}}%</div>
+          <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> Mois Precedent</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="glyphicon glyphicon-transfer"></i> Traitement en coours</span>
+          <div class="count">{{$inProgressTicket}}</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="glyphicon glyphicon-trash"></i> Total Suspendu</span>
+          <div class="count">{{$suspendedTicket}}</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+          <span class="count_top"><i class="fa fa-user"></i> Total Plaignants</span>
+          <div class="count">{{$usersCount}}</div>
+          <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
         </div>
       </div>
-      <!-- Include top navigation bar-->
-      @include('includes.ha_top_nav_bar')
-      <!-- page content -->
-      <div class="right_col" role="main">
-        <!-- top tiles -->
-        <div class="row tile_count">
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="glyphicon glyphicon-phone-alt"></i> Total Reclamations</span>
-            <div class="count">{{$postsCount}}</div>
-            <span class="count_bottom"><i class="green">4% </i> Mois Precedent</span>
-          </div>
 
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="glyphicon glyphicon-check"></i> Total Resolu</span>
-              <div class="count green">{{$solvedTicket}}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="glyphicon glyphicon-hourglass"></i> Pourcentage Resolu</span>
-              <div class="count">{{number_format(0.1,1)}}%</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> Mois Precedent</span>
-            </div>
+      <!-- /top tiles -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="dashboard_graph">
 
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="glyphicon glyphicon-transfer"></i> Traitement en coours</span>
-              <div class="count">{{$inProgressTicket}}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
+            <div class="row x_title">
+              <div class="col-md-6">
+                <h3>Reclamations: TRAITE versus NON TRAITE  <small>Graph title sub-title</small></h3>
+              </div>
+              <div class="col-md-6">
+                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                  <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                  <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                </div>
+              </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="glyphicon glyphicon-trash"></i> Total Suspendu</span>
-              <div class="count">{{$suspendedTicket}}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+             <canvas id="lineChart"></canvas>
+           </div>
+           <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+            <div class="x_title">
+              <h2>Progression des Reclamations</h2>
+              <div class="clearfix"></div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Plaignants</span>
-              <div class="count">{{$usersCount}}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> Mois Precedent</span>
-            </div>
-          </div>
-          <!-- /top tiles -->
-          <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="dashboard_graph">
+              <div class="x_panel tile ">
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+                <!-- Progression par categories: -->
+                <div class="x_content">
+                  <h4>Progression Par categorie:</h4>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                   <canvas id="yourbarChart"></canvas>
+                 </div>
+               </div>
+             </div>
 
-                <div class="row x_title">
-                  <div class="col-md-6">
-                    <h3>Reclamations: TRAITE versus NON TRAITE  <small>Graph title sub-title</small></h3>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                    </div>
-                  </div>
-                </div>
+           </div>
+         </div>
+         <br />
+         <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile fixed_height_320">
+              <div class="x_title">
+                <h2>TOP 5 Des Agences</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <!-- for loop for the agences -->
+              <div class="x_content">
+                <h4>Agence de:</h4>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                 <canvas id="lineChart"></canvas>
+                 <canvas id="topAgencebarChart"></canvas>
                </div>
-               <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                <div class="x_title">
-                  <h2>Progression des Reclamations</h2>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="x_panel tile ">
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                    <!-- Progression par categories: -->
-                    <div class="x_content">
-                      <h4>Progression Par categorie:</h4>
-                      <div class="col-md-9 col-sm-9 col-xs-12">
-                       <canvas id="yourbarChart"></canvas>
-                     </div>
-                   </div>
-                 </div>
-
-               </div>
+               <!-- end for loop -->
              </div>
-             <br />
-             <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="x_panel tile fixed_height_320">
-                  <div class="x_title">
-                    <h2>TOP 5 Des Agences</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- for loop for the agences -->
-                  <div class="x_content">
-                    <h4>Agence de:</h4>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                     <canvas id="topAgencebarChart"></canvas>
-                   </div>
-                   <!-- end for loop -->
-                 </div>
-               </div>
-             </div>
-             <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>LAG 5 Des Agences</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+           </div>
+         </div>
+         <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="x_panel tile fixed_height_320">
+            <div class="x_title">
+              <h2>LAG 5 Des Agences</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    <li><a href="#">Settings 2</a>
                     </li>
                   </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <h4>Les Lag 5 Des Agences</h4>
-                  <!-- for loop to get all element in the graph-->
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <h4>Les Lag 5 Des Agences</h4>
+              <!-- for loop to get all element in the graph-->
                 <!--  @foreach($lag5AgenceCollection as $lag5Agence)
                   <div class="widget_summary">
                     <div class="w_left w_25">
@@ -304,7 +310,7 @@
                     <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->department? $post->department->name . " -  ". $post->ns_event_observe : 'Objet non Defini'}}</a></td>
                     <td>{{$post->status ? $post->status->name : 'Status Inconnu'}}</td>
                     <td>{{$post->ns_nom_prenom ? $post->ns_nom_prenom : 'Sans Nom'}}</td>
-                   <td>{{$post->agence ? $post->agence->name : 'Agence Inconnue'}}</td>
+                    <td>{{$post->agence ? $post->agence->name : 'Agence Inconnue'}}</td>
                     
                     <td>{{$post->user? $post->user->name : 'Pas Assigne'}}</td>
                     <td>{{$post->created_at->diffForhumans()}}</td>
@@ -313,11 +319,11 @@
                       <div class="col-xs-4 text-left">
                         <a href="{{route('home.post', $post->slug)}}"class = "btn btn-primary btn-xs"><i class="fa fa-eye"></i>  </a>
                       </div>
-                       @can('reclam-edit')
+                      @can('reclam-edit')
                       <div class="col-xs-4 text-center">
                         <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> </a>
                       </div>
-                       @endcan
+                      @endcan
                       @can('reclam-delete')
                       <div class="col-xs-4 text-right">
                         <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger btn-xs "><i class="fa fa-trash fa-danger"></i> </a>
@@ -492,10 +498,10 @@
       var Ratio = new Array();
       var coloR = [];
       var dynamicColors = function() {
-            var r = Math.floor(Math.random() * 255);
-            var g = Math.floor(Math.random() * 255);
-            var b = Math.floor(Math.random() * 255);
-            return "rgb(" + r + "," + g + "," + b + ")";
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
       };
 
       @forelse($topclaimcollection as $analysis) 

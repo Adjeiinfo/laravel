@@ -23,7 +23,8 @@
         </div>
       </div>
       <!-- Include top navigation bar-->
-      @include('includes.ha_top_nav_bar')
+       @include('includes.ha_top_nav_bar_with_notif')
+     </div>
       <div class="right_col" role="main">
         @yield('content')
         <!-- page content --> 

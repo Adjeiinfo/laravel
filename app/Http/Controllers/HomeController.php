@@ -100,13 +100,13 @@ class HomeController extends Controller
         //return ($topclaimcollection);
 
         //top agences (changer departement par agence ici apres avoir defini comment les agences seront tratees)
-        $top5AgenceCollection =Post::join('departments', 'departments.id', '=', 'posts.department_id')
-        ->groupBy('departments.id')
+        $top5AgenceCollection =Post::join('agences', 'agences.id', '=', 'posts.agence_id')
+        ->groupBy('agences.id')
         ->where('posts.status_id', '3')
         ->get([
-            'departments.id',
-            'departments.name',
-            DB::raw('count(departments.id) as count'),
+            'agences.id',
+            'agences.name',
+            DB::raw('count(agences.id) as count'),
             DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
         ]);
         $top5AgenceCollection = $top5AgenceCollection->sortByDesc('count')->values()->all();
@@ -120,13 +120,13 @@ class HomeController extends Controller
         */
 
         //lagger with ration 
-        $lag5AgenceCollection= Post::join('departments', 'departments.id', '=', 'posts.department_id')
-        ->groupBy('departments.id')
+        $lag5AgenceCollection= Post::join('agences', 'agences.id', '=', 'posts.agence_id')
+        ->groupBy('agences.id')
         ->where('posts.status_id', '3')
         ->get([
-            'departments.id',
-            'departments.name',
-            DB::raw('count(departments.id) as count'),
+            'agences.id',
+            'agences.name',
+            DB::raw('count(agences.id) as count'),
             DB::raw(sprintf('(count(*)/(%s) ) as ratio', Post::select(DB::raw('COUNT(*)'))->toSql()))
         ]);
         $lag5AgenceCollection = $lag5AgenceCollection->sortBy('count')->values()->all();
