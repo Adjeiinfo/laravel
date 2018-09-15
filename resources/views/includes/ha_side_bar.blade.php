@@ -8,7 +8,7 @@
         <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Tableau de Bord</a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-wrench fa-fw"></i>Agents de la Banque<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-group fa-fw"></i>Agents de la Banque<span class="fa arrow"></span></a>
         <ul class="nav child_menu">
             <li>
                 <a href="{{route('admin.users.index')}}">Liste des Agents</a>
@@ -21,7 +21,7 @@
         <!-- /.child_menu -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-wrench fa-fw"></i> Réclamations<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-phone fa-fw"></i> Réclamations<span class="fa arrow"></span></a>
         <ul class="nav child_menu">
             <li>
                 <a href="{{route('admin.posts.index')}}">Liste des Réclamations</a>
