@@ -23,6 +23,7 @@ use App\nature_transaction;
 use App\Priority;
 use App\User;
 use App\Notification;
+use App\Notifications\NouvelleReclamation;
 class AdminPostsController extends Controller
 {
     /**
@@ -102,6 +103,8 @@ class AdminPostsController extends Controller
 
         $user->posts()->create($input);
 
+        $user->notify(new NouvelleReclamation);
+
         return redirect('/admin/posts');
 
     }
@@ -159,7 +162,11 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
         //user_id
+
         $post = Post::findOrFail($id);
+
+        //create and save notification to database
+        auth()->user()->notify(new NouvelleReclamation());
 
         if (self::canupdate($id) == true){
             //return $input;
@@ -167,6 +174,8 @@ class AdminPostsController extends Controller
             $post->update($input);
             return redirect('/admin/posts')->with("success",'Reclamation mise a jour avec succes');
         }
+
+       
 
         return redirect()->back()->with("Fail",'Le statut de la reclamation ne peut plus ete modifiee car deja '. $post->status->name);
     }

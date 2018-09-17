@@ -165,6 +165,9 @@ return [
         //spatie 
         Spatie\Permission\PermissionServiceProvider::class,
 
+
+        //notifictions 
+         Illuminate\Notifications\NotificationServiceProvider::class,
     ],
 
     /*
@@ -217,6 +220,8 @@ return [
         'permission' => Spatie\Permission\Models\Permission::class,
         'role' => Spatie\Permission\Models\Role::class,
 
+        //notifications 
+        'Notification' => Illuminate\Support\Facades\Notification::class,
 
     ],
     'twilio' => [
