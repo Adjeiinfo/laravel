@@ -3,11 +3,11 @@
 @if(Session::has('deleted_user'))
 <p class="bg-danger">{{session('deleted_user')}}</p>
 @endif
-<h1>Users</h1>
+<h1>Agents de la Banque</h1>
 <div class="ccol-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2>Tableau Recaputilatif des Utilisateur<small>Utilisateur</small></h2>
+      <h2>Tableau Recaputilatif des Agents<small>Agents de la Banque</small></h2>
       <ul class="nav navbar-right panel_toolbox">
         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
         </li>
