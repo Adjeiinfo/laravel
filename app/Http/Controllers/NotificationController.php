@@ -33,7 +33,7 @@ class NotificationController extends Controller
 
 		try{
 			Mail::send('admin.posts.sendmail', ['name' => $name, 'email' => $email, 'title' => $title, 'content' => $content], function ($message) use ($post, $title) {
-				$message->from('koffielie@h-aigis.com', 'Nsia Service Qualite');
+				$message->from('koffielie@h-aigis.com', 'Demo Banque Service Qualite');
 				$message->to($post->ns_address_email, $post->ns_nom_prenom)->subject("Reponse a votre requete ".$post->id);
 			});
 

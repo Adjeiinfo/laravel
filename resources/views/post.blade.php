@@ -79,7 +79,7 @@
         <div class="well">
          <div class="card mb-3">
           <div class="card-body row">
-            <strong><h3>NSIA CLASSIFICATION:</h3></strong>
+            <strong><h3>CLASSIFICATION:</h3></strong>
             <hr>
             <div class="col-md-6">
              <p><strong>Departement: </strong>: {!!$post->department->name!!}</p>

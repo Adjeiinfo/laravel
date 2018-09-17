@@ -69,7 +69,7 @@
        <div class="well">
          <div class="card mb-3">
           <div class="card-body row">
-            <strong><h3>NSIA CLASSIFICATION:</h3></strong>
+            <strong><h3>CLASSIFICATION:</h3></strong>
             <hr>
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
              {!! Form::label ('typeclient_id', 'Statut Client:') !!}
@@ -123,7 +123,7 @@
   <div class="well">
    <div class="card mb-3">
     <div class="card-body row">
-      <strong><h3>Responsabilite NSIA:</h3></strong>
+      <strong><h3>Responsabilite:</h3></strong>
       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
        {!! Form::label ('priority_id', 'Priorite de la Reclamation:') !!}
        {!! Form::select('priority_id', [''=>'Priorite'] + $prirorities, null,['class' => 'form-control has-feedback-left']) !!}
