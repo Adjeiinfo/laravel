@@ -157,7 +157,7 @@
                 <input type="hidden" name="post_id" value="{{$post->id}}">
                 <input type="hidden" name="message_type" value="{{$post->typenotification_id}}">
                 <div class="form-group">
-                    {!! Form::textarea('smsbody', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
+                    {!! Form::text('smsbody', null, ['class'=>'form-control','rows'=>3,'maxlength' => '64'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Envoyer Messagage', ['class'=>'btn btn-primary']) !!}
