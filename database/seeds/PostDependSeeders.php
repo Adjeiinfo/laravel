@@ -29,8 +29,8 @@ class PostDependSeeders extends Seeder
 
         //client 
     	$clientypes = [
-    		['name'=>"Client BANQUE"],
-    		['name'=>"Agent  BANQUE"],
+    		['name'=>"Client"],
+    		['name'=>"Agent"],
     		['name'=>"Visiteur"]
     	];
     	DB::table('typeclients')->insert($clientypes);

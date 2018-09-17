@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
         $employee->is_active = 1;
         $employee->department_id = 1;
         $employee->agence_id = 1;
+        $employee->photo_id=1;
         $employee->save();
         $employee->assignRole('admin');
         $employee->save();
@@ -30,6 +31,8 @@ class UserTableSeeder extends Seeder
         $manager->password = bcrypt('secret');
         $manager->is_active =1;
         $manager->department_id = 1;
+        $manager->photo_id=1;
+
         $manager->agence_id = 1;
         $manager->save();
         $manager->assignRole('super-admin');
@@ -42,6 +45,8 @@ class UserTableSeeder extends Seeder
         $manager->is_active =1;
         $manager->department_id = 1;
         $manager->agence_id = 1;
+        $manager->photo_id=1;
+
         $manager->save();
         $manager->assignRole('super-admin');
         $manager->save();
@@ -52,6 +57,8 @@ class UserTableSeeder extends Seeder
         $manager->password = bcrypt('secret');
         $manager->is_active =1;
         $manager->department_id = 1;
+        $manager->photo_id=1;
+
         $manager->agence_id = 1;
         $manager->save();
         $manager->assignRole('super-admin');
