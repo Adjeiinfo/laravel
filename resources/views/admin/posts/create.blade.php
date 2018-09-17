@@ -4,12 +4,12 @@
 @include('includes.tinyeditor')
 @include('includes.ha_script')
 
-<h1>Create Post</h1>
+<h1>Créer une Réclamation</h1>
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Form validation <small>sub title</small></h2>
+        <h2>Remplisser le formulaire suivant <small>Par l'agent de la banque</small></h2>
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
           </li>
@@ -211,7 +211,7 @@
 <div class="row">
 <div class="well">
 
-  {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
+  {!! Form::submit('Soumettre', ['class'=>'btn btn-primary']) !!}
 </div>
 </div>
 
