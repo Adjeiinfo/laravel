@@ -63,6 +63,7 @@ class UserTableSeeder extends Seeder
         $manager->save();
         $manager->assignRole('super-admin');
         $manager->save();
+        
 
     }
 }
